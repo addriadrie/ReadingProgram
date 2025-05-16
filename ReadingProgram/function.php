@@ -8,7 +8,7 @@ $step = $_POST['step'] ?? 'vocab';
 
 // Check if a valid storyKey is provided
 $storyIndex = $storyKey !== null && is_numeric($storyKey) && isset($easy[$storyKey]) ? $storyKey : 0;
-$story = $easy[$storyIndex - 1];
+$story = $easy[$storyIndex];
 
 // Define vocab and definitions for the chosen story
 $prevocab = $story['pre-vocab'];
@@ -17,6 +17,48 @@ $definitions = array_values($prevocab);
 
 // Timer settings
 $readingTime = $_POST['readingTime'] ?? $story['readingTime'] ?? 300; // Default 5 minutes in seconds
+
+// Store user answers if this is a submission
+$vocabAnswers = $_POST['answer'] ?? [];
+$vocabScore = 0;
+
+// Calculate score for vocabulary matching
+if (!empty($vocabAnswers)) {
+    foreach ($vocabAnswers as $index => $answer) {
+        if ($answer === $words[$index]) {
+            $vocabScore++;
+        }
+    }
+}
+
+// Process post-vocab answers
+$blankAnswers = [];
+$blankScore = 0;
+$totalBlanks = 0;
+
+if ($step === 'postvocab-submit') {
+    $answers = $story["post-vocab"]["answers"];
+    $totalBlanks = count($answers);
+
+    for ($i = 0; $i < $totalBlanks; $i++) {
+        $position = $i + 1;
+        $userAnswer = $_POST["blank_$position"] ?? '';
+        $correctAnswer = $answers[$i];
+        $blankAnswers[$position] = [
+            'user' => $userAnswer,
+            'correct' => $correctAnswer,
+            'isCorrect' => ($userAnswer === $correctAnswer)
+        ];
+
+        if ($userAnswer === $correctAnswer) {
+            $blankScore++;
+        }
+    }
+
+    // Move to comprehension step after processing
+    $step = 'comprehension';
+}
+
 
 ?>
 
@@ -59,9 +101,11 @@ $readingTime = $_POST['readingTime'] ?? $story['readingTime'] ?? 300; // Default
             left: 50%;
             transform: translate(-50%, -50%);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            max-width: 90%;  /* Increase from 800px to 90% of viewport width */
+            max-width: 90%;
+            /* Increase from 800px to 90% of viewport width */
             width: 90%;
-            max-height: 90vh; /* Increase from 85vh to 90vh */
+            max-height: 90vh;
+            /* Increase from 85vh to 90vh */
             overflow-y: auto;
         }
 
@@ -75,7 +119,8 @@ $readingTime = $_POST['readingTime'] ?? $story['readingTime'] ?? 300; // Default
             margin-bottom: 1rem;
         }
 
-        .vocab-title, .section-title {
+        .vocab-title,
+        .section-title {
             font-size: 3.5rem;
             font-weight: bolder;
         }
@@ -94,7 +139,8 @@ $readingTime = $_POST['readingTime'] ?? $story['readingTime'] ?? 300; // Default
             margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
-            gap: 1.5rem; /* Increase from 1rem */
+            gap: 1.5rem;
+            /* Increase from 1rem */
         }
 
         select {
@@ -104,7 +150,8 @@ $readingTime = $_POST['readingTime'] ?? $story['readingTime'] ?? 300; // Default
             font-family: 'Poppins', sans-serif;
             font-size: 1rem;
             transition: all 0.3s ease;
-            min-width: 220px; /* Increase from 180px */
+            min-width: 220px;
+            /* Increase from 180px */
             cursor: pointer;
             background-color: white;
         }
@@ -150,12 +197,14 @@ $readingTime = $_POST['readingTime'] ?? $story['readingTime'] ?? 300; // Default
         /* Story styles */
         .story-content {
             display: flex;
-            flex-direction: row; /* Change from column to row */
+            flex-direction: row;
+            /* Change from column to row */
             align-items: flex-start;
             text-align: justify;
             line-height: 1.6;
             font-size: 1.5rem;
-            gap: 2rem; /* Add gap between the two sides */
+            gap: 2rem;
+            /* Add gap between the two sides */
         }
 
         /* Create a text column container for all paragraphs */
@@ -177,7 +226,8 @@ $readingTime = $_POST['readingTime'] ?? $story['readingTime'] ?? 300; // Default
         }
 
         .story-paragraph {
-            margin-bottom: 0; /* Remove bottom margin since we use gap */
+            margin-bottom: 0;
+            /* Remove bottom margin since we use gap */
             background-color: rgba(255, 255, 255, 0.5);
             padding: 15px;
             border-radius: 8px;
@@ -188,11 +238,13 @@ $readingTime = $_POST['readingTime'] ?? $story['readingTime'] ?? 300; // Default
             width: 100%;
             display: flex;
             justify-content: center;
-            margin: 0; /* Remove margin since we use gap */
+            margin: 0;
+            /* Remove margin since we use gap */
         }
 
         .story-image {
-            max-width: 100%; /* Change from 300px to 100% of container */
+            max-width: 100%;
+            /* Change from 300px to 100% of container */
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         }
@@ -405,21 +457,21 @@ $readingTime = $_POST['readingTime'] ?? $story['readingTime'] ?? 300; // Default
             width: 100px;
             margin-bottom: 1rem;
         }
-        
+
         /* Blur effect for content */
         .blurred-content {
             filter: blur(5px);
             user-select: none;
             pointer-events: none;
         }
-        
+
         /* Finish button */
         .finish-button-container {
             text-align: center;
             margin-top: 1rem;
             margin-bottom: 1rem;
         }
-        
+
         .finish-button {
             background-color: #4CAF50;
             color: white;
@@ -431,11 +483,105 @@ $readingTime = $_POST['readingTime'] ?? $story['readingTime'] ?? 300; // Default
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        
+
         .finish-button:hover {
             background-color: #45a049;
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Fill in the blanks activity styling - like in the screenshot */
+        .word-bank {
+            background-color: #ebf5e1;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .word-item {
+            display: inline-block;
+            background-color: #ffffff;
+            color: #008000;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 2px solid #008000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .word-item:hover {
+            background-color: #e1f0d8;
+            transform: scale(1.05);
+        }
+
+        .fill-blanks-text {
+            font-size: 1.4rem;
+            line-height: 2.2;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .blank-input {
+            border: none;
+            border-bottom: 2px solid #ffbd59;
+            background-color: transparent;
+            padding: 5px;
+            min-width: 120px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #0066cc;
+        }
+
+        .blank-input:focus {
+            outline: none;
+            border-bottom: 2px solid #ff9800;
+            background-color: rgba(255, 189, 89, 0.1);
+        }
+
+        /* Score display */
+        .score-container {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 2px solid #28a745;
+        }
+
+        .score-title {
+            font-size: 1.5rem;
+            color: #28a745;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .score-details {
+            font-size: 1.2rem;
+        }
+
+        /* Correct and incorrect answer highlighting */
+        .correct-answer {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .incorrect-answer {
+            color: #dc3545;
+            text-decoration: line-through;
+        }
+
+        .answer-feedback {
+            margin-top: 5px;
+            font-style: italic;
         }
     </style>
 </head>
@@ -494,7 +640,7 @@ $readingTime = $_POST['readingTime'] ?? $story['readingTime'] ?? 300; // Default
                         }
                         ?>
                     </div>
-                    
+
                     <div class="image-column">
                         <?php
                         // Process all images for right column
@@ -510,7 +656,7 @@ $readingTime = $_POST['readingTime'] ?? $story['readingTime'] ?? 300; // Default
                         ?>
                     </div>
                 </div>
-                
+
                 <div class="finish-button-container" style="display: none;" id="finishButtonContainer">
                     <button type="button" class="finish-button" id="finishReadingBtn">Finish Reading</button>
                 </div>
@@ -534,25 +680,97 @@ $readingTime = $_POST['readingTime'] ?? $story['readingTime'] ?? 300; // Default
         <?php elseif ($step === 'postvocab'): ?>
             <div class="test">
                 <h3 class="section-title">Fill in the Blanks</h3>
-                <p class="paragraph"><strong>Paragraph:</strong> <?php echo $story["post-vocab"]["paragraph"]; ?></p>
+
+                <!-- Word Bank Section -->
+                <div class="word-bank">
+                    <?php
+                    // Get all words from the word bank
+                    $wordBank = $story["post-vocab"]["word_bank"];
+                    // Shuffle them to make it more interesting
+                    shuffle($wordBank);
+
+                    // Display word bank
+                    foreach ($wordBank as $word): ?>
+                        <span class="word-item" onclick="selectWord(this)"><?php echo $word; ?></span>
+                    <?php endforeach; ?>
+                </div>
+
+                <!-- Fill in the blanks paragraph with actual blanks -->
+                <div class="fill-blanks-text">
+                    <?php
+                    // Get the gap fill text and create input fields where there are blanks
+                    $gapfillText = $story["post-vocab"]["gapfill_text"];
+
+                    // Replace each blank marker (__________) with an input field
+                    $counter = 1;
+                    $pattern = '/(__________)/';
+                    $filledText = preg_replace_callback($pattern, function ($matches) use (&$counter) {
+                        return '<input type="text" class="blank-input" id="blank_' . $counter++ . '" readonly onclick="this.value=\'\'">';
+                    }, $gapfillText);
+
+                    echo $filledText;
+                    ?>
+                </div>
+
+                <form method="post" id="postVocabForm">
+                    <input type="hidden" name="step" value="postvocab-submit">
+
+                    <?php
+                    // Count blank inputs needed based on answers array
+                    $totalAnswers = count($story["post-vocab"]["answers"]);
+                    for ($i = 1; $i <= $totalAnswers; $i++):
+                    ?>
+                        <input type="hidden" name="blank_<?php echo $i; ?>" id="blank_<?php echo $i; ?>_value">
+                    <?php endfor; ?>
+
+                    <button type="button" onclick="submitBlanks()">Check Answers</button>
+                </form>
+            </div>
+
+
+        <?php elseif ($step === 'postvocab-submit' || ($step === 'comprehension' && !empty($blankAnswers))): ?>
+            <div class="test">
+                <h3 class="section-title">Fill in the Blanks Results</h3>
+
+                <!-- Score display -->
+                <div class="score-container">
+                    <div class="score-title">Your Score</div>
+                    <div class="score-details">
+                        You got <span class="correct-answer"><?php echo $blankScore; ?></span> out of <?php echo $totalBlanks; ?> correct!
+                    </div>
+                </div>
+
+                <!-- Show results with feedback -->
+                <div class="fill-blanks-text">
+                    <?php
+                    // Get the gap fill text and show the results with feedback
+                    $gapfillText = $story["post-vocab"]["gapfill_text"];
+                    $answers = $story["post-vocab"]["answers"];
+
+                    $counter = 0;
+                    $pattern = '/(__________)/';
+                    $resultText = preg_replace_callback($pattern, function ($matches) use (&$counter, $blankAnswers) {
+                        $position = $counter + 1;
+                        $userAnswer = $blankAnswers[$position]['user'] ?? '';
+                        $correctAnswer = $blankAnswers[$position]['correct'] ?? '';
+                        $isCorrect = $blankAnswers[$position]['isCorrect'] ?? false;
+
+                        $counter++;
+
+                        if ($isCorrect) {
+                            return '<span class="correct-answer">' . $userAnswer . '</span>';
+                        } else {
+                            return '<span class="incorrect-answer">' . $userAnswer . '</span> <span class="correct-answer">(' . $correctAnswer . ')</span>';
+                        }
+                    }, $gapfillText);
+
+                    echo $resultText;
+                    ?>
+                </div>
+
                 <form method="post">
                     <input type="hidden" name="step" value="comprehension">
-                    <div class="blanks-container">
-                        <?php foreach ($story["post-vocab"]["blanks"] as $blank): ?>
-                            <div class="blank-question">
-                                <p><?php echo $blank["question"]; ?></p>
-                                <div class="choices">
-                                    <?php foreach ($blank["choices"] as $choice): ?>
-                                        <label class="choice-label">
-                                            <input type="radio" name="blank_<?php echo $blank["position"]; ?>" value="<?php echo $choice; ?>">
-                                            <span><?php echo $choice; ?></span>
-                                        </label>
-                                    <?php endforeach; ?>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-                    <button type="submit">Continue</button>
+                    <button type="submit">Continue to Comprehension Questions</button>
                 </form>
             </div>
 
@@ -563,7 +781,7 @@ $readingTime = $_POST['readingTime'] ?? $story['readingTime'] ?? 300; // Default
                     <div class="questions-container">
                         <?php foreach ($story["questions"] as $num => $q): ?>
                             <div class="question-item">
-                                <label for="q<?php echo $num; ?>"><?php echo $num . '. ' . $q; ?></label>
+                                <label for="q<?php echo $num; ?>"><?php echo $q; ?></label>
                                 <textarea name="q<?php echo $num; ?>" rows="3" cols="60" class="answer-textarea"></textarea>
                             </div>
                         <?php endforeach; ?>
@@ -695,7 +913,7 @@ $readingTime = $_POST['readingTime'] ?? $story['readingTime'] ?? 300; // Default
                     timerElement.textContent = formatTime(timeLeft);
                     isTimerPaused = false;
                     pauseTimerBtn.textContent = 'Pause';
-                    
+
                     // Remove blur if applied
                     storyContent.classList.remove('blurred-content');
 
@@ -720,19 +938,19 @@ $readingTime = $_POST['readingTime'] ?? $story['readingTime'] ?? 300; // Default
                     timerElement.textContent = formatTime(timeLeft);
                     isTimerPaused = false;
                     pauseTimerBtn.textContent = 'Pause';
-                    
+
                     // Remove blur
                     storyContent.classList.remove('blurred-content');
 
                     // Restart the timer
                     startTimer();
                 });
-                
+
                 // Finish Reading button click handler
                 finishReadingBtn.addEventListener('click', function() {
                     // Clear the timer interval
                     clearInterval(timerInterval);
-                    
+
                     // Show the continue form
                     continueForm.style.display = 'block';
                     continueForm.submit();
@@ -752,6 +970,86 @@ $readingTime = $_POST['readingTime'] ?? $story['readingTime'] ?? 300; // Default
                 });
             }
         });
+
+        // Global variable to track the currently selected word
+        let selectedWord = null;
+
+        // Function to handle word selection from the word bank
+        function selectWord(element) {
+            // If we already have a word selected, deselect it visually
+            if (selectedWord) {
+                selectedWord.style.backgroundColor = '';
+                selectedWord.style.color = '';
+            }
+
+            // Select the new word and highlight it
+            selectedWord = element;
+            selectedWord.style.backgroundColor = '#008000';
+            selectedWord.style.color = '#ffffff';
+
+            // Let user know they can click on a blank to place the word
+            toastr.info('Click on a blank to place this word', 'Word Selected');
+        }
+
+        // Function to place the selected word in a blank when clicked
+        document.addEventListener('DOMContentLoaded', function() {
+            // Find all blank inputs
+            const blankInputs = document.querySelectorAll('.blank-input');
+
+            // Add click event listeners to each blank input
+            blankInputs.forEach(input => {
+                input.addEventListener('click', function() {
+                    // If a word is selected from the word bank
+                    if (selectedWord) {
+                        // Place the word in the blank
+                        this.value = selectedWord.textContent;
+
+                        // Also update the hidden input for form submission
+                        const hiddenInput = document.getElementById(this.id + '_value');
+                        if (hiddenInput) {
+                            hiddenInput.value = selectedWord.textContent;
+                        }
+
+                        // Deselect the word
+                        selectedWord.style.backgroundColor = '';
+                        selectedWord.style.color = '';
+                        selectedWord.style.opacity = '0.5'; // Dim the used word
+                        selectedWord.style.pointerEvents = 'none'; // Make it unclickable
+                        selectedWord = null;
+                    }
+                });
+            });
+        });
+
+        // Function to submit the blank answers
+        function submitBlanks() {
+            // Check if all blanks are filled
+            const blanks = document.querySelectorAll('.blank-input');
+            const emptyBlanks = Array.from(blanks).filter(input => !input.value);
+
+            if (emptyBlanks.length > 0) {
+                toastr.warning('Please fill in all blanks before submitting', 'Incomplete');
+                // Highlight empty blanks
+                emptyBlanks.forEach(blank => {
+                    blank.style.borderBottom = '2px solid red';
+                    setTimeout(() => {
+                        blank.style.borderBottom = '2px solid #ffbd59';
+                    }, 2000);
+                });
+                return;
+            }
+
+            // Update all hidden inputs
+            blanks.forEach(blank => {
+                const hiddenInput = document.getElementById(blank.id + '_value');
+                if (hiddenInput) {
+                    hiddenInput.value = blank.value;
+                }
+            });
+
+            // Submit the form
+            document.getElementById('postVocabForm').submit();
+        }
     </script>
 
 </body>
