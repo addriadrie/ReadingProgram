@@ -447,12 +447,44 @@
 
         // Prepare comprehension test
         // Updated function to handle nested comprehension data structure
+        // function prepareComprehensionTest() {
+        //     const flattenedQuestions = [];
+        //     let questionNumber = 1;
+            
+        //     // Flatten the nested structure
+        //     comprehensionData.forEach(passageData => {
+        //         const passage = passageData.passage;
+                
+        //         passageData.questions.forEach(questionData => {
+        //             // Convert the options object to an array
+        //             const optionsArray = Object.values(questionData.options);
+                    
+        //             // Find the correct answer text (not just the letter)
+        //             const correctLetter = questionData.correct_answer;
+        //             const correctAnswer = questionData.options[correctLetter];
+                    
+        //             flattenedQuestions.push({
+        //                 question: `${passage}\n\nQuestion ${questionData.number}: Fill in the blank.`,
+        //                 options: optionsArray,
+        //                 answer: correctAnswer,
+        //                 questionNumber: questionNumber++
+        //             });
+        //         });
+        //     });
+            
+        //     return flattenedQuestions;
+        // }
+
+
         function prepareComprehensionTest() {
             const flattenedQuestions = [];
             let questionNumber = 1;
             
+            // Take only the first 2 passages
+            const limitedPassages = comprehensionData.slice(0, 2);
+            
             // Flatten the nested structure
-            comprehensionData.forEach(passageData => {
+            limitedPassages.forEach(passageData => {
                 const passage = passageData.passage;
                 
                 passageData.questions.forEach(questionData => {
@@ -468,13 +500,12 @@
                         options: optionsArray,
                         answer: correctAnswer,
                         questionNumber: questionNumber++
-                    });
-                });
             });
-            
-            return flattenedQuestions;
-        }
-
+        });
+    });
+    
+    return flattenedQuestions;
+}
         // Updated generateComprehensionTest function
         function generateComprehensionTest() {
             const questions = prepareComprehensionTest();
@@ -586,55 +617,7 @@
             return questions;
         }
 
-        // // Update progress bar for vocabulary
-        // function updateVocabProgress() {
-        //     const totalQuestions = vocabQuestions.length;
-        //     const answeredQuestions = new Set();
-            
-        //     // Debug: Log total questions
-        //     console.log('Total vocab questions:', totalQuestions);
-            
-        //     // Find all checked vocab radio buttons
-        //     const checkedInputs = document.querySelectorAll('input[name^="vocab_question"]:checked');
-        //     console.log('Checked inputs found:', checkedInputs.length);
-            
-        //     checkedInputs.forEach(input => {
-        //         const questionName = input.name;
-        //         answeredQuestions.add(questionName);
-        //         console.log('Added question:', questionName);
-        //     });
-            
-        //     console.log('Unique answered questions:', answeredQuestions.size);
-            
-        //     const progress = (answeredQuestions.size / totalQuestions) * 100;
-        //     document.getElementById('vocabProgressFill').style.width = progress + '%';
-            
-        //     // Enable proceed button if all questions answered
-        //     const proceedBtn = document.getElementById('proceedToSpeedBtn');
-        //     if (answeredQuestions.size === totalQuestions) {
-        //         console.log('All questions answered! Enabling button.');
-        //         proceedBtn.disabled = false;
-        //     } else {
-        //         console.log(`Only ${answeredQuestions.size}/${totalQuestions} questions answered. Button stays disabled.`);
-        //         proceedBtn.disabled = true;
-        //     }
-        // }
-
-        // // Also add this to check if the event listener is working
-        // document.addEventListener('change', function(e) {
-        //     if (e.target.type === 'radio') {
-        //         console.log('Radio button changed:', e.target.name, e.target.value);
-        //         if (e.target.name.startsWith('vocab_')) {
-        //             console.log('Updating vocab progress...');
-        //             updateVocabProgress();
-        //         } else if (e.target.name.startsWith('speed_')) {
-        //             updateSpeedProgress();
-        //         } else if (e.target.name.startsWith('comprehension_')) {
-        //             updateComprehensionProgress();
-        //         }
-        //     }
-        // });
-
+        // Update progress bar for vocabulary
         function updateVocabProgress() {
             const totalQuestions = vocabQuestions.length;
             
@@ -663,37 +646,53 @@
         // Update progress bar for speed test
         function updateSpeedProgress() {
             const totalQuestions = speedQuestions.length;
-            const answeredQuestions = new Set();
             
-            document.querySelectorAll('input[name^="speed_question"]:checked').forEach(input => {
-                const questionName = input.name;
-                answeredQuestions.add(questionName);
-            });
-            
-            const progress = (answeredQuestions.size / totalQuestions) * 100;
-            document.getElementById('speedProgressFill').style.width = progress + '%';
-
-            // Enable proceed button if all questions answered
-            const proceedBtn = document.getElementById('proceedToCompreBtn');
-            if (answeredQuestions.size === totalQuestions) {
-                proceedBtn.disabled = false;
-            } else {
-                proceedBtn.disabled = true;
+            if (totalQuestions === 0) {
+                console.warn('No speed and accuracy questions found');
+                return;
             }
+            
+            const checkedInputs = document.querySelectorAll('input[name^="speed_question"]:checked');
+            const answeredCount = new Set(Array.from(checkedInputs).map(input => input.name)).size;
+            
+            const progress = Math.round((answeredCount / totalQuestions) * 100);
+            
+            // Update UI elements
+            const progressFill = document.getElementById('speedProgressFill');
+            const progressText = document.getElementById('speedProgressText');
+            const proceedBtn = document.getElementById('proceedToCompreBtn');
+            
+            if (progressFill) progressFill.style.width = progress + '%';
+            if (progressText) progressText.textContent = `${progress}% (${answeredCount}/${totalQuestions})`;
+            if (proceedBtn) proceedBtn.disabled = answeredCount !== totalQuestions;
+            
+            console.log(`Speed and Accuracy Progress: ${progress}% (${answeredCount}/${totalQuestions})`);
         }
 
         // Update progress bar for comprehension test
         function updateComprehensionProgress() {
             const totalQuestions = comprehensionQuestions.length;
-            const answeredQuestions = new Set();
             
-            document.querySelectorAll('input[name^="comprehension_question"]:checked').forEach(input => {
-                const questionName = input.name;
-                answeredQuestions.add(questionName);
-            });
+            if (totalQuestions === 0) {
+                console.warn('No comprehension questions found');
+                return;
+            }
             
-            const progress = (answeredQuestions.size / totalQuestions) * 100;
-            document.getElementById('comprehensionProgressFill').style.width = progress + '%';
+            const checkedInputs = document.querySelectorAll('input[name^="comprehension_question"]:checked');
+            const answeredCount = new Set(Array.from(checkedInputs).map(input => input.name)).size;
+            
+            const progress = Math.round((answeredCount / totalQuestions) * 100);
+            
+            // Update UI elements
+            const progressFill = document.getElementById('comprehensionProgressFill');
+            const progressText = document.getElementById('comprehensionProgressText');
+            const proceedBtn = document.getElementById('proceedToResultsBtn'); // Adjust button ID as needed
+            
+            if (progressFill) progressFill.style.width = progress + '%';
+            if (progressText) progressText.textContent = `${progress}% (${answeredCount}/${totalQuestions})`;
+            if (proceedBtn) proceedBtn.disabled = answeredCount !== totalQuestions;
+            
+            console.log(`Comprehension Progress: ${progress}% (${answeredCount}/${totalQuestions})`);
         }
 
         // Timer function
