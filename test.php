@@ -681,7 +681,7 @@
             </div>
             
             <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin: 20px 0;">
-                <p><strong>⏰ Time Limit: 45 minutes</strong></p>
+                <p><strong>⏰ Time Limit: 55 minutes</strong></p>
                 <p style="font-size: 0.95em; color: #666; margin: 5px 0 0 0;">
                     The timer will start when you click "Start Test" and cannot be stopped.
                 </p>
@@ -740,7 +740,7 @@
             <!-- Sticky Progress Bar and Timer -->
             <div class="progress-container">
                 <div class="test-timer">
-                    <strong>Time Remaining: <span id="timer">45:00</span></strong>
+                    <strong>Time Remaining: <span id="timer">55:00</span></strong>
                     <button id="pauseBtn" class="pause-btn">⏸️ Pause</button>
                 </div>
                 <div class="progress-info">
@@ -776,7 +776,7 @@
             <!-- Sticky Progress Bar and Timer -->
             <div class="progress-container">
                 <div class="test-timer">
-                    <strong>Time Remaining: <span id="timer">45:00</span></strong>
+                    <strong>Time Remaining: <span id="timer">55:00</span></strong>
                     <button id="pauseBtn" class="pause-btn">⏸️ Pause</button>
                 </div>
                 <div class="progress-info">
@@ -842,7 +842,7 @@
             <!-- Sticky Progress Bar and Timer -->
             <div class="progress-container">
                 <div class="test-timer">
-                    <strong>Time Remaining: <span id="timer">45:00</span></strong>
+                    <strong>Time Remaining: <span id="timer">55:00</span></strong>
                     <button id="pauseBtn" class="pause-btn">⏸️ Pause</button>
                 </div>
                 <div class="progress-info">
@@ -893,7 +893,7 @@
         let speedAnswers = {};
         let comprehensionAnswers = {};
         let timerInterval;
-        let timeRemaining = 45 * 60; // 45 minutes in seconds
+        let timeRemaining = 55 * 60; // 55 minutes in seconds
 
         // Shuffle function
         function shuffle(array) {
