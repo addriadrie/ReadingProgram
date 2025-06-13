@@ -7,6 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/icon.png" type="image/x-icon">
     <title>Gates-MacGinitie Reading Test</title>
 
     <style>
@@ -17,6 +18,140 @@
             padding: 20px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+        }
+
+        /* Start modal */
+        .start-modal {
+            display: flex;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .start-modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            max-height: 90vh;
+            margin: 20px;
+            overflow-y: auto;
+            pointer-events: all;
+            animation: slideIn 0.3s ease-out;
+            position: relative;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px) scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Hide test content initially */
+        .test-content-hidden {
+            display: none;
+        }
+
+        /* Make sure the main container is hidden initially */
+        .container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        /* Rest of the start modal styles remain the same */
+        .start-modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .start-modal-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .start-modal-content::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 4px;
+        }
+
+        .start-modal-content::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, #5a6fd8, #6a4190);
+        }
+
+        .start-modal h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 2.2em;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .start-modal p {
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .start-modal ul {
+            text-align: left;
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+
+        .start-modal li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .start-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.3em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            margin-top: 20px;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Hide test content initially */
+        .test-content-hidden {
+            display: none;
         }
         
         .container {
@@ -76,6 +211,21 @@
             color: #333;
             margin-bottom: 15px;
             line-height: 1.6;
+        }
+
+        /* Smooth transition when question is answered */
+        .question-container {
+            transition: all 0.3s ease;
+        }
+
+        .question-container.answered {
+            border-color: #28a745 !important;
+            background: #d4edda !important;
+            box-shadow: 0 0 10px rgba(40, 167, 69, 0.2) !important;
+        }
+
+        .question-container.answered::before {
+            background: #28a745;
         }
         
         .options {
@@ -148,18 +298,6 @@
             text-align: center;
             margin-bottom: 20px;
         }
-        
-        .correct {
-            background: #d4edda;
-            border: 1px solid #c3e6cb;
-            color: #155724;
-        }
-        
-        .incorrect {
-            background: #f8d7da;
-            border: 1px solid #f5c6cb;
-            color: #721c24;
-        }
 
         /* Sticky Progress Bar Styles */
         .progress-container {
@@ -172,6 +310,9 @@
             border-bottom: 2px solid #e9ecef;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            gap: 10px; /* Add spacing between timer and progress */
         }
 
         .progress-info {
@@ -214,7 +355,6 @@
             overflow: hidden;
         }
 
-        /* Add animated shine effect */
         .progress-fill::after {
             content: '';
             position: absolute;
@@ -246,11 +386,24 @@
             margin-bottom: 20px;
         }
 
-        /* Responsive adjustments */
+        /* Timer Styles */
+        .sticky-timer {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #667eea;
+            padding: 8px 15px;
+            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+            border-radius: 8px;
+            border: 2px solid #667eea;
+            margin: 0; /* Remove default margins */
+        }
+
         @media (max-width: 768px) {
             .progress-container {
                 padding: 12px 15px;
                 margin: -20px -20px 15px -20px;
+                gap: 8px;
             }
             
             .progress-info {
@@ -262,6 +415,86 @@
             .progress-text, .progress-percentage {
                 font-size: 0.9em;
             }
+
+            .sticky-timer {
+                font-size: 1em;
+                padding: 6px 12px;
+            }
+        }
+
+        .timer-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .pause-btn {
+            background: #e9ecef;
+            color: 666;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .pause-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(99, 97, 97, 0.4);
+        }
+
+        .pause-btn.resume {
+            background: linear-gradient(45deg, #51cf66, #40c057);
+            box-shadow: 0 3px 10px rgba(81, 207, 102, 0.3);
+        }
+
+        .pause-btn.resume:hover {
+            box-shadow: 0 5px 15px rgba(81, 207, 102, 0.4);
+        }
+
+        /* Blur overlay */
+        .blur-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content-blurred {
+            filter: blur(5px);
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .pause-message {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+        }
+
+        .pause-message h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        .pause-message p {
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 30px;
         }
     
         .test-header {
@@ -283,16 +516,186 @@
             border-radius: 5px;
         }
 
+        .back-btn {
+            background: linear-gradient(45deg, #6c757d, #495057);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(108, 117, 125, 0.3);
+            float: right;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(108, 117, 125, 0.4);
+        }
+
         .question-result {
             margin-bottom: 15px;
             padding: 15px;
             border-radius: 8px;
             border: 1px solid #ddd;
         }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 30px;
+            border: none;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 600px;
+            max-height: 80vh; /* Add maximum height */
+            overflow-y: auto; /* Add vertical scrolling */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        .modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 4px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, #5a6fd8, #6a4190);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 25px;
+            font-size: 2em;
+        }
+
+        .score-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .score-section h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.3em;
+        }
+
+        .score-display {
+            font-size: 2em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .percentage {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .overall-score {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .reader-type-section {
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="start-modal" id="startModal">
+        <div class="start-modal-content">
+            <h2>📚 Gates-MacGinitie Reading Test</h2>
+            <p><strong>Welcome to the Reading Assessment!</strong></p>
+            
+            <div style="text-align: left; margin: 20px 0;">
+                <p>This test consists of three parts:</p>
+                <ul>
+                    <li><strong>Vocabulary Test</strong> - Choose words with similar meanings</li>
+                    <li><strong>Speed & Accuracy Test</strong> - Quick reading comprehension</li>
+                    <li><strong>Comprehension Test</strong> - Detailed passage analysis</li>
+                </ul>
+            </div>
+            
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin: 20px 0;">
+                <p><strong>⏰ Time Limit: 45 minutes</strong></p>
+                <p style="font-size: 0.95em; color: #666; margin: 5px 0 0 0;">
+                    The timer will start when you click "Start Test" and cannot be stopped.
+                </p>
+            </div>
+            
+            <p style="font-size: 0.9em; color: #888;">
+                Make sure you're in a quiet environment and ready to focus.
+            </p>
+            
+            <button id="startTestBtn" class="start-btn">🚀 Start Test</button>
+        </div>
+    </div>
+
+    <div class="container test-content-hidden">
         <h1>📚 Gates-MacGinitie Reading Test</h1>
         
        <!-- Vocabulary Test Section -->
@@ -304,11 +707,42 @@
             
             <div class="instructions">
                 <h3>Instructions:</h3>
-                <p>Choose the word that means the same or nearly the same as the given word. Click on your answer choice for each question. You must answer all questions to proceed to the next section.</p>
+                <p>Look at the test words V1 below. The word is <b><i><u>baby</b></i></u>. Now read the five words below baby. Find the same word in this group that means most nearly the same as <b><i><u>baby</b></i></u>. The word <b><i><u>child</b></i></u> most nearly the same as baby.
+                <br><br>
+                Now look at the test word number V2. Find the one word in the group below it that means most nearly the same and write its letter.
+                <br><br>
+                <b><i><u>Slide</b></i></u> means most nearly as <b><i><u>slip</b></i></u>. You should have written letter <b><i><u>A</b></i></u>.
+                <br><br>
+                <b>SAMPLES:</b>
+                <ol style="list-style: none;">
+                    <li>V1.  baby</li>
+                        <ol>
+                            <li style="display: inline-block;margin-right: 3rem;">A. box</li>
+                            <li style="display: inline-block;margin-right: 3rem;">B. bath</li>
+                            <li style="display: inline-block;margin-right: 3rem;">C. nest</li>
+                            <li style="display: inline-block;margin-right: 3rem;">D. child</li>
+                            <li style="display: inline-block;margin-right: 3rem;">E. bib</li>
+                        </ol>
+                    <li>V2.  slip</li>
+                        <ol>
+                            <li style="display: inline-block;margin-right: 3rem;">A. slide</li>
+                            <li style="display: inline-block;margin-right: 3rem;">B. neat</li>
+                            <li style="display: inline-block;margin-right: 3rem;">C. smile</li>
+                            <li style="display: inline-block;margin-right: 3rem;">D. bad</li>
+                            <li style="display: inline-block;margin-right: 3rem;">E. nap</li>
+                        </ol>
+                </ol>
+                <br>
+                <i>For each numbered word on this page, choose the letter of the word that means nearly the same. If you can’t decide which word means most nearly the same as the numbered test word, go on to the next test word.</i>
+                </p>
             </div>
             
-            <!-- Sticky Progress Bar -->
+            <!-- Sticky Progress Bar and Timer -->
             <div class="progress-container">
+                <div class="test-timer">
+                    <strong>Time Remaining: <span id="timer">45:00</span></strong>
+                    <button id="pauseBtn" class="pause-btn">⏸️ Pause</button>
+                </div>
                 <div class="progress-info">
                     <span class="progress-text">Vocabulary Progress</span>
                     <span class="progress-percentage" id="vocabProgressText">0%</span>
@@ -331,19 +765,20 @@
             <div class="test-header">
                 <h2>Part 2: Speed & Accuracy Test</h2>
                 <p>Read each passage carefully and answer the questions</p>
+                <button type="button" id="backToVocabBtn" class="back-btn">← Back to Vocabulary</button>
             </div>
             
             <div class="instructions">
                 <h3>Instructions:</h3>
                 <p>Read each passage carefully and choose the best answer for each question. Work as quickly and accurately as possible.</p>
             </div>
-
-            <div class="test-timer">
-                <strong>Time Remaining: <span id="timer">20:00</span></strong>
-            </div>
             
-            <!-- Sticky Progress Bar -->
+            <!-- Sticky Progress Bar and Timer -->
             <div class="progress-container">
+                <div class="test-timer">
+                    <strong>Time Remaining: <span id="timer">45:00</span></strong>
+                    <button id="pauseBtn" class="pause-btn">⏸️ Pause</button>
+                </div>
                 <div class="progress-info">
                     <span class="progress-text">Speed & Accuracy Progress</span>
                     <span class="progress-percentage" id="speedProgressText">0%</span>
@@ -366,15 +801,50 @@
             <div class="test-header">
                 <h2>Part 3: Comprehension Test</h2>
                 <p>Read each passage carefully and answer the questions</p>
+                <button type="button" id="backToSpeedBtn" class="back-btn">← Back to Speed Test</button>
             </div>
             
             <div class="instructions">
                 <h3>Instructions:</h3>
-                <p>Read each passage carefully and choose the best answer for each question. Take your time to understand the content.</p>
+                <p>Read the sample paragraph below. It has numbered blanks in it. The first blank is number C1. Look below the paragraph at the line of words with C1 in front of it. Find the word in line C1 that makes the best sense in blank C1. The word <b><i><u>house</u></i></b> is the answer to number C1.
+                <br><br>
+                Choose the word <b><i><u>house</u></i></b>.
+                <br><br>
+                Now look at the words in line C2.  Find the word in line C2 that makes the best answer in blank C2, and write its letter.
+                <br><br>
+                <b>SAMPLES:</b>
+                <br>
+                We have a playroom in our (C1) _______.  It is down in the basement, so we need to turn 	on an electric (C2)_______ .
+                <br>
+                <ol>
+                    <li style="display: inline-block;margin-right: 3rem;">C1.</li>
+                    <li style="display: inline-block;margin-right: 3rem;">A. stove</li>
+                    <li style="display: inline-block;margin-right: 3rem;">B. house</li>
+                    <li style="display: inline-block;margin-right: 3rem;">C. bed</li>
+                    <li style="display: inline-block;margin-right: 3rem;">D. car</li>
+                    <li style="display: inline-block;margin-right: 3rem;">E. lake</li>
+                </ol>
+                <ol>
+                    <li style="display: inline-block;margin-right: 3rem;">C2.</li>
+                    <li style="display: inline-block;margin-right: 3rem;">A. storm</li>
+                    <li style="display: inline-block;margin-right: 3rem;">B. friend</li>
+                    <li style="display: inline-block;margin-right: 3rem;">C. ladder</li>
+                    <li style="display: inline-block;margin-right: 3rem;">D. room</li>
+                    <li style="display: inline-block;margin-right: 3rem;">E. light</li>
+                </ol>
+                <br>
+                The word <b><i><u>light</u></i></b> makes the best sense in blank C2. You should have written letter <b><i><u>E</u></i></b>.
+                <br><br>
+                <i>Now write the letter of the best word for each of the blanks that follow on this page and on the next pages.  If you can’t choose the best word for a blank, don’t spend too much time on it.  Go on to the next one. 
+                </p>
             </div>
             
-            <!-- Sticky Progress Bar -->
+            <!-- Sticky Progress Bar and Timer -->
             <div class="progress-container">
+                <div class="test-timer">
+                    <strong>Time Remaining: <span id="timer">45:00</span></strong>
+                    <button id="pauseBtn" class="pause-btn">⏸️ Pause</button>
+                </div>
                 <div class="progress-info">
                     <span class="progress-text">Comprehension Progress</span>
                     <span class="progress-percentage" id="comprehensionProgressText">0%</span>
@@ -386,7 +856,7 @@
             
             <form id="comprehensionTest">
                 <div id="comprehensionQuestionsContainer"></div>
-                <button type="submit" class="submit-btn">Submit Complete Test</button>
+                <button type="submit" class="submit-btn" disabled>Submit Complete Test</button>
             </form>
         </div>
         
@@ -394,7 +864,26 @@
         <div id="results" class="results"></div>
     </div>
 
+    <!-- Blur overlay -->
+    <div class="blur-overlay" id="blurOverlay">
+        <div class="pause-message">
+            <h2>⏸️ Test Paused</h2>
+            <p>The timer is paused. Click the resume button to continue your test.</p>
+            <button id="resumeBtn" class="pause-btn resume">▶️ Resume Test</button>
+        </div>
+    </div>
+
+    <!-- Results -->
+    <div id="resultsModal" class="modal">
+        <div class="modal-content">
+            <h2>🎉 Test Results</h2>
+            <div id="modalResults"></div>
+        </div>
+    </div>
+
     <script>
+        let timerStarted = false;
+
         // Test data from PHP - dynamically loaded
         const vocabData = <?php echo json_encode($vocabTest); ?>;
         const speedAccuracyData = <?php echo json_encode($speedAccuracyTest); ?>;
@@ -404,7 +893,7 @@
         let speedAnswers = {};
         let comprehensionAnswers = {};
         let timerInterval;
-        let timeRemaining = 20 * 60; // 20 minutes in seconds
+        let timeRemaining = 45 * 60; // 45 minutes in seconds
 
         // Shuffle function
         function shuffle(array) {
@@ -437,45 +926,8 @@
                 questionNumber: index + 1
             }));
         }
-        // function prepareSpeedTest() {
-        //     return speedAccuracyData.map((item, index) => ({
-        //         ...item,
-        //         options: shuffle(item.options),
-        //         questionNumber: index + 1
-        //     }));
-        // }
 
         // Prepare comprehension test
-        // Updated function to handle nested comprehension data structure
-        // function prepareComprehensionTest() {
-        //     const flattenedQuestions = [];
-        //     let questionNumber = 1;
-            
-        //     // Flatten the nested structure
-        //     comprehensionData.forEach(passageData => {
-        //         const passage = passageData.passage;
-                
-        //         passageData.questions.forEach(questionData => {
-        //             // Convert the options object to an array
-        //             const optionsArray = Object.values(questionData.options);
-                    
-        //             // Find the correct answer text (not just the letter)
-        //             const correctLetter = questionData.correct_answer;
-        //             const correctAnswer = questionData.options[correctLetter];
-                    
-        //             flattenedQuestions.push({
-        //                 question: `${passage}\n\nQuestion ${questionData.number}: Fill in the blank.`,
-        //                 options: optionsArray,
-        //                 answer: correctAnswer,
-        //                 questionNumber: questionNumber++
-        //             });
-        //         });
-        //     });
-            
-        //     return flattenedQuestions;
-        // }
-
-
         function prepareComprehensionTest() {
             const flattenedQuestions = [];
             let questionNumber = 1;
@@ -500,43 +952,11 @@
                         options: optionsArray,
                         answer: correctAnswer,
                         questionNumber: questionNumber++
-            });
-        });
-    });
-    
-    return flattenedQuestions;
-}
-        // Updated generateComprehensionTest function
-        function generateComprehensionTest() {
-            const questions = prepareComprehensionTest();
-            const container = document.getElementById('comprehensionQuestionsContainer');
-            
-            questions.forEach(question => {
-                const questionDiv = document.createElement('div');
-                questionDiv.className = 'question-container';
-                
-                // Split the question to show passage and question separately
-                const [passage, questionText] = question.question.split('\n\nQuestion');
-                
-                questionDiv.innerHTML = `
-                    <div class="passage" style="background: #f0f8ff; padding: 15px; border-radius: 8px; margin-bottom: 15px; font-style: italic;">
-                        ${passage}
-                    </div>
-                    <div class="question-text">${question.questionNumber}. Question${questionText || ': Fill in the blank.'}</div>
-                    <div class="options">
-                        ${question.options.map((option, optIndex) => `
-                            <div class="option">
-                                <input type="radio" id="comprehension_q${question.questionNumber}_${optIndex}" 
-                                    name="comprehension_question${question.questionNumber}" value="${option}">
-                                <label for="comprehension_q${question.questionNumber}_${optIndex}">${option}</label>
-                            </div>
-                        `).join('')}
-                    </div>
-                `;
-                container.appendChild(questionDiv);
+                    });
+                });
             });
             
-            return questions;
+            return flattenedQuestions;
         }
 
         // Generate vocabulary test HTML
@@ -599,13 +1019,20 @@
             questions.forEach(question => {
                 const questionDiv = document.createElement('div');
                 questionDiv.className = 'question-container';
+                
+                // Split the question to show passage and question separately
+                const [passage, questionText] = question.question.split('\n\nQuestion');
+                
                 questionDiv.innerHTML = `
-                    <div class="question-text">${question.questionNumber}. ${question.question}</div>
+                    <div class="passage" style="background: #f0f8ff; padding: 15px; border-radius: 8px; margin-bottom: 15px; font-style: italic;">
+                        ${passage}
+                    </div>
+                    <div class="question-text">${question.questionNumber}. Question${questionText || ': Fill in the blank.'}</div>
                     <div class="options">
                         ${question.options.map((option, optIndex) => `
                             <div class="option">
                                 <input type="radio" id="comprehension_q${question.questionNumber}_${optIndex}" 
-                                       name="comprehension_question${question.questionNumber}" value="${option}">
+                                    name="comprehension_question${question.questionNumber}" value="${option}">
                                 <label for="comprehension_q${question.questionNumber}_${optIndex}">${option}</label>
                             </div>
                         `).join('')}
@@ -640,8 +1067,22 @@
             if (progressText) progressText.textContent = `${progress}% (${answeredCount}/${totalQuestions})`;
             if (proceedBtn) proceedBtn.disabled = answeredCount !== totalQuestions;
             
+            // Update individual question styling
+            const questionContainers = document.querySelectorAll('#vocabularySection .question-container');
+            questionContainers.forEach((container, index) => {
+                const questionNumber = index + 1;
+                const radioButtons = container.querySelectorAll(`input[name="vocab_question${questionNumber}"]`);
+                const isAnswered = Array.from(radioButtons).some(radio => radio.checked);
+                
+                container.classList.remove('answered');
+                if (isAnswered) {
+                    container.classList.add('answered');
+                }
+            });
+            
             console.log(`Vocab Progress: ${progress}% (${answeredCount}/${totalQuestions})`);
         }
+
 
         // Update progress bar for speed test
         function updateSpeedProgress() {
@@ -666,6 +1107,19 @@
             if (progressText) progressText.textContent = `${progress}% (${answeredCount}/${totalQuestions})`;
             if (proceedBtn) proceedBtn.disabled = answeredCount !== totalQuestions;
             
+            // Update individual question styling
+            const questionContainers = document.querySelectorAll('#speedSection .question-container');
+            questionContainers.forEach((container, index) => {
+                const questionNumber = index + 1;
+                const radioButtons = container.querySelectorAll(`input[name="speed_question${questionNumber}"]`);
+                const isAnswered = Array.from(radioButtons).some(radio => radio.checked);
+                
+                container.classList.remove('answered');
+                if (isAnswered) {
+                    container.classList.add('answered');
+                }
+            });
+            
             console.log(`Speed and Accuracy Progress: ${progress}% (${answeredCount}/${totalQuestions})`);
         }
 
@@ -686,30 +1140,125 @@
             // Update UI elements
             const progressFill = document.getElementById('comprehensionProgressFill');
             const progressText = document.getElementById('comprehensionProgressText');
-            const proceedBtn = document.getElementById('proceedToResultsBtn'); // Adjust button ID as needed
+            const submitBtn = document.querySelector('#comprehensionTest .submit-btn'); // Get the submit button
             
             if (progressFill) progressFill.style.width = progress + '%';
             if (progressText) progressText.textContent = `${progress}% (${answeredCount}/${totalQuestions})`;
-            if (proceedBtn) proceedBtn.disabled = answeredCount !== totalQuestions;
+            
+            // Enable/disable submit button based on completion
+            if (submitBtn) {
+                submitBtn.disabled = answeredCount !== totalQuestions;
+            }
+            
+            // Update individual question styling
+            const questionContainers = document.querySelectorAll('#comprehensionSection .question-container');
+            questionContainers.forEach((container, index) => {
+                const questionNumber = index + 1;
+                const radioButtons = container.querySelectorAll(`input[name="comprehension_question${questionNumber}"]`);
+                const isAnswered = Array.from(radioButtons).some(radio => radio.checked);
+                
+                container.classList.remove('answered');
+                if (isAnswered) {
+                    container.classList.add('answered');
+                }
+            });
             
             console.log(`Comprehension Progress: ${progress}% (${answeredCount}/${totalQuestions})`);
         }
 
         // Timer function
+        let isPaused = false;
+
         function startTimer() {
+            if (timerStarted) return; // Prevent multiple timers
+            
+            timerStarted = true;
             timerInterval = setInterval(() => {
-                timeRemaining--;
-                const minutes = Math.floor(timeRemaining / 60);
-                const seconds = timeRemaining % 60;
-                document.getElementById('timer').textContent = 
-                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                
-                if (timeRemaining <= 0) {
-                    clearInterval(timerInterval);
-                    alert('Time is up! Submitting your test...');
-                    document.getElementById('comprehensionTest').dispatchEvent(new Event('submit'));
+                if (!isPaused) {
+                    timeRemaining--;
+                    const minutes = Math.floor(timeRemaining / 60);
+                    const seconds = timeRemaining % 60;
+                    
+                    const timerElements = document.querySelectorAll('#timer');
+                    timerElements.forEach(element => {
+                        element.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                    });
+                    
+                    if (timeRemaining <= 0) {
+                        clearInterval(timerInterval);
+                        alert('Time is up! Submitting your test...');
+                        document.getElementById('comprehensionTest').dispatchEvent(new Event('submit'));
+                    }
                 }
             }, 1000);
+        }
+
+        // Handle start test button
+        document.getElementById('startTestBtn').addEventListener('click', function() {
+            // Hide the start modal
+            document.getElementById('startModal').style.display = 'none';
+            
+            // Show the test content
+            document.querySelector('.container').classList.remove('test-content-hidden');
+            
+            // Start the timer
+            startTimer();
+        });
+
+        // Handle pause timer button
+        function pauseTimer() {
+            isPaused = true;
+            document.getElementById('blurOverlay').style.display = 'flex';
+            document.querySelector('.container').classList.add('content-blurred');
+            
+            // Update all pause buttons
+            const pauseBtns = document.querySelectorAll('#pauseBtn');
+            pauseBtns.forEach(btn => {
+                btn.textContent = '▶️ Resume';
+                btn.classList.add('resume');
+            });
+        }
+
+        // Handle resume timer button
+        function resumeTimer() {
+            isPaused = false;
+            document.getElementById('blurOverlay').style.display = 'none';
+            document.querySelector('.container').classList.remove('content-blurred');
+            
+            // Update all pause buttons
+            const pauseBtns = document.querySelectorAll('#pauseBtn');
+            pauseBtns.forEach(btn => {
+                btn.textContent = '⏸️ Pause';
+                btn.classList.remove('resume');
+            });
+        }
+
+        // Function to restore vocabulary answers
+        function restoreVocabAnswers() {
+            Object.keys(vocabAnswers).forEach(key => {
+                const input = document.querySelector(`input[name="${key}"][value="${vocabAnswers[key]}"]`);
+                if (input) input.checked = true;
+            });
+            updateVocabProgress();
+        }
+
+        // Function to restore speed answers
+        function restoreSpeedAnswers() {
+            Object.keys(speedAnswers).forEach(key => {
+                const input = document.querySelector(`input[name="${key}"][value="${speedAnswers[key]}"]`);
+                if (input) input.checked = true;
+            });
+            updateSpeedProgress();
+        }
+
+        // Function to restore comprehension answers
+        function restoreComprehensionAnswers() {
+            const comprehensionFormData = new FormData(document.getElementById('comprehensionTest'));
+            comprehensionFormData.forEach((value, key) => {
+                const input = document.querySelector(`input[name="${key}"][value="${value}"]`);
+                if (input) input.checked = true;
+            });
+            updateComprehensionProgress();
         }
 
         // Store vocabulary answers
@@ -730,7 +1279,7 @@
             }
         }
 
-        // Score all three tests - FIXED
+        // Score all three tests
         function scoreCompleteTest() {
             // Score vocabulary
             let vocabCorrect = 0;
@@ -794,9 +1343,10 @@
             };
         }
 
-        // Display complete results
-        function displayCompleteResults(scoreData) {
-            const resultsDiv = document.getElementById('results');
+        // Handle form submission
+        function showResults() {
+            const scoreData = scoreCompleteTest();
+            
             const vocabPercentage = Math.round((scoreData.vocab.correct / scoreData.vocab.total) * 100);
             const speedPercentage = Math.round((scoreData.speed.correct / scoreData.speed.total) * 100);
             const comprehensionPercentage = Math.round((scoreData.comprehension.correct / scoreData.comprehension.total) * 100);
@@ -805,65 +1355,115 @@
             const totalQuestions = scoreData.vocab.total + scoreData.speed.total + scoreData.comprehension.total;
             const overallPercentage = Math.round((totalCorrect / totalQuestions) * 100);
             
-            let resultsHTML = `
-                <div class="score ${overallPercentage >= 70 ? 'correct' : 'incorrect'}">
-                    <h2>Complete Test Results</h2>
-                    <p>Vocabulary: ${scoreData.vocab.correct}/${scoreData.vocab.total} (${vocabPercentage}%)</p>
-                    <p>Speed & Accuracy: ${scoreData.speed.correct}/${scoreData.speed.total} (${speedPercentage}%)</p>
-                    <p>Comprehension: ${scoreData.comprehension.correct}/${scoreData.comprehension.total} (${comprehensionPercentage}%)</p>
-                    <p><strong>Overall Score: ${totalCorrect}/${totalQuestions} (${overallPercentage}%)</strong></p>
+            // Determine reader type
+            const readerType = determineReaderType(vocabPercentage, comprehensionPercentage, overallPercentage);
+            
+            const modalContent = `
+                <div class="score-section">
+                    <h3>📚 Vocabulary Section</h3>
+                    <div class="score-display">${scoreData.vocab.correct}/${scoreData.vocab.total}</div>
+                    <div class="percentage">${vocabPercentage}%</div>
                 </div>
                 
-                <h3>Vocabulary Test Results:</h3>
+                <div class="score-section">
+                    <h3>⚡ Speed & Accuracy Section</h3>
+                    <div class="score-display">${scoreData.speed.correct}/${scoreData.speed.total}</div>
+                    <div class="percentage">${speedPercentage}%</div>
+                </div>
+                
+                <div class="score-section">
+                    <h3>📖 Comprehension Section</h3>
+                    <div class="score-display">${scoreData.comprehension.correct}/${scoreData.comprehension.total}</div>
+                    <div class="percentage">${comprehensionPercentage}%</div>
+                </div>
+                
+                <div class="overall-score">
+                    <h3>🏆 Overall Score</h3>
+                    <div class="score-display">${totalCorrect}/${totalQuestions}</div>
+                    <div class="percentage">${overallPercentage}%</div>
+                </div>
+                
+                <div class="reader-type-section" style="background: ${readerType.color}; color: white; padding: 25px; margin: 20px 0; border-radius: 15px; text-align: center;">
+                    <h3 style="margin: 0 0 15px 0; font-size: 1.8em;">
+                        ${readerType.icon} ${readerType.type}
+                    </h3>
+                    <p style="margin: 0; font-size: 1.1em; line-height: 1.5; opacity: 0.95;">
+                        ${readerType.description}
+                    </p>
+                </div>
+                
+                <button class="continue-btn" onclick="continueToReading('${readerType.redirectUrl}')" 
+                        style="background: linear-gradient(45deg, #667eea, #764ba2); color: white; padding: 15px 40px; border: none; border-radius: 25px; font-size: 1.3em; cursor: pointer; margin: 20px auto; display: block; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3); width: 80%; max-width: 300px;">
+                    📖 Continue to Reading
+                </button>
             `;
             
-            scoreData.vocab.results.forEach((result, index) => {
-                resultsHTML += `
-                    <div class="question-result ${result.isCorrect ? 'correct' : 'incorrect'}">
-                        <strong>${index + 1}. ${result.question}</strong><br>
-                        Your answer: ${result.userAnswer}<br>
-                        Correct answer: ${result.correctAnswer}
-                        ${result.isCorrect ? ' ✓' : ' ✗'}
-                    </div>
-                `;
-            });
-
-            resultsHTML += '<h3>Speed & Accuracy Test Results:</h3>';
+            document.getElementById('modalResults').innerHTML = modalContent;
+            document.getElementById('resultsModal').style.display = 'block';
             
-            scoreData.speed.results.forEach((result, index) => {
-                resultsHTML += `
-                    <div class="question-result ${result.isCorrect ? 'correct' : 'incorrect'}">
-                        <strong>${index + 1}. ${result.question.substring(0, 100)}...</strong><br>
-                        Your answer: ${result.userAnswer}<br>
-                        Correct answer: ${result.correctAnswer}
-                        ${result.isCorrect ? ' ✓' : ' ✗'}
-                    </div>
-                `;
-            });
-
-            // Add comprehension test results - ADDED
-            resultsHTML += '<h3>Comprehension Test Results:</h3>';
-            
-            scoreData.comprehension.results.forEach((result, index) => {
-                resultsHTML += `
-                    <div class="question-result ${result.isCorrect ? 'correct' : 'incorrect'}">
-                        <strong>${index + 1}. ${result.question.substring(0, 100)}...</strong><br>
-                        Your answer: ${result.userAnswer}<br>
-                        Correct answer: ${result.correctAnswer}
-                        ${result.isCorrect ? ' ✓' : ' ✗'}
-                    </div>
-                `;
-            });
-            
-            resultsDiv.innerHTML = resultsHTML;
-            resultsDiv.style.display = 'block';
-            resultsDiv.scrollIntoView({ behavior: 'smooth' });
+            // Prevent clicking outside to close
+            document.getElementById('resultsModal').onclick = function(event) {
+                if (event.target === this) {
+                    return false;
+                }
+            };
         }
 
+        // Function to handle continue to reading
+        function continueToReading(url) {
+            window.location.href = url;
+        }
+
+        // Function to determine reader type based on scores
+        function determineReaderType(vocabPercentage, comprehensionPercentage, overallPercentage) {
+            if (vocabPercentage >= 95 && comprehensionPercentage >= 90 && overallPercentage >= 95) {
+                return {
+                    type: 'Independent Reader',
+                    description: 'You can read and understand text independently with excellent comprehension.',
+                    redirectUrl: 'independent.php',
+                    color: '#28a745', // Green
+                    icon: '🌟'
+                };
+            } else if (vocabPercentage >= 90 && comprehensionPercentage >= 75 && overallPercentage >= 90 && overallPercentage <= 94) {
+                return {
+                    type: 'Instructional Reader',
+                    description: 'You can read well with some guidance and support for optimal learning.',
+                    redirectUrl: 'instructional.php',
+                    color: '#ffc107', // Yellow/Gold
+                    icon: '📚'
+                };
+            } else {
+                return {
+                    type: 'Frustrational Reader',
+                    description: 'Reading material may be challenging. Additional support and practice recommended.',
+                    redirectUrl: 'frustrational.php',
+                    color: '#dc3545', // Red
+                    icon: '💪'
+                };
+            }
+        }
+    
         // Initialize tests
         const vocabQuestions = generateVocabTest();
         const speedQuestions = generateSpeedTest();
         const comprehensionQuestions = generateComprehensionTest();
+        
+        updateComprehensionProgress();
+        
+        // Handle pause/resume timer
+        document.addEventListener('click', function(e) {
+            if (e.target.id === 'pauseBtn') {
+                if (isPaused) {
+                    resumeTimer();
+                } else {
+                    pauseTimer();
+                }
+            }
+        });
+
+        document.getElementById('resumeBtn').addEventListener('click', function() {
+            resumeTimer();
+        });
 
         // Add event listeners for progress tracking
         document.addEventListener('change', function(e) {
@@ -878,20 +1478,46 @@
             }
         });
 
+        // Handle back to vocabulary test
+        document.getElementById('backToVocabBtn').addEventListener('click', function() {
+            storeSpeedAnswers(); // Store current answers before going back
+            document.getElementById('speedSection').classList.remove('active');
+            document.getElementById('vocabularySection').classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top
+        });
+
         // Handle proceed to speed test
         document.getElementById('proceedToSpeedBtn').addEventListener('click', function() {
             storeVocabAnswers();
             document.getElementById('vocabularySection').classList.remove('active');
             document.getElementById('speedSection').classList.add('active');
-            startTimer();
+            restoreSpeedAnswers();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // Handle proceed to comprehension test - FIXED
+        // Handle back to speed test
+        document.getElementById('backToSpeedBtn').addEventListener('click', function() {
+            // Store comprehension answers
+            const comprehensionFormData = new FormData(document.getElementById('comprehensionTest'));
+            const tempComprehensionAnswers = {};
+            for (let [key, value] of comprehensionFormData.entries()) {
+                tempComprehensionAnswers[key] = value;
+            }
+            
+            document.getElementById('comprehensionSection').classList.remove('active');
+            document.getElementById('speedSection').classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top
+        });
+
+        // Handle proceed to comprehension test
         document.getElementById('proceedToCompreBtn').addEventListener('click', function() {
-            storeSpeedAnswers(); // Store speed answers
+            storeSpeedAnswers();
             document.getElementById('speedSection').classList.remove('active');
             document.getElementById('comprehensionSection').classList.add('active');
-            // Timer continues from speed test
+            restoreComprehensionAnswers();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
         // Handle final form submission
@@ -903,7 +1529,7 @@
             }
             
             const scoreData = scoreCompleteTest();
-            displayCompleteResults(scoreData);
+            showResults(); // Show results in modal
         });
     </script>
 </body>
