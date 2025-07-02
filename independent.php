@@ -52,7 +52,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 break;
                 
             case 'reset_test':
+                error_log("Before reset: " . print_r($_SESSION, true));
+                session_unset();
                 session_destroy();
+                session_start();
+                // Reinitialize
+                $_SESSION['test_stage'] = 'start';
+                $_SESSION['pretest_answers'] = [];
+                $_SESSION['posttest_answers'] = [];
+                $_SESSION['pretest_score'] = 0;
+                $_SESSION['posttest_score'] = 0;
+                $_SESSION['selected_posttest'] = null;
+                error_log("After reset: " . print_r($_SESSION, true));
                 header('Location: ' . $_SERVER['PHP_SELF']);
                 exit;
                 break;
@@ -83,6 +94,85 @@ function formatTime($seconds) {
     $minutes = floor($seconds / 60);
     $seconds = $seconds % 60;
     return sprintf('%02d:%02d', $minutes, $seconds);
+}
+
+// Function to handle time out
+function isTimeExpired($startTime, $duration) {
+    return (time() - $startTime) > $duration;
+}
+
+// Modify your form submission handling
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['action'])) {
+        switch ($_POST['action']) {
+            case 'start_pretest':
+                $_SESSION['test_stage'] = 'pretest_reading';
+                $_SESSION['pretest_start_time'] = time();
+                break;
+                
+            case 'start_pretest_questions':
+                // Check if reading time expired
+                if (isset($_SESSION['pretest_start_time']) && 
+                    isTimeExpired($_SESSION['pretest_start_time'], 900)) {
+                    // Time expired, proceed anyway
+                }
+                $_SESSION['test_stage'] = 'pretest_questions';
+                $_SESSION['pretest_questions_start_time'] = time();
+                break;
+                
+            case 'submit_pretest':
+                // Check if question time expired and handle partial answers
+                if (isset($_SESSION['pretest_questions_start_time']) && 
+                    isTimeExpired($_SESSION['pretest_questions_start_time'], 900)) {
+                    // Time expired - accept whatever answers were provided
+                }
+                $_SESSION['pretest_answers'] = $_POST['answers'] ?? [];
+                $_SESSION['pretest_score'] = calculateScore($_SESSION['pretest_answers'], $independentContent[0]['comprehension']);
+                $_SESSION['test_stage'] = 'pretest_results';
+                break;
+                
+            case 'select_posttest':
+                $_SESSION['selected_posttest'] = (int)$_POST['story_selection'];
+                $_SESSION['test_stage'] = 'posttest_reading';
+                $_SESSION['posttest_start_time'] = time();
+                break;
+                
+            case 'start_posttest_questions':
+                // Check if reading time expired
+                if (isset($_SESSION['posttest_start_time']) && 
+                    isTimeExpired($_SESSION['posttest_start_time'], 2100)) {
+                    // Time expired, proceed anyway
+                }
+                $_SESSION['test_stage'] = 'posttest_questions';
+                $_SESSION['posttest_questions_start_time'] = time();
+                break;
+                
+            case 'submit_posttest':
+                // Check if question time expired and handle partial answers
+                if (isset($_SESSION['posttest_questions_start_time']) && 
+                    isTimeExpired($_SESSION['posttest_questions_start_time'], 900)) {
+                    // Time expired - accept whatever answers were provided
+                }
+                $_SESSION['posttest_answers'] = $_POST['answers'] ?? [];
+                $_SESSION['posttest_score'] = calculateScore($_SESSION['posttest_answers'], $independentContent[$_SESSION['selected_posttest']]['comprehension']);
+                $_SESSION['test_stage'] = 'final_results';
+                break;
+                
+            case 'reset_test':
+                session_unset();
+                session_destroy();
+                session_start();
+                $_SESSION['test_stage'] = 'start';
+                $_SESSION['pretest_answers'] = [];
+                $_SESSION['posttest_answers'] = [];
+                $_SESSION['pretest_score'] = 0;
+                $_SESSION['posttest_score'] = 0;
+                $_SESSION['selected_posttest'] = null;
+                header('Location: ' . $_SERVER['PHP_SELF']);
+                exit;
+                break;
+        }
+    }
 }
 
 ?>
@@ -256,19 +346,22 @@ function formatTime($seconds) {
     <div class="container">
         <?php
         // Display timer for timed sections
-        if (in_array($_SESSION['test_stage'], ['pretest_reading', 'pretest_questions', 'posttest_reading', 'posttest_questions'])) {
+        if (in_array($_SESSION['test_stage'], ['pretest_reading', 'pretest_questions'])) {
+            $timeLimit = 900; // 15 minutes total for entire pretest
+            $startTime = $_SESSION['pretest_start_time']; // Use same start time for both phases
+            
+            $remainingTime = getRemainingTime($startTime, $timeLimit);
+            $timerClass = $remainingTime <= 300 ? 'timer warning' : 'timer'; // Warning when 5 minutes left
+            
+            echo '<div class="' . $timerClass . '" id="timer">' . formatTime($remainingTime) . '</div>';
+        }
+
+        // For posttest, keep separate timers
+        if (in_array($_SESSION['test_stage'], ['posttest_reading', 'posttest_questions'])) {
             $timeLimit = 0;
             $startTime = 0;
             
             switch ($_SESSION['test_stage']) {
-                case 'pretest_reading':
-                    $timeLimit = 900; // 15 minutes
-                    $startTime = $_SESSION['pretest_start_time'];
-                    break;
-                case 'pretest_questions':
-                    $timeLimit = 900; // 15 minutes
-                    $startTime = $_SESSION['pretest_questions_start_time'];
-                    break;
                 case 'posttest_reading':
                     $timeLimit = 2100; // 35 minutes
                     $startTime = $_SESSION['posttest_start_time'];
@@ -280,7 +373,7 @@ function formatTime($seconds) {
             }
             
             $remainingTime = getRemainingTime($startTime, $timeLimit);
-            $timerClass = $remainingTime <= 300 ? 'timer warning' : 'timer'; // Warning when 5 minutes left
+            $timerClass = $remainingTime <= 300 ? 'timer warning' : 'timer';
             
             echo '<div class="' . $timerClass . '" id="timer">' . formatTime($remainingTime) . '</div>';
         }
@@ -295,7 +388,7 @@ function formatTime($seconds) {
                     <h3>Welcome to the Reading Comprehension Test</h3>
                     <p>This test consists of two parts:</p>
                     <ul>
-                        <li><strong>Pre-test:</strong> Read a passage (15 minutes) and answer questions (15 minutes)</li>
+                        <li><strong>Pre-test:</strong> Read a passage and answer questions (15 minutes)</li>
                         <li><strong>Post-test:</strong> Select and read a story (35 minutes) and answer questions (15 minutes)</li>
                     </ul>
                     <p>Please ensure you have a stable internet connection and will not be interrupted during the test.</p>
@@ -446,10 +539,70 @@ function formatTime($seconds) {
         
         function updateTimer() {
             if (remainingTime <= 0) {
-                // Auto-submit form when time is up
-                const forms = document.querySelectorAll('form');
-                if (forms.length > 0) {
-                    forms[0].submit();
+                // Handle different stages when time runs out
+                const currentStage = '<?php echo $_SESSION['test_stage']; ?>';
+                
+                if (currentStage === 'pretest_reading') {
+                    // Auto-advance to questions phase
+                    const form = document.createElement('form');
+                    form.method = 'POST';
+                    form.style.display = 'none';
+                    
+                    const actionInput = document.createElement('input');
+                    actionInput.type = 'hidden';
+                    actionInput.name = 'action';
+                    actionInput.value = 'start_pretest_questions';
+                    
+                    form.appendChild(actionInput);
+                    document.body.appendChild(form);
+                    form.submit();
+                    
+                } else if (currentStage === 'posttest_reading') {
+                    // Auto-advance to questions phase
+                    const form = document.createElement('form');
+                    form.method = 'POST';
+                    form.style.display = 'none';
+                    
+                    const actionInput = document.createElement('input');
+                    actionInput.type = 'hidden';
+                    actionInput.name = 'action';
+                    actionInput.value = 'start_posttest_questions';
+                    
+                    form.appendChild(actionInput);
+                    document.body.appendChild(form);
+                    form.submit();
+                    
+                } else if (currentStage === 'pretest_questions') {
+                    // Auto-submit pretest with current answers
+                    const form = document.querySelector('form[method="post"]');
+                    if (form) {
+                        // Add hidden input for action if not present
+                        let actionInput = form.querySelector('input[name="action"]');
+                        if (!actionInput) {
+                            actionInput = document.createElement('input');
+                            actionInput.type = 'hidden';
+                            actionInput.name = 'action';
+                            actionInput.value = 'submit_pretest';
+                            form.appendChild(actionInput);
+                        }
+                        form.submit();
+                    }
+                    
+                } else if (currentStage === 'posttest_questions') {
+                    // Auto-submit posttest with current answers
+                    const form = document.querySelector('form[method="post"]');
+                    if (form) {
+                        // Add hidden input for action if not present
+                        let actionInput = form.querySelector('input[name="action"]');
+                        if (!actionInput) {
+                            actionInput = document.createElement('input');
+                            actionInput.type = 'hidden';
+                            actionInput.name = 'action';
+                            actionInput.value = 'submit_posttest';
+                            form.appendChild(actionInput);
+                        }
+                        form.submit();
+                    }
                 }
                 return;
             }
@@ -479,9 +632,22 @@ function formatTime($seconds) {
             });
         });
         
-        // Prevent accidental page refresh during test
+        // Prevent accidental page refresh during test - FIXED VERSION
         <?php if ($_SESSION['test_stage'] !== 'start' && $_SESSION['test_stage'] !== 'final_results'): ?>
+        let formSubmitting = false;
+
+        // Track when forms are being submitted
+        document.addEventListener('submit', function() {
+            formSubmitting = true;
+        });
+
         window.addEventListener('beforeunload', function(e) {
+            // Don't show warning if user is submitting a form
+            if (formSubmitting) {
+                return;
+            }
+            
+            // Only show warning for actual navigation away from page
             const message = 'Are you sure you want to leave? Your progress may be lost.';
             e.returnValue = message;
             return message;
