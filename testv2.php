@@ -11,7 +11,7 @@
     <title>Gates-MacGinitie Reading Test</title>
 
     <style>
-        /* Reset and Base Styles */
+        /* Reset and Base Styles */ 
         * {
             margin: 0;
             padding: 0;
@@ -286,29 +286,35 @@
         }
 
         .options {
-            margin: 15px 0;
+            display: grid;
+            gap: 10px;
         }
-
+        
         .option {
-            margin: 8px 0;
-        }
-
-        .option label {
             display: flex;
             align-items: center;
-            padding: 8px;
+            padding: 12px;
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
             cursor: pointer;
-            border-radius: 4px;
-            transition: background-color 0.2s;
+            transition: all 0.3s ease;
         }
-
-        .option label:hover {
-            background: #e9ecef;
+        
+        .option:hover {
+            background: #e3f2fd;
+            border-color: #2196f3;
         }
-
+        
         .option input[type="radio"] {
             margin-right: 10px;
             transform: scale(1.2);
+        }
+        
+        .option label {
+            cursor: pointer;
+            flex: 1;
+            font-size: 1.1em;
         }
 
         /* Button Styles */
@@ -450,16 +456,17 @@
             overflow-y: auto;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             animation: modalSlideIn 0.3s ease-out;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
         /* Results Styles */
         .results {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            margin: 20px 0;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin: 0;
         }
+
 
         .score-section {
             background: #f8f9fa;
@@ -801,7 +808,7 @@
                 <br>
                 The word <b><i><u>light</u></i></b> makes the best sense in blank C2. You should have written letter <b><i><u>E</u></i></b>.
                 <br><br>
-                <i>Now write the letter of the best word for each of the blanks that follow on this page and on the next pages.  If you can’t choose the best word for a blank, don’t spend too much time on it.  Go on to the next one. 
+                <i>Now write the letter of the best word for each of the blanks that follow on this page and on the next pages.  If you can’t choose the best word for a blank, don’t spend too much time on it.  Go on to the next one. </i>
                 </p>
             </div>
             
@@ -990,7 +997,7 @@
                 const [passage, questionText] = question.question.split('\n\nQuestion');
                 
                 questionDiv.innerHTML = `
-                    <div class="passage" style="background: #f0f8ff; padding: 15px; border-radius: 8px; margin-bottom: 15px; font-style: italic;">
+                    <div class="passage" style="background: #f0f8ff; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
                         ${passage}
                     </div>
                     <div class="question-text">${question.questionNumber}. Question${questionText || ': Fill in the blank.'}</div>
