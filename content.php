@@ -108,27 +108,11 @@ $independentContent = [
     [
         "type" => "posttest",
         "title" => "The Coronavirus Pandemic: Origins, Symptoms, and Treatment",
-        "content" => "Coronaviruses are named for their appearance: “corona” means “crown.” The virus’s 
-        outer layers are covered with spike proteins that surround them like a crown. Coronaviruses 
-        were discovered in the 1960s. They are a group of viruses that cause diseases in birds and 
-        mammals including humans. At the end of 2019, a new type of coronavirus called COVID-19 
-        started spreading in China. In a short period of time, COVID-19 was able to meet the three 
-        required factors to be classified as a pandemic. This includes causing death, person-to-person spread and worldwide spread. It is believed that the virus was transmitted from animals to humans. Unfortunately, when this happened, it took scientists a lot of time before they could develop a vaccine or medicines to cure it. 
+        "content" => "Coronaviruses are named for their appearance: “corona” means “crown.” The virus’s  outer layers are covered with spike proteins that surround them like a crown. Coronaviruses were discovered in the 1960s. They are a group of viruses that cause diseases in birds and mammals including humans. At the end of 2019, a new type of coronavirus called COVID-19 started spreading in China. In a short period of time, COVID-19 was able to meet the three required factors to be classified as a pandemic. This includes causing death, person-to-person spread and worldwide spread. It is believed that the virus was transmitted from animals to humans. Unfortunately, when this happened, it took scientists a lot of time before they could develop a vaccine or medicines to cure it. 
 
-        COVID-19 is diagnosed through a laboratory test. Diagnosis by examination alone is 
-        difficult since many COVID-19 signs and symptoms can be caused by other illnesses. 
-        However, most people infected with the COVID-19 virus will experience mild to moderate 
-        respiratory illness and recover without requiring special treatment. Some of the symptoms 
-        are fever, cough, runny nose and headache. Older people, and those with underlying medical 
-        problems like diabetes, chronic respiratory disease, and cancer are more likely to develop 
-        serious illness because they have a weak immune system.  
+        COVID-19 is diagnosed through a laboratory test. Diagnosis by examination alone is difficult since many COVID-19 signs and symptoms can be caused by other illnesses. However, most people infected with the COVID-19 virus will experience mild to moderate respiratory illness and recover without requiring special treatment. Some of the symptoms are fever, cough, runny nose and headache. Older people, and those with underlying medical problems like diabetes, chronic respiratory disease, and cancer are more likely to develop serious illness because they have a weak immune system.  
 
-        As of now, researchers know that the coronavirus is spread through droplets and virus 
-        particles released into the air when an infected person breathes, talks, laughs, coughs, or 
-        sneezes. Larger droplets may fall to the ground in a few seconds, but tiny infectious particles 
-        can linger in the air and accumulate in indoor places, especially where many people are 
-        gathered and there is poor ventilation. Therefore, mask-wearing, hand hygiene and physical 
-        distancing are essential to preventing COVID-19. 
+        As of now, researchers know that the coronavirus is spread through droplets and virus particles released into the air when an infected person breathes, talks, laughs, coughs, or sneezes. Larger droplets may fall to the ground in a few seconds, but tiny infectious particles can linger in the air and accumulate in indoor places, especially where many people are gathered and there is poor ventilation. Therefore, mask-wearing, hand hygiene and physical distancing are essential to preventing COVID-19. 
 
         Treatment for COVID-19 addresses the signs and symptoms of the infection and 
         supports people with more severe disease. For mild cases of coronavirus disease, your doctor 

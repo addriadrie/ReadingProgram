@@ -101,6 +101,69 @@ function isTimeExpired($startTime, $duration) {
     return (time() - $startTime) > $duration;
 }
 
+// Functino to auto-save results
+function saveResultsToCSV($pretestScore, $posttestScore, $selectedStory, $pretestAnswers, $posttestAnswers) {
+    $csvFile = 'test_results.csv';
+    $fileExists = file_exists($csvFile);
+    
+    // Open file for appending
+    $handle = fopen($csvFile, 'a');
+    
+    if ($handle === false) {
+        error_log("Could not open CSV file for writing");
+        return false;
+    }
+    
+    // Add header row if file is new
+    if (!$fileExists) {
+        $header = [
+            'Timestamp',
+            'Session ID',
+            'Pretest Score',
+            'Posttest Score',
+            'Score Improvement',
+            'Selected Story Index',
+            'Selected Story Title',
+            'Pretest Answers',
+            'Posttest Answers',
+            'Total Time (minutes)'
+        ];
+        fputcsv($handle, $header);
+    }
+    
+    // Calculate total time if timestamps are available
+    $totalTime = 'N/A';
+    if (isset($_SESSION['pretest_start_time'])) {
+        $totalMinutes = round((time() - $_SESSION['pretest_start_time']) / 60, 2);
+        $totalTime = $totalMinutes;
+    }
+    
+    // Get story title
+    global $independentContent;
+    $storyTitle = isset($independentContent[$selectedStory]) ? 
+                  $independentContent[$selectedStory]['title'] : 'Unknown';
+    
+    // Prepare data row
+    $data = [
+        date('Y-m-d H:i:s'), // Timestamp
+        session_id(), // Session ID
+        $pretestScore,
+        $posttestScore,
+        $posttestScore - $pretestScore, // Improvement
+        $selectedStory,
+        $storyTitle,
+        json_encode($pretestAnswers), // Convert arrays to JSON strings
+        json_encode($posttestAnswers),
+        $totalTime
+    ];
+    
+    // Write data to CSV
+    $result = fputcsv($handle, $data);
+    fclose($handle);
+    
+    return $result !== false;
+}
+
 // Modify your form submission handling
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['action'])) {
@@ -147,14 +210,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['posttest_questions_start_time'] = time();
                 break;
                 
-            case 'submit_posttest':
-                // Check if question time expired and handle partial answers
-                if (isset($_SESSION['posttest_questions_start_time']) && 
-                    isTimeExpired($_SESSION['posttest_questions_start_time'], 900)) {
-                    // Time expired - accept whatever answers were provided
-                }
+           case 'submit_posttest':
                 $_SESSION['posttest_answers'] = $_POST['answers'] ?? [];
                 $_SESSION['posttest_score'] = calculateScore($_SESSION['posttest_answers'], $independentContent[$_SESSION['selected_posttest']]['comprehension']);
+                
+                // Save results to CSV
+                saveResultsToCSV(
+                    $_SESSION['pretest_score'],
+                    $_SESSION['posttest_score'],
+                    $_SESSION['selected_posttest'],
+                    $_SESSION['pretest_answers'],
+                    $_SESSION['posttest_answers']
+                );
+                
                 $_SESSION['test_stage'] = 'final_results';
                 break;
                 
