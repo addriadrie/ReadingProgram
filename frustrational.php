@@ -1,3 +1,6 @@
+
+
+
 <?php
     session_start();
 
@@ -8,13 +11,19 @@
     if (!isset($_SESSION['test_stage'])) {
         $_SESSION['test_stage'] = 'start';
         $_SESSION['pretest_answers'] = [];
+        $_SESSION['prevocab_answers'] = [];
+        $_SESSION['postvocab_answers'] = [];
+        $_SESSION['activity_answers'] = [];
         $_SESSION['posttest_answers'] = [];
         $_SESSION['pretest_score'] = 0;
+        $_SESSION['prevocab_score'] = 0;
+        $_SESSION['postvocab_score'] = 0;
+        $_SESSION['activity_score'] = 0;
         $_SESSION['posttest_score'] = 0;
         $_SESSION['selected_posttest'] = null;
     }
 
-    // Handle form submissions
+    // Handle form submissions - SINGLE SWITCH STATEMENT ONLY
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST['action'])) {
             switch ($_POST['action']) {
@@ -30,8 +39,31 @@
                     
                 case 'submit_pretest':
                     $_SESSION['pretest_answers'] = $_POST['answers'] ?? [];
-                    $_SESSION['pretest_score'] = calculateScore($_SESSION['pretest_answers'], $independentContent[0]['comprehension']);
-                    $_SESSION['test_stage'] = 'pretest_results';
+                    $_SESSION['pretest_score'] = calculateScore($_SESSION['pretest_answers'], $frustrationalContent[0]['comprehension']);
+                    $_SESSION['test_stage'] = 'prevocab_test'; // Go directly to vocab test
+                    $_SESSION['activity_start_time'] = time();
+                    break;
+
+                case 'submit_prevocab':
+                    $_SESSION['prevocab_answers'] = $_POST['answers'] ?? [];
+                    $_SESSION['prevocab_score'] = calculateVocabScore($_SESSION['prevocab_answers'], $frustrationalContent[1]['vocabulary']);
+                    $_SESSION['test_stage'] = 'activity_reading';
+                    break;
+                
+                case 'start_postvocab':
+                    $_SESSION['test_stage'] = 'postvocab_test';
+                    break;
+
+                case 'submit_postvocab':
+                    $_SESSION['postvocab_answers'] = $_POST['answers'] ?? [];
+                    $_SESSION['postvocab_score'] = calculateVocabScore($_SESSION['postvocab_answers'], $frustrationalContent[1]['vocabulary']);
+                    $_SESSION['test_stage'] = 'activity_questions';
+                    break;
+
+                case 'submit_activity':
+                    $_SESSION['activity_answers'] = $_POST['answers'] ?? [];
+                    $_SESSION['activity_score'] = calculateScore($_SESSION['activity_answers'], $frustrationalContent[1]['comprehension']);
+                    $_SESSION['test_stage'] = 'posttest_selection';
                     break;
                     
                 case 'select_posttest':
@@ -42,28 +74,37 @@
                     
                 case 'start_posttest_questions':
                     $_SESSION['test_stage'] = 'posttest_questions';
-                    $_SESSION['posttest_questions_start_time'] = time();
                     break;
                     
                 case 'submit_posttest':
                     $_SESSION['posttest_answers'] = $_POST['answers'] ?? [];
-                    $_SESSION['posttest_score'] = calculateScore($_SESSION['posttest_answers'], $independentContent[$_SESSION['selected_posttest']]['comprehension']);
+                    $_SESSION['posttest_score'] = calculateScore($_SESSION['posttest_answers'], $frustrationalContent[$_SESSION['selected_posttest']]['comprehension']);
+                    
+                    // Save results to CSV
+                    saveResultsToCSV(
+                        $_SESSION['pretest_score'],
+                        $_SESSION['posttest_score'],
+                        $_SESSION['selected_posttest'],
+                        $_SESSION['pretest_answers'],
+                        $_SESSION['posttest_answers'],
+                        $_SESSION['prevocab_score'],
+                        $_SESSION['postvocab_score'],
+                        $_SESSION['activity_score']
+                    );
+                    
                     $_SESSION['test_stage'] = 'final_results';
                     break;
                     
                 case 'reset_test':
-                    error_log("Before reset: " . print_r($_SESSION, true));
                     session_unset();
                     session_destroy();
                     session_start();
-                    // Reinitialize
                     $_SESSION['test_stage'] = 'start';
                     $_SESSION['pretest_answers'] = [];
                     $_SESSION['posttest_answers'] = [];
                     $_SESSION['pretest_score'] = 0;
                     $_SESSION['posttest_score'] = 0;
                     $_SESSION['selected_posttest'] = null;
-                    error_log("After reset: " . print_r($_SESSION, true));
                     header('Location: ' . $_SERVER['PHP_SELF']);
                     exit;
                     break;
@@ -80,6 +121,20 @@
             }
         }
         return round(($correct / count($questions)) * 100, 2);
+    }
+
+    // Function to calculate vocab score - FIXED LOGIC
+    function calculateVocabScore($answers, $vocabulary) {
+        $correct = 0;
+        $vocabWords = array_keys($vocabulary);
+        
+        foreach ($answers as $index => $answer) {
+            // Check if the selected answer matches the correct word for this index
+            if (isset($vocabWords[$index]) && $answer === $vocabWords[$index]) {
+                $correct++;
+            }
+        }
+        return round(($correct / count($vocabulary)) * 100, 2);
     }
 
     // Function to get remaining time
@@ -101,9 +156,9 @@
         return (time() - $startTime) > $duration;
     }
 
-    // Functino to auto-save results
-    function saveResultsToCSV($pretestScore, $posttestScore, $selectedStory, $pretestAnswers, $posttestAnswers) {
-        $csvFile = 'independent_results.csv';
+    // Function to auto-save results
+    function saveResultsToCSV($pretestScore, $posttestScore, $selectedStory, $pretestAnswers, $posttestAnswers, $prevocabScore, $postvocabScore, $activityScore) {
+        $csvFile = 'frustrational_results.csv';
         $fileExists = file_exists($csvFile);
         
         // Open file for appending
@@ -117,15 +172,9 @@
         // Add header row if file is new
         if (!$fileExists) {
             $header = [
-                'Timestamp',
-                'Session ID',
-                'Pretest Score',
-                'Posttest Score',
-                'Score Improvement',
-                'Selected Story Index',
-                'Selected Story Title',
-                'Pretest Answers',
-                'Posttest Answers',
+                'Timestamp', 'Session ID', 'Pretest Score', 'Posttest Score', 'Score Improvement',
+                'Pre-Vocab Score', 'Post-Vocab Score', 'Vocab Improvement', 'Activity Score',
+                'Selected Story Index', 'Selected Story Title', 'Pretest Answers', 'Posttest Answers',
                 'Total Time (minutes)'
             ];
             fputcsv($handle, $header);
@@ -139,21 +188,25 @@
         }
         
         // Get story title
-        global $independentContent;
-        $storyTitle = isset($independentContent[$selectedStory]) ? 
-                    $independentContent[$selectedStory]['title'] : 'Unknown';
+        global $frustrationalContent;
+        $storyTitle = isset($frustrationalContent[$selectedStory]) ? 
+                    $frustrationalContent[$selectedStory]['title'] : 'Unknown';
         
         // Prepare data row
         $data = [
-            date('Y-m-d H:i:s'), // Timestamp
-            session_id(), // Session ID
-            $pretestScore,
-            $posttestScore,
-            $posttestScore - $pretestScore, // Improvement
-            $selectedStory,
-            $storyTitle,
-            json_encode($pretestAnswers), // Convert arrays to JSON strings
-            json_encode($posttestAnswers),
+            date('Y-m-d H:i:s'), 
+            session_id(), 
+            $pretestScore, 
+            $posttestScore, 
+            $posttestScore - $pretestScore,
+            $prevocabScore, 
+            $postvocabScore, 
+            $postvocabScore - $prevocabScore, 
+            $activityScore,
+            $selectedStory, 
+            $storyTitle, 
+            json_encode($pretestAnswers), 
+            json_encode($posttestAnswers), 
             $totalTime
         ];
         
@@ -162,85 +215,6 @@
         fclose($handle);
         
         return $result !== false;
-    }
-
-    // Modify your form submission handling
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if (isset($_POST['action'])) {
-            switch ($_POST['action']) {
-                case 'start_pretest':
-                    $_SESSION['test_stage'] = 'pretest_reading';
-                    $_SESSION['pretest_start_time'] = time();
-                    break;
-                    
-                case 'start_pretest_questions':
-                    // Check if reading time expired
-                    if (isset($_SESSION['pretest_start_time']) && 
-                        isTimeExpired($_SESSION['pretest_start_time'], 900)) {
-                        // Time expired, proceed anyway
-                    }
-                    $_SESSION['test_stage'] = 'pretest_questions';
-                    $_SESSION['pretest_questions_start_time'] = time();
-                    break;
-                    
-                case 'submit_pretest':
-                    // Check if question time expired and handle partial answers
-                    if (isset($_SESSION['pretest_questions_start_time']) && 
-                        isTimeExpired($_SESSION['pretest_questions_start_time'], 900)) {
-                        // Time expired - accept whatever answers were provided
-                    }
-                    $_SESSION['pretest_answers'] = $_POST['answers'] ?? [];
-                    $_SESSION['pretest_score'] = calculateScore($_SESSION['pretest_answers'], $independentContent[0]['comprehension']);
-                    $_SESSION['test_stage'] = 'pretest_results';
-                    break;
-                    
-                case 'select_posttest':
-                    $_SESSION['selected_posttest'] = (int)$_POST['story_selection'];
-                    $_SESSION['test_stage'] = 'posttest_reading';
-                    $_SESSION['posttest_start_time'] = time();
-                    break;
-                    
-                case 'start_posttest_questions':
-                    // Check if reading time expired
-                    if (isset($_SESSION['posttest_start_time']) && 
-                        isTimeExpired($_SESSION['posttest_start_time'], 2100)) {
-                        // Time expired, proceed anyway
-                    }
-                    $_SESSION['test_stage'] = 'posttest_questions';
-                    $_SESSION['posttest_questions_start_time'] = time();
-                    break;
-                    
-            case 'submit_posttest':
-                    $_SESSION['posttest_answers'] = $_POST['answers'] ?? [];
-                    $_SESSION['posttest_score'] = calculateScore($_SESSION['posttest_answers'], $independentContent[$_SESSION['selected_posttest']]['comprehension']);
-                    
-                    // Save results to CSV
-                    saveResultsToCSV(
-                        $_SESSION['pretest_score'],
-                        $_SESSION['posttest_score'],
-                        $_SESSION['selected_posttest'],
-                        $_SESSION['pretest_answers'],
-                        $_SESSION['posttest_answers']
-                    );
-                    
-                    $_SESSION['test_stage'] = 'final_results';
-                    break;
-                    
-                case 'reset_test':
-                    session_unset();
-                    session_destroy();
-                    session_start();
-                    $_SESSION['test_stage'] = 'start';
-                    $_SESSION['pretest_answers'] = [];
-                    $_SESSION['posttest_answers'] = [];
-                    $_SESSION['pretest_score'] = 0;
-                    $_SESSION['posttest_score'] = 0;
-                    $_SESSION['selected_posttest'] = null;
-                    header('Location: ' . $_SERVER['PHP_SELF']);
-                    exit;
-                    break;
-            }
-        }
     }
 ?>
 
@@ -413,9 +387,9 @@
 <body>
     <div class="container">
         <?php
-        // Display timer for timed sections
+        // 15 minutes total for entire pretest
         if (in_array($_SESSION['test_stage'], ['pretest_reading', 'pretest_questions'])) {
-            $timeLimit = 900; // 15 minutes total for entire pretest
+            $timeLimit = 900; // 15 minutes in seconds
             $startTime = $_SESSION['pretest_start_time']; // Use same start time for both phases
             
             $remainingTime = getRemainingTime($startTime, $timeLimit);
@@ -424,21 +398,21 @@
             echo '<div class="' . $timerClass . '" id="timer">' . formatTime($remainingTime) . '</div>';
         }
 
-        // For posttest, keep separate timers
-        if (in_array($_SESSION['test_stage'], ['posttest_reading', 'posttest_questions'])) {
-            $timeLimit = 0;
-            $startTime = 0;
+        // 35 minutes total for entire activity sequence
+        if (in_array($_SESSION['test_stage'], ['prevocab_test', 'activity_reading', 'postvocab_test', 'activity_questions'])) {
+            $timeLimit = 2100; // 
+            $startTime = $_SESSION['activity_start_time']; // Use same start time for all phases
             
-            switch ($_SESSION['test_stage']) {
-                case 'posttest_reading':
-                    $timeLimit = 2100; // 35 minutes
-                    $startTime = $_SESSION['posttest_start_time'];
-                    break;
-                case 'posttest_questions':
-                    $timeLimit = 900; // 15 minutes
-                    $startTime = $_SESSION['posttest_questions_start_time'];
-                    break;
-            }
+            $remainingTime = getRemainingTime($startTime, $timeLimit);
+            $timerClass = $remainingTime <= 300 ? 'timer warning' : 'timer'; // Warning when 5 minutes left
+            
+            echo '<div class="' . $timerClass . '" id="timer">' . formatTime($remainingTime) . '</div>';
+        }
+
+        // 15 minutes total for entire posttest (reading + questions)
+        if (in_array($_SESSION['test_stage'], ['posttest_reading', 'posttest_questions'])) {
+            $timeLimit = 900; 
+            $startTime = $_SESSION['posttest_start_time']; 
             
             $remainingTime = getRemainingTime($startTime, $timeLimit);
             $timerClass = $remainingTime <= 300 ? 'timer warning' : 'timer';
@@ -468,7 +442,7 @@
                 break;
 
             case 'pretest_reading':
-                $pretest = $independentContent[0];
+                $pretest = $frustrationalContent[0];
                 ?>
                 <div class="progress">Pre-Test Reading Phase</div>
                 <h2><?php echo htmlspecialchars($pretest['title']); ?></h2>
@@ -482,7 +456,7 @@
                 break;
 
             case 'pretest_questions':
-                $pretest = $independentContent[0];
+                $pretest = $frustrationalContent[0];
                 ?>
                 <div class="progress">Pre-Test Questions Phase</div>
                 <h2>Pre-Test Questions</h2>
@@ -520,16 +494,16 @@
                 </div>
                 <div class="instructions">
                     <h3>Select a Story for Post-Test</h3>
-                    <p>Choose one of the following stories to read for your post-test:</p>
+                    <p>Choose one of the following stories to read for your reading activity:</p>
                 </div>
-                <form method="post">
+                <form method="post">    
                     <div class="story-selection">
-                        <?php foreach ($independentContent as $index => $story): ?>
+                        <?php foreach ($frustrationalContent as $index => $story): ?>
                             <?php if ($story['type'] === 'posttest'): ?>
                                 <div class="story-card">
                                     <label>
                                         <input type="radio" name="story_selection" value="<?php echo $index; ?>" required>
-                                        <h3><?php echo htmlspecialchars($story['title']); ?></h3>
+                                        <h3><?php echo htmlspecialchars($story['title'] ?: 'Antarctica Story'); ?></h3>
                                         <p><?php echo htmlspecialchars(substr($story['content'], 0, 200)) . '...'; ?></p>
                                     </label>
                                 </div>
@@ -541,8 +515,143 @@
                 <?php
                 break;
 
+            case 'prevocab_test':
+                $activity = $frustrationalContent[1];
+                ?>
+                <div class="progress">Pre-Activity Vocabulary Test</div>
+                <h2>Vocabulary Test</h2>
+                <p>Match each word with its correct definition:</p>
+                <form method="post">
+                    <?php 
+                    $vocabWords = array_keys($activity['vocabulary']);
+                    $vocabDefinitions = array_values($activity['vocabulary']);
+                    shuffle($vocabDefinitions);
+                    
+                    foreach ($vocabWords as $index => $word): ?>
+                        <div class="question">
+                            <h4>Word <?php echo $index + 1; ?>: <?php echo htmlspecialchars($word); ?></h4>
+                            <div class="options">
+                                <?php foreach ($vocabDefinitions as $defIndex => $definition): ?>
+                                    <label>
+                                        <input type="radio" name="answers[<?php echo $index; ?>]" value="<?php echo $word; ?>" required>
+                                        <?php echo htmlspecialchars($definition); ?>
+                                    </label>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                    <button type="submit" name="action" value="submit_prevocab" class="btn">Continue to Reading</button>
+                </form>
+                <?php
+                break;
+
+            case 'activity_reading':
+                $activity = $frustrationalContent[1];
+                ?>
+                <div class="progress">Activity Reading Phase</div>
+                <h2><?php echo htmlspecialchars($activity['title']); ?></h2>
+                <div class="content">
+                    <?php echo nl2br(htmlspecialchars($activity['content'])); ?>
+                </div>
+                <form method="post">
+                    <button type="submit" name="action" value="start_postvocab" class="btn">Proceed to Post-Vocabulary</button>
+                </form>
+                <?php
+                break;
+
+            case 'postvocab_test':
+                $activity = $frustrationalContent[1];
+                ?>
+                <div class="progress">Post-Activity Vocabulary Test</div>
+                <h2>Vocabulary Test (After Reading)</h2>
+                <p>Match each word with its correct definition:</p>
+                <form method="post">
+                    <?php 
+                    $vocabWords = array_keys($activity['vocabulary']);
+                    $vocabDefinitions = array_values($activity['vocabulary']);
+                    shuffle($vocabDefinitions);
+                    
+                    foreach ($vocabWords as $index => $word): ?>
+                        <div class="question">
+                            <h4>Word <?php echo $index + 1; ?>: <?php echo htmlspecialchars($word); ?></h4>
+                            <div class="options">
+                                <?php foreach ($vocabDefinitions as $defIndex => $definition): ?>
+                                    <label>
+                                        <input type="radio" name="answers[<?php echo $index; ?>]" value="<?php echo $word; ?>" required>
+                                        <?php echo htmlspecialchars($definition); ?>
+                                    </label>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                    <button type="submit" name="action" value="submit_postvocab" class="btn">Continue to Questions</button>
+                </form>
+                <?php
+                break;
+
+            case 'activity_questions':
+                $activity = $frustrationalContent[1];
+                ?>
+                <div class="progress">Activity Comprehension Questions</div>
+                <h2>Reading Comprehension Questions</h2>
+                <form method="post">
+                    <?php foreach ($activity['comprehension'] as $index => $question): ?>
+                        <div class="question">
+                            <h4>Question <?php echo $index + 1; ?>: <?php echo nl2br(htmlspecialchars($question['question'])); ?></h4>
+                            <div class="options">
+                                <?php foreach ($question['options'] as $option => $text): ?>
+                                    <label>
+                                        <input type="radio" name="answers[<?php echo $index; ?>]" value="<?php echo $option; ?>" required>
+                                        <?php echo htmlspecialchars($text); ?>
+                                    </label>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                    <button type="submit" name="action" value="submit_activity" class="btn">Submit Activity</button>
+                </form>
+                <?php
+                break;
+
+            case 'activity_results':
+                ?>
+                <h2>Activity Results</h2>
+                <div class="score">Pre-Vocabulary Score: <?php echo $_SESSION['prevocab_score']; ?>%</div>
+                <div class="score">Post-Vocabulary Score: <?php echo $_SESSION['postvocab_score']; ?>%</div>
+                <div class="score">Activity Comprehension Score: <?php echo $_SESSION['activity_score']; ?>%</div>
+                <form method="post">
+                    <button type="submit" name="action" value="proceed_to_posttest" class="btn">Proceed to Post-Test</button>
+                </form>
+                <?php
+                break;
+
+            case 'posttest_selection':
+                ?>
+                <h2>Select Post-Test Story</h2>
+                <div class="instructions">
+                    <p>Choose a story for your final test:</p>
+                </div>
+                <form method="post">
+                    <div class="story-selection">
+                        <?php foreach ($frustrationalContent as $index => $story): ?>
+                            <?php if ($story['type'] === 'posttest'): ?>
+                                <div class="story-card">
+                                    <label>
+                                        <input type="radio" name="story_selection" value="<?php echo $index; ?>" required>
+                                        <h3><?php echo htmlspecialchars($story['title'] ?: 'Antarctica Story'); ?></h3>
+                                        <p><?php echo htmlspecialchars(substr($story['content'], 0, 200)) . '...'; ?></p>
+                                    </label>
+                                </div>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </div>
+                    <button type="submit" name="action" value="select_posttest" class="btn">Start Post-Test</button>
+                </form>
+                <?php
+                break;
+
             case 'posttest_reading':
-                $posttest = $independentContent[$_SESSION['selected_posttest']];
+                $posttest = $frustrationalContent[$_SESSION['selected_posttest']];
                 ?>
                 <div class="progress">Post-Test Reading Phase</div>
                 <h2><?php echo htmlspecialchars($posttest['title']); ?></h2>
@@ -556,7 +665,7 @@
                 break;
 
             case 'posttest_questions':
-                $posttest = $independentContent[$_SESSION['selected_posttest']];
+                $posttest = $frustrationalContent[$_SESSION['selected_posttest']];
                 ?>
                 <div class="progress">Post-Test Questions Phase</div>
                 <h2>Post-Test Questions</h2>
@@ -565,13 +674,7 @@
                         <div class="question">
                             <h4>Question <?php echo $index + 1; ?>: <?php echo nl2br(htmlspecialchars($question['question'])); ?></h4>
                             <div class="options">
-                                <?php 
-                                $shuffledOptions = $question['options'];
-                                $keys = array_keys($shuffledOptions);
-                                shuffle($keys);
-                                $shuffledOptions = array_merge(array_flip($keys), $shuffledOptions);
-                                
-                                foreach ($shuffledOptions as $option => $text): ?>
+                                <?php foreach ($question['options'] as $option => $text): ?>
                                     <label>
                                         <input type="radio" name="answers[<?php echo $index; ?>]" value="<?php echo $option; ?>" required>
                                         <?php echo htmlspecialchars($text); ?>
@@ -672,7 +775,6 @@
                     // Auto-submit posttest with current answers
                     const form = document.querySelector('form[method="post"]');
                     if (form) {
-                        // Add hidden input for action if not present
                         let actionInput = form.querySelector('input[name="action"]');
                         if (!actionInput) {
                             actionInput = document.createElement('input');
@@ -683,8 +785,65 @@
                         }
                         form.submit();
                     }
+                } else if (currentStage === 'prevocab_test') {
+                    // Auto-submit pre-vocab test
+                    const form = document.querySelector('form[method="post"]');
+                    if (form) {
+                        let actionInput = form.querySelector('input[name="action"]');
+                        if (!actionInput) {
+                            actionInput = document.createElement('input');
+                            actionInput.type = 'hidden';
+                            actionInput.name = 'action';
+                            actionInput.value = 'submit_prevocab';
+                            form.appendChild(actionInput);
+                        }
+                        form.submit();
+                    }
+                
+                } else if (currentStage === 'activity_reading') {
+                    const form = document.createElement('form');
+                    form.method = 'POST';
+                    form.style.display = 'none';
+                    
+                    const actionInput = document.createElement('input');
+                    actionInput.type = 'hidden';
+                    actionInput.name = 'action';
+                    actionInput.value = 'start_activity_questions';
+                    
+                    form.appendChild(actionInput);
+                    document.body.appendChild(form);
+                    form.submit();
+                    
+                } else if (currentStage === 'postvocab_test') {
+                    const form = document.querySelector('form[method="post"]');
+                    if (form) {
+                        let actionInput = form.querySelector('input[name="action"]');
+                        if (!actionInput) {
+                            actionInput = document.createElement('input');
+                            actionInput.type = 'hidden';
+                            actionInput.name = 'action';
+                            actionInput.value = 'submit_postvocab';
+                            form.appendChild(actionInput);
+                        }
+                        form.submit();
+                    }
+                    
+                } else if (currentStage === 'activity_questions') {
+                    const form = document.querySelector('form[method="post"]');
+                    if (form) {
+                        let actionInput = form.querySelector('input[name="action"]');
+                        if (!actionInput) {
+                            actionInput = document.createElement('input');
+                            actionInput.type = 'hidden';
+                            actionInput.name = 'action';
+                            actionInput.value = 'submit_activity';
+                            form.appendChild(actionInput);
+                        }
+                        form.submit();
+                    }
                 }
-                return;
+
+                return;     
             }
             
             const minutes = Math.floor(remainingTime / 60);
@@ -712,7 +871,7 @@
             });
         });
         
-        // Prevent accidental page refresh during test - FIXED VERSION
+        // Prevent accidental page refresh during test
         <?php if ($_SESSION['test_stage'] !== 'start' && $_SESSION['test_stage'] !== 'final_results'): ?>
         let formSubmitting = false;
 

@@ -11,223 +11,280 @@
     <title>Gates-MacGinitie Reading Test</title>
 
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+        /* Reset and Base Styles */ 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        /* Start modal */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Start Modal Styles */
         .start-modal {
-            display: flex;
             position: fixed;
-            z-index: 10000;
-            left: 0;
             top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
             justify-content: center;
             align-items: center;
-            animation: fadeIn 0.3s ease-out;
+            z-index: 1000;
         }
 
         .start-modal-content {
             background: white;
             padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            max-width: 500px;
-            max-height: 90vh;
-            margin: 20px;
-            overflow-y: auto;
-            pointer-events: all;
-            animation: slideIn 0.3s ease-out;
-            position: relative;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateY(-50px) scale(0.9);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0) scale(1);
-                opacity: 1;
-            }
-        }
-
-        /* Hide test content initially */
-        .test-content-hidden {
-            display: none;
-        }
-
-        /* Make sure the main container is hidden initially */
-        .container {
-            background: white;
             border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease-out;
         }
 
-        /* Rest of the start modal styles remain the same */
-        .start-modal-content::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .start-modal-content::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 4px;
-        }
-
-        .start-modal-content::-webkit-scrollbar-thumb {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 4px;
-        }
-
-        .start-modal-content::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(45deg, #5a6fd8, #6a4190);
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .start-modal h2 {
-            color: #333;
+            color: #2c3e50;
             margin-bottom: 20px;
-            font-size: 2.2em;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .start-modal p {
-            color: #666;
-            font-size: 1.1em;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        .start-modal ul {
-            text-align: left;
-            margin: 20px 0;
-            padding-left: 20px;
-        }
-
-        .start-modal li {
-            margin-bottom: 8px;
-            color: #555;
+            font-size: 2em;
         }
 
         .start-btn {
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
             color: white;
-            padding: 15px 40px;
+            padding: 15px 30px;
             border: none;
-            border-radius: 25px;
-            font-size: 1.3em;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
             margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
         }
 
         .start-btn:hover {
+            background: linear-gradient(45deg, #229954, #27ae60);
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
         }
 
-        /* Hide test content initially */
+        /* Container and Layout */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
         .test-content-hidden {
             display: none;
         }
-        
-        .container {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+
+        .test-content-visible {
+            display: block;
         }
-        
+
+        /* Header Styles */
         h1 {
             text-align: center;
-            color: #333;
+            color: #2c3e50;
             margin-bottom: 30px;
             font-size: 2.2em;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
-        
+
+        /* Test Section Styles */
         .test-section {
             display: none;
+            animation: fadeIn 0.5s ease-in;
         }
-        
+
         .test-section.active {
             display: block;
         }
-        
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .test-header {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #3498db;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .test-header h2 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .test-header p {
+            color: #7f8c8d;
+            font-size: 1.1em;
+        }
+
+        /* Instructions Styles */
         .instructions {
+            background: #e8f4fd;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+
+        .instructions h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .instructions p {
+            margin-bottom: 10px;
+        }
+
+        .instructions ul, .instructions ol {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+
+        .instructions li {
+            margin: 8px 0;
+        }
+
+        /* Progress Container (Sticky) */
+        .progress-container {
+            position: sticky;
+            top: 0;
+            background: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            border: 1px solid #e0e0e0;
+        }
+
+        .test-timer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .test-timer.warning {
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .pause-btn {
+            background: #f39c12;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .pause-btn:hover {
+            background: #e67e22;
+        }
+
+        .pause-btn.resume {
+            background: #27ae60;
+        }
+
+        .pause-btn.resume:hover {
+            background: #229954;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #ecf0f1;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Question Styles */
+        .question-container {
             background: #f8f9fa;
             padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            border-left: 4px solid #667eea;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 3px solid #28a745;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         }
-        
-        .question-container {
-            margin-bottom: 25px;
-            padding: 20px;
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
-            background: #fafbfc;
-            transition: all 0.3s ease;
-        }
-        
-        .question-container:hover {
-            border-color: #667eea;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.1);
-        }
-        
-        .question-word {
-            font-size: 1.4em;
+
+        .question-word, .question-text {
             font-weight: bold;
-            color: #333;
+            font-size: 1.1em;
+            color: #2c3e50;
             margin-bottom: 15px;
         }
-        
-        .question-text {
-            font-size: 1.2em;
-            color: #333;
+
+        .passage {
+            background: #f0f8ff;
+            padding: 15px;
+            border-radius: 8px;
             margin-bottom: 15px;
-            line-height: 1.6;
+            font-style: italic;
+            border-left: 3px solid #3498db;
         }
 
-        /* Smooth transition when question is answered */
-        .question-container {
-            transition: all 0.3s ease;
-        }
-
-        .question-container.answered {
-            border-color: #28a745 !important;
-            background: #d4edda !important;
-            box-shadow: 0 0 10px rgba(40, 167, 69, 0.2) !important;
-        }
-
-        .question-container.answered::before {
-            background: #28a745;
-        }
-        
         .options {
             display: grid;
             gap: 10px;
@@ -259,203 +316,95 @@
             flex: 1;
             font-size: 1.1em;
         }
-        
-        .submit-btn, .proceed-btn {
+
+        /* Button Styles */
+        .btn, .proceed-btn, .back-btn, .submit-btn {
+            background: #3498db;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover, .proceed-btn:hover, .back-btn:hover, .submit-btn:hover {
+            background: #2980b9;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .proceed-btn {
+            background: #27ae60;
+            font-size: 18px;
+            padding: 15px 30px;
+            margin-top: 20px;
+        }
+
+        .proceed-btn:hover {
+            background: #229954;
+        }
+
+        .proceed-btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .back-btn {
+            background: #95a5a6;
+            margin-bottom: 20px;
+        }
+
+        .back-btn:hover {
+            background: #7f8c8d;
+        }
+
+        .submit-btn {
+            background: #e74c3c;
+            font-size: 18px;
+            padding: 15px 30px;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            background: #c0392b;
+        }
+
+        .submit-btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .continue-btn {
             background: linear-gradient(45deg, #667eea, #764ba2);
             color: white;
             padding: 15px 40px;
             border: none;
             border-radius: 25px;
-            font-size: 1.2em;
+            font-size: 1.3em;
             cursor: pointer;
+            margin: 20px auto;
             display: block;
-            margin: 40px auto 20px;
             transition: all 0.3s ease;
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            width: 80%;
+            max-width: 300px;
         }
-        
-        .submit-btn:hover, .proceed-btn:hover {
+
+        .continue-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-        }
-        
-        .submit-btn:disabled, .proceed-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        .results {
-            margin-top: 30px;
-            padding: 20px;
-            border-radius: 10px;
-            display: none;
-        }
-        
-        .score {
-            font-size: 1.5em;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
         }
 
-        /* Sticky Progress Bar Styles */
-        .progress-container {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: white;
-            padding: 15px 20px;
-            margin: -30px -30px 20px -30px; /* Extend to container edges */
-            border-bottom: 2px solid #e9ecef;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            backdrop-filter: blur(10px);
-            display: flex;
-            flex-direction: column;
-            gap: 10px; /* Add spacing between timer and progress */
-        }
-
-        .progress-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .progress-text {
-            font-weight: 600;
-            color: #333;
-            font-size: 1em;
-            text-align: center;
-            margin-top: 5px;
-        }
-
-        .progress-percentage {
-            font-weight: bold;
-            color: #667eea;
-            font-size: 1.1em;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 12px;
-            background: #e9ecef;
-            border-radius: 6px;
-            overflow: hidden;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            width: 0%;
-            transition: width 0.5s ease;
-            border-radius: 6px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .progress-fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            animation: shine 2s infinite;
-        }
-
-        #vocabProgressFill {
-            transition: width 0.3s ease-in-out;
-        }
-
-        @keyframes shine {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        /* Adjust container padding to accommodate sticky progress bar */
-        .test-section {
-            padding-top: 10px;
-        }
-
-        /* Make sure the test header doesn't interfere with sticky progress */
-        .test-header {
-            margin-top: 0;
-            margin-bottom: 20px;
-        }
-
-        /* Timer Styles */
-        .sticky-timer {
-            text-align: center;
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #667eea;
-            padding: 8px 15px;
-            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
-            border-radius: 8px;
-            border: 2px solid #667eea;
-            margin: 0; /* Remove default margins */
-        }
-
-        @media (max-width: 768px) {
-            .progress-container {
-                padding: 12px 15px;
-                margin: -20px -20px 15px -20px;
-                gap: 8px;
-            }
-            
-            .progress-info {
-                flex-direction: column;
-                gap: 5px;
-                align-items: flex-start;
-            }
-            
-            .progress-text, .progress-percentage {
-                font-size: 0.9em;
-            }
-
-            .sticky-timer {
-                font-size: 1em;
-                padding: 6px 12px;
-            }
-        }
-
-        .timer-controls {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .pause-btn {
-            background: #e9ecef;
-            color: 666;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .pause-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 5px 15px rgba(99, 97, 97, 0.4);
-        }
-
-        .pause-btn.resume {
-            background: linear-gradient(45deg, #51cf66, #40c057);
-            box-shadow: 0 3px 10px rgba(81, 207, 102, 0.3);
-        }
-
-        .pause-btn.resume:hover {
-            box-shadow: 0 5px 15px rgba(81, 207, 102, 0.4);
-        }
-
-        /* Blur overlay */
+        /* Blur Overlay for Pause */
         .blur-overlay {
             position: fixed;
             top: 0;
@@ -463,204 +412,228 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 9999;
+            backdrop-filter: blur(5px);
             display: none;
             justify-content: center;
             align-items: center;
-        }
-
-        .content-blurred {
-            filter: blur(5px);
-            pointer-events: none;
-            user-select: none;
+            z-index: 1000;
         }
 
         .pause-message {
             background: white;
             padding: 40px;
-            border-radius: 20px;
+            border-radius: 15px;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         .pause-message h2 {
-            color: #333;
-            margin-bottom: 20px;
-            font-size: 2em;
-        }
-
-        .pause-message p {
-            color: #666;
-            font-size: 1.2em;
-            margin-bottom: 30px;
-        }
-    
-        .test-header {
-            text-align: center;
-            margin-bottom: 20px;
-            padding: 15px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            border-radius: 10px;
-        }
-        
-        .test-timer {
-            text-align: center;
-            font-size: 1.2em;
-            color: #666;
-            margin-bottom: 20px;
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 5px;
-        }
-
-        .back-btn {
-            background: linear-gradient(45deg, #6c757d, #495057);
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 20px;
-            font-size: 1em;
-            cursor: pointer;
+            color: #2c3e50;
             margin-bottom: 15px;
-            transition: all 0.3s ease;
-            box-shadow: 0 3px 10px rgba(108, 117, 125, 0.3);
-            float: right;
         }
 
-        .back-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 5px 15px rgba(108, 117, 125, 0.4);
-        }
-
-        .question-result {
-            margin-bottom: 15px;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-        }
-
+        /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
-            z-index: 1000;
-            left: 0;
             top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
         }
 
         .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 30px;
-            border: none;
+            background: white;
+            padding: 40px;
             border-radius: 15px;
-            width: 80%;
             max-width: 600px;
-            max-height: 80vh; /* Add maximum height */
-            overflow-y: auto; /* Add vertical scrolling */
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             animation: modalSlideIn 0.3s ease-out;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
-        .modal-content::-webkit-scrollbar {
-            width: 8px;
+        /* Results Styles */
+        .results {
+            margin: 0;
         }
 
-        .modal-content::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 4px;
-        }
-
-        .modal-content::-webkit-scrollbar-thumb {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 4px;
-        }
-
-        .modal-content::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(45deg, #5a6fd8, #6a4190);
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes modalSlideIn {
-            from {
-                transform: translateY(-50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .modal h2 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 25px;
-            font-size: 2em;
-        }
 
         .score-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: #f8f9fa;
             padding: 20px;
-            border-radius: 10px;
             margin: 15px 0;
+            border-radius: 8px;
             text-align: center;
+            border-left: 4px solid #3498db;
         }
 
         .score-section h3 {
-            margin: 0 0 10px 0;
-            font-size: 1.3em;
+            color: #2c3e50;
+            margin-bottom: 10px;
         }
 
         .score-display {
             font-size: 2em;
             font-weight: bold;
+            color: #2c3e50;
             margin: 10px 0;
         }
 
         .percentage {
-            font-size: 1.2em;
-            opacity: 0.9;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #3498db;
         }
 
         .overall-score {
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
             padding: 25px;
             margin: 20px 0;
             border-radius: 10px;
+            text-align: center;
         }
 
-        .continue-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        .overall-score h3 {
+            margin-bottom: 10px;
+        }
+
+        .overall-score .score-display,
+        .overall-score .percentage {
+            color: white;
         }
 
         .reader-type-section {
-            animation: fadeInUp 0.5s ease-out;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
+        .reader-type-section h3 {
+            margin: 0 0 15px 0;
+            font-size: 1.8em;
+        }
+
+        .reader-type-section p {
+            margin: 0;
+            font-size: 1.1em;
+            line-height: 1.5;
+            opacity: 0.95;
+        }
+
+        /* Timer Styles (Fixed Position) */
+        .timer {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #e74c3c;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .start-modal-content {
+                padding: 20px;
+                width: 95%;
+            }
+            
+            .question-container {
+                padding: 15px;
+            }
+            
+            .progress-container {
+                padding: 10px 15px;
+            }
+            
+            .test-timer {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .timer {
+                position: static;
+                margin-bottom: 10px;
+                text-align: center;
+            }
+            
+            .btn, .proceed-btn, .back-btn, .submit-btn {
+                width: 100%;
+                margin: 5px 0;
+            }
+            
+            .modal-content {
+                padding: 20px;
+                width: 95%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .start-modal-content {
+                padding: 15px;
+            }
+            
+            .start-modal h2 {
+                font-size: 1.5em;
+            }
+            
+            .option label {
+                font-size: 14px;
+            }
+            
+            .question-word, .question-text {
+                font-size: 1em;
+            }
+            
+            .score-display {
+                font-size: 1.5em;
+            }
+            
+            .percentage {
+                font-size: 1.2em;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .timer, .progress-container, .blur-overlay, .modal {
+                display: none !important;
+            }
+            
+            .container {
+                box-shadow: none;
+                background: white;
+            }
+            
+            .question-container {
+                break-inside: avoid;
             }
         }
     </style>
@@ -835,7 +808,7 @@
                 <br>
                 The word <b><i><u>light</u></i></b> makes the best sense in blank C2. You should have written letter <b><i><u>E</u></i></b>.
                 <br><br>
-                <i>Now write the letter of the best word for each of the blanks that follow on this page and on the next pages.  If you can’t choose the best word for a blank, don’t spend too much time on it.  Go on to the next one. 
+                <i>Now write the letter of the best word for each of the blanks that follow on this page and on the next pages.  If you can’t choose the best word for a blank, don’t spend too much time on it.  Go on to the next one. </i>
                 </p>
             </div>
             
@@ -1024,7 +997,7 @@
                 const [passage, questionText] = question.question.split('\n\nQuestion');
                 
                 questionDiv.innerHTML = `
-                    <div class="passage" style="background: #f0f8ff; padding: 15px; border-radius: 8px; margin-bottom: 15px; font-style: italic;">
+                    <div class="passage" style="background: #f0f8ff; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
                         ${passage}
                     </div>
                     <div class="question-text">${question.questionNumber}. Question${questionText || ': Fill in the blank.'}</div>
