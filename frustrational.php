@@ -389,34 +389,28 @@
         <?php
         // 15 minutes total for entire pretest
         if (in_array($_SESSION['test_stage'], ['pretest_reading', 'pretest_questions'])) {
-            $timeLimit = 900; // 15 minutes in seconds
-            $startTime = $_SESSION['pretest_start_time']; // Use same start time for both phases
-            
+            $timeLimit = 900; // 15 minutes
+            $startTime = $_SESSION['pretest_start_time'];
             $remainingTime = getRemainingTime($startTime, $timeLimit);
-            $timerClass = $remainingTime <= 300 ? 'timer warning' : 'timer'; // Warning when 5 minutes left
-            
+            $timerClass = $remainingTime <= 300 ? 'timer warning' : 'timer';
             echo '<div class="' . $timerClass . '" id="timer">' . formatTime($remainingTime) . '</div>';
         }
 
         // 35 minutes total for entire activity sequence
         if (in_array($_SESSION['test_stage'], ['prevocab_test', 'activity_reading', 'postvocab_test', 'activity_questions'])) {
-            $timeLimit = 2100; // 
-            $startTime = $_SESSION['activity_start_time']; // Use same start time for all phases
-            
+            $timeLimit = 2100; // 35 minutes
+            $startTime = $_SESSION['activity_start_time'];
             $remainingTime = getRemainingTime($startTime, $timeLimit);
-            $timerClass = $remainingTime <= 300 ? 'timer warning' : 'timer'; // Warning when 5 minutes left
-            
+            $timerClass = $remainingTime <= 300 ? 'timer warning' : 'timer';
             echo '<div class="' . $timerClass . '" id="timer">' . formatTime($remainingTime) . '</div>';
         }
 
         // 15 minutes total for entire posttest (reading + questions)
         if (in_array($_SESSION['test_stage'], ['posttest_reading', 'posttest_questions'])) {
-            $timeLimit = 900; 
-            $startTime = $_SESSION['posttest_start_time']; 
-            
+            $timeLimit = 900; // 15 minutes
+            $startTime = $_SESSION['posttest_start_time'];
             $remainingTime = getRemainingTime($startTime, $timeLimit);
             $timerClass = $remainingTime <= 300 ? 'timer warning' : 'timer';
-            
             echo '<div class="' . $timerClass . '" id="timer">' . formatTime($remainingTime) . '</div>';
         }
         ?>
@@ -428,10 +422,12 @@
                 <h1>Reading Comprehension Test System</h1>
                 <div class="instructions">
                     <h3>Welcome to the Reading Comprehension Test</h3>
-                    <p>This test consists of two parts:</p>
+                    <p>This test consists of multiple parts:</p>
                     <ul>
                         <li><strong>Pre-test:</strong> Read a passage and answer questions (15 minutes)</li>
-                        <li><strong>Post-test:</strong> Select and read a story (35 minutes) and answer questions (15 minutes)</li>
+                        <li><strong>Vocabulary Tests:</strong> Pre and post reading vocabulary assessments</li>
+                        <li><strong>Activity:</strong> Read a story and answer questions (35 minutes total)</li>
+                        <li><strong>Post-test:</strong> Select and read a story and answer questions (15 minutes)</li>
                     </ul>
                     <p>Please ensure you have a stable internet connection and will not be interrupted during the test.</p>
                 </div>
@@ -465,13 +461,7 @@
                         <div class="question">
                             <h4>Question <?php echo $index + 1; ?>: <?php echo nl2br(htmlspecialchars($question['question'])); ?></h4>
                             <div class="options">
-                                <?php 
-                                $shuffledOptions = $question['options'];
-                                $keys = array_keys($shuffledOptions);
-                                shuffle($keys);
-                                $shuffledOptions = array_merge(array_flip($keys), $shuffledOptions);
-                                
-                                foreach ($shuffledOptions as $option => $text): ?>
+                                <?php foreach ($question['options'] as $option => $text): ?>
                                     <label>
                                         <input type="radio" name="answers[<?php echo $index; ?>]" value="<?php echo $option; ?>" required>
                                         <?php echo htmlspecialchars($text); ?>
@@ -481,36 +471,6 @@
                         </div>
                     <?php endforeach; ?>
                     <button type="submit" name="action" value="submit_pretest" class="btn btn-success">Submit Pre-Test</button>
-                </form>
-                <?php
-                break;
-
-            case 'pretest_results':
-                $scoreClass = $_SESSION['pretest_score'] >= 80 ? 'good' : ($_SESSION['pretest_score'] >= 60 ? 'average' : 'poor');
-                ?>
-                <h2>Pre-Test Results</h2>
-                <div class="score <?php echo $scoreClass; ?>">
-                    Your Pre-Test Score: <?php echo $_SESSION['pretest_score']; ?>%
-                </div>
-                <div class="instructions">
-                    <h3>Select a Story for Post-Test</h3>
-                    <p>Choose one of the following stories to read for your reading activity:</p>
-                </div>
-                <form method="post">    
-                    <div class="story-selection">
-                        <?php foreach ($frustrationalContent as $index => $story): ?>
-                            <?php if ($story['type'] === 'posttest'): ?>
-                                <div class="story-card">
-                                    <label>
-                                        <input type="radio" name="story_selection" value="<?php echo $index; ?>" required>
-                                        <h3><?php echo htmlspecialchars($story['title'] ?: 'Antarctica Story'); ?></h3>
-                                        <p><?php echo htmlspecialchars(substr($story['content'], 0, 200)) . '...'; ?></p>
-                                    </label>
-                                </div>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                    </div>
-                    <button type="submit" name="action" value="select_posttest" class="btn btn-success">Start Post-Test Reading</button>
                 </form>
                 <?php
                 break;
@@ -525,13 +485,17 @@
                     <?php 
                     $vocabWords = array_keys($activity['vocabulary']);
                     $vocabDefinitions = array_values($activity['vocabulary']);
-                    shuffle($vocabDefinitions);
                     
                     foreach ($vocabWords as $index => $word): ?>
                         <div class="question">
                             <h4>Word <?php echo $index + 1; ?>: <?php echo htmlspecialchars($word); ?></h4>
                             <div class="options">
-                                <?php foreach ($vocabDefinitions as $defIndex => $definition): ?>
+                                <?php 
+                                // Create shuffled definitions for each word
+                                $shuffledDefs = $vocabDefinitions;
+                                shuffle($shuffledDefs);
+                                
+                                foreach ($shuffledDefs as $definition): ?>
                                     <label>
                                         <input type="radio" name="answers[<?php echo $index; ?>]" value="<?php echo $word; ?>" required>
                                         <?php echo htmlspecialchars($definition); ?>
@@ -569,13 +533,16 @@
                     <?php 
                     $vocabWords = array_keys($activity['vocabulary']);
                     $vocabDefinitions = array_values($activity['vocabulary']);
-                    shuffle($vocabDefinitions);
                     
                     foreach ($vocabWords as $index => $word): ?>
                         <div class="question">
                             <h4>Word <?php echo $index + 1; ?>: <?php echo htmlspecialchars($word); ?></h4>
                             <div class="options">
-                                <?php foreach ($vocabDefinitions as $defIndex => $definition): ?>
+                                <?php 
+                                $shuffledDefs = $vocabDefinitions;
+                                shuffle($shuffledDefs);
+                                
+                                foreach ($shuffledDefs as $definition): ?>
                                     <label>
                                         <input type="radio" name="answers[<?php echo $index; ?>]" value="<?php echo $word; ?>" required>
                                         <?php echo htmlspecialchars($definition); ?>
@@ -613,23 +580,12 @@
                 <?php
                 break;
 
-            case 'activity_results':
-                ?>
-                <h2>Activity Results</h2>
-                <div class="score">Pre-Vocabulary Score: <?php echo $_SESSION['prevocab_score']; ?>%</div>
-                <div class="score">Post-Vocabulary Score: <?php echo $_SESSION['postvocab_score']; ?>%</div>
-                <div class="score">Activity Comprehension Score: <?php echo $_SESSION['activity_score']; ?>%</div>
-                <form method="post">
-                    <button type="submit" name="action" value="proceed_to_posttest" class="btn">Proceed to Post-Test</button>
-                </form>
-                <?php
-                break;
-
             case 'posttest_selection':
                 ?>
                 <h2>Select Post-Test Story</h2>
                 <div class="instructions">
-                    <p>Choose a story for your final test:</p>
+                    <h3>Activity Complete!</h3>
+                    <p>Now choose a story for your final test:</p>
                 </div>
                 <form method="post">
                     <div class="story-selection">
@@ -638,14 +594,14 @@
                                 <div class="story-card">
                                     <label>
                                         <input type="radio" name="story_selection" value="<?php echo $index; ?>" required>
-                                        <h3><?php echo htmlspecialchars($story['title'] ?: 'Antarctica Story'); ?></h3>
+                                        <h3><?php echo htmlspecialchars($story['title'] ?: 'Story ' . ($index + 1)); ?></h3>
                                         <p><?php echo htmlspecialchars(substr($story['content'], 0, 200)) . '...'; ?></p>
                                     </label>
                                 </div>
                             <?php endif; ?>
                         <?php endforeach; ?>
                     </div>
-                    <button type="submit" name="action" value="select_posttest" class="btn">Start Post-Test</button>
+                    <button type="submit" name="action" value="select_posttest" class="btn btn-success">Start Post-Test</button>
                 </form>
                 <?php
                 break;
@@ -689,26 +645,26 @@
                 break;
 
             case 'final_results':
-                $pretestClass = $_SESSION['pretest_score'] >= 80 ? 'good' : ($_SESSION['pretest_score'] >= 60 ? 'average' : 'poor');
-                $posttestClass = $_SESSION['posttest_score'] >= 80 ? 'good' : ($_SESSION['posttest_score'] >= 60 ? 'average' : 'poor');
                 ?>
                 <h2>Final Test Results</h2>
-                <div class="score <?php echo $pretestClass; ?>">
-                    Pre-Test Score: <?php echo $_SESSION['pretest_score']; ?>%
-                </div>
-                <div class="score <?php echo $posttestClass; ?>">
-                    Post-Test Score: <?php echo $_SESSION['posttest_score']; ?>%
-                </div>
+                <div class="score">Pre-Test Score: <?php echo $_SESSION['pretest_score']; ?>%</div>
+                <div class="score">Pre-Vocabulary Score: <?php echo $_SESSION['prevocab_score']; ?>%</div>
+                <div class="score">Post-Vocabulary Score: <?php echo $_SESSION['postvocab_score']; ?>%</div>
+                <div class="score">Activity Score: <?php echo $_SESSION['activity_score']; ?>%</div>
+                <div class="score">Post-Test Score: <?php echo $_SESSION['posttest_score']; ?>%</div>
                 <div class="instructions">
                     <h3>Test Summary</h3>
-                    <p><strong>Pre-Test:</strong> <?php echo $_SESSION['pretest_score']; ?>%</p>
-                    <p><strong>Post-Test:</strong> <?php echo $_SESSION['posttest_score']; ?>%</p>
-                    <p><strong>Improvement:</strong> <?php echo $_SESSION['posttest_score'] - $_SESSION['pretest_score']; ?>%</p>
+                    <p><strong>Overall Improvement:</strong> <?php echo $_SESSION['posttest_score'] - $_SESSION['pretest_score']; ?>%</p>
+                    <p><strong>Vocabulary Improvement:</strong> <?php echo $_SESSION['postvocab_score'] - $_SESSION['prevocab_score']; ?>%</p>
                 </div>
                 <form method="post">
                     <button type="submit" name="action" value="reset_test" class="btn btn-danger">Take Test Again</button>
                 </form>
                 <?php
+                break;
+
+            default:
+                echo '<p>Unknown test stage: ' . $_SESSION['test_stage'] . '</p>';
                 break;
         }
         ?>
