@@ -5,11 +5,17 @@ $independentContent = [
         "type" => "pretest",
         "title" => "Pre-Test Story",
         "content" => "Post-traumatic stress disorder (PTSD) is a severe anxiety disorder that affects millions of people around the world. Individuals can develop PTSD after experiencing any event that results in psychological trauma. Symptoms of PTSD involve flashbacks to the traumatic event, nightmares, obsessive behavior, anger, insomnia, difficulty concentrating, and hypervigilance. Individuals who suffer from PTSD can experience significant difficulties in social relationships, have lower self-esteem, and have trouble maintaining employment. People with PTSD experience a higher risk of committing suicide, developing a drug addiction, and suffering from alcoholism. 
+        
         Although PTSD can affect any individual, military veterans are especially susceptible to this debilitating affliction. Furthermore, within this population, women are more than twice as likely as men to develop PTSD. Studies have also shown that former service women who do develop PTSD experience more severe symptoms than their male counterparts. Recent changes made by the United States Department of Veterans Affairs have improved treatment options for female veterans living with PTSD, but there is still more that needs to be done. Although studies investigating precisely why women are more likely than men to experience PTSD have not yet been completed, some experts have theorized that low unit cohesion is a major factor. Unit cohesion, defined as the mutual bonds of friendship and support among members of a military unit, is thought to be helpful in reducing the incidence of developing PTSD. According to recent surveys compiled by U.S. Army researchers, increased unit cohesion emerged as the most important factor determining whether soldiers developed suicidal thoughts. Women are more likely than men to experience low unit cohesion for a variety of reasons. One of the most obvious factors is the relative paucity of females in the military; currently, women make up only 20% of the armed forces. Pervasive male prejudice against women is another factor that can diminish unit cohesion for female soldiers. Because women are less likely than men to experience unit cohesion while serving in the military, women are less likely to develop the social support structures that will help prevent them from developing PTSD, depression, or other serious mental health problems. 
+        
         Another issue at play is the stigma amongst military personnel that asking for help for mental health issues makes one “weak.” A recent Department of Defense study of returning combat troops shows that only 1 in 6 veterans acknowledged themselves to be suffering from symptoms of PTSD, and 3 out of 5 veterans were convinced that their comrades and commanding officers would lose confidence in them if they sought treatment for mental health issues. For women, this hesitation to self-identify as a sufferer of PTSD could be even greater; historically, female soldiers have struggled to be counted as equals to men on the battlefield. Women, stereotypically considered to possess less emotional fortitude than men, may be unwilling to admit that they are suffering from PTSD lest they appear to conform to this stereotype. Unfortunately for those who do not seek help, when PTSD goes untreated it is very likely to worsen over time. 
+        
         Another challenge is that until very recently, treatment for PTSD has been more difficult for women than men to obtain. Before rule changes were enacted in 2010, only veterans who encountered direct combat experience qualified to receive disability payments for PTSD. Because very few women are placed on the front lines, very few were eligible to receive free treatment for PTSD. However, recent regulation changes have ended these stipulations, allowing women who serve in any capacity to be eligible for benefits. 
+        
         Even if female veterans are eligible for these benefits, the quality of the care a wartime PTSD sufferer receives can vary widely. The United States Department of Veterans Affairs (VA) pays disability benefits to service men and women who have been diagnosed with PTSD and also provides these individuals with free health care. But while mental health counseling that comes directly from VA doctors is completely free to veterans, there are often long waiting lists for those who need to be evaluated or treated. Therapy provided by non-VA professionals may not be covered by health insurance. Access to mental health professionals who have been specially trained to treat wartime PTSD is often difficult for those not living near major urban centers. 
+        
         Perhaps the biggest impediment to achieving quality treatment for women suffering from wartime PTSD is a lack of research. While both the VA and independent agencies have completed hundreds of studies researching the prevention of and treatment for PTSD amongst general military populations, there have been no studies completed that solely target women. Before adequate care can be provided, there must be greater understanding about the root causes of this issue as it affects women specifically. On both the research level and the policy level, more must be done to help the women who have sacrificed so much for their country.",
+        
         "comprehension" => [
             [
                 "question" => "The primary purpose of the passage is to",
@@ -114,16 +120,9 @@ $independentContent = [
 
         As of now, researchers know that the coronavirus is spread through droplets and virus particles released into the air when an infected person breathes, talks, laughs, coughs, or sneezes. Larger droplets may fall to the ground in a few seconds, but tiny infectious particles can linger in the air and accumulate in indoor places, especially where many people are gathered and there is poor ventilation. Therefore, mask-wearing, hand hygiene and physical distancing are essential to preventing COVID-19. 
 
-        Treatment for COVID-19 addresses the signs and symptoms of the infection and 
-        supports people with more severe disease. For mild cases of coronavirus disease, your doctor 
-        may recommend measures such as fever reducers or over-the-counter medications. More 
-        severe cases may require hospital care, where a patient may receive a combination of 
-        treatments that could include oxygen and mechanical breathing support. 
+        Treatment for COVID-19 addresses the signs and symptoms of the infection and supports people with more severe disease. For mild cases of coronavirus disease, your doctor may recommend measures such as fever reducers or over-the-counter medications. More severe cases may require hospital care, where a patient may receive a combination of treatments that could include oxygen and mechanical breathing support. 
 
-        Vaccines are now authorized to prevent infection with SARS-CoV-2, the coronavirus 
-        that causes COVID-19. But until more is understood about how the vaccines affect a person’s 
-        ability to transmit the virus, precautions such as mask-wearing, physical distancing and hand 
-        hygiene should continue to prevent the spread of COVID-19.",
+        Vaccines are now authorized to prevent infection with SARS-CoV-2, the coronavirus that causes COVID-19. But until more is understood about how the vaccines affect a person’s ability to transmit the virus, precautions such as mask-wearing, physical distancing and hand hygiene should continue to prevent the spread of COVID-19.",
 
         "comprehension" => [
             [
@@ -537,6 +536,357 @@ $independentContent = [
                     "D" => "Struggle against poverty"
                 ],
                 "answer" => "D"
+            ]
+        ]
+    ],
+
+    [
+        "type" => "posttest",
+        "title" => "Yuquot, the Centre of The World by Mowachaht–Muchalaht First Nations",
+        "content" => "Yuquot. It is the centre of the world. The name of our village, meaning “where the wind blows from all directions,” acknowledges the central nature of the place given to us by the Creator. During the winter when the powerful winds sweep unhindered from the southwest across the open ocean, we wonder why some of the rocks on the beach don’t blow away. In the spring, it arrives from the west with news of the sea, of the arrival of the herring and whales. In the summer, the wind comes from the southeast, following the shores of Vancouver Island and warming the land. This is the breeze that guided men like Cook, Bodega y Quadra, Malaspina and Meares who, with their ships, visited our harbour over two hundred years ago. In the fall, the wind brings the first storms and heavy rains, beckoning the salmon to return to their river homes, signaling to our people the last great harvest of the year. Last, the wind comes from the north, twisting overland across the forest and mountains. This wind is filled with the scent and spirit of the cedar, fir and yew, of the mountains, inlets, streams, rivers and lakes that feed the richness of our territory.
+
+        Yuquot also is at the centre for gathering the resources which have nourished us through countless generations. It is ideally located between the land and the sea, between the outside and the inside, between the abundance and energy of the ocean and the majesty and richness of the forest and inlets. It is a place of power and change. We look to the outside, to the open Pacific, for the whales, sea lions and seals, to the fishing banks for halibut, cod and salmon, and to the rocky shorelines for mussels and barnacles. To the inside are the sheltered waters, providing us with clams, oysters and herring, and the forests which sustain us with cedar, alder, berries, plants, deer, elk and much more. Further inside, up the inlets, are the rivers that once were rich with spawning salmon, and trails that led up through the mountains across Vancouver Island to our neighbours with whom we have always traded.
+
+        To outsiders, Yuquot appears to be at the edge of the world. For us, it is the centre of the world. It is a place of unsurpassed beauty and natural wonders we wish all to witness. A place where one can share a beach with whales who come to rub in the surf, where one can feel the power of the great winds, experience Nature’s harmonies, and travel back in time to ponder people and events that once were.
+
+        Yuquot is also the centre of our history, a place of many stories, some of which we will share with you. Our history extends far back, to the very beginnings of time. One of our stories tells of the time when the Great Creator made the first woman in the wilderness at Yuquot. She, in turn, produced “Snot-Boy” who eventually grew to become the first man of our nation. Together, they produced the offspring of whom we are the direct descendants. Other stories document the early history of Yuquot, the origins of the many powerful tribes who once inhabited our territory, the wars and conflicts which took place, and the experiences of Yahlua, the father of the first Chief Maquinna. Some of our most important history lessons document the origins and development of the whaling power, and how the Whalers’ Washing House came to be the source of that power. All of our history demonstrates the interconnectedness of life, and illustrates the deep spiritual bonds we have with our environment as a result of the experiences, adventures and keen observations of our ancestors.
+
+        Archaeologists undertaking excavations at Yuquot unearthed the remains of some of the foods our ancestors ate, tools they used, and other items of house and hearth. From these few clues, they developed theories about our history and the development of our culture, and say they have proof we have lived at Yuquot for over 4300 years. We suspect that further research will prove we have been there much longer, and will reveal much more information about our way of life.",
+            
+        "comprehension" => [
+            [
+                "question" => "During which season did European explorers arrive in Yuquot?",
+                "options"=> [
+                    "A" => "spring",
+                    "B" => "summer",
+                    "C" => "fall",
+                    "D" => "winter"
+                ],
+                "answer" => "B"
+            ],
+            [
+                "question" => "Why do the writers consider Yuquot to be the “centre of the world”?",
+                "options"=> [
+                    "A" => "It is important to the people.",
+                    "B" => "It has rich archaeological sites.",
+                    "C" => "Its resources are significant to the global economy.",
+                    "D" => "It is the site of the historical meeting between Chief Maquinna and Captain Vancouver."
+                ],
+                "answer" => "A"
+            ],
+            [
+                "question" => "With reference to the time line (Figure 2), which phrase best describes Yuquot’s history during the years 1787–1803?",
+                "options"=> [
+                    "A" => "European colonization of Yuquot",
+                    "B" => "Spanish trading monopoly with First Nations",
+                    "C" => "increased hostility between Europeans and First Nations",
+                    "D" => "sustained violence between Europeans and First Nations"
+                ],
+                "answer" => "C"
+            ]
+        ]
+    ],
+
+    [
+        "type" => "posttest",
+        "title" => "The Crow Hop by Garry Gottfriedson",
+        "content" => "he flew in from unknown places
+            before the sun could hide
+            behind the mountain tops
+
+            i was a cynical youngster
+            sitting on the banks
+            of the tk’kum loop river
+            and grappling with mixed thoughts
+            as a young man does
+
+            he smiled and spoke to me
+            in his gravelly experienced voice 
+            saying, “i’d make a good dancer”
+            asking, if i’d like to see it done?
+
+            i laughed in the setting sun
+            but soon became trapped
+            in my own laughter 
+            as i witnessed the magic
+            an old dance held to an ancient beat
+
+            he weaved and hopped
+            on the shore’s edge
+
+            all the while singing a song his grandfather knew
+            as i stared at this mystery
+            i too, began to move
+            to the rhythm of rippling waves
+            that stole sand
+
+            as the tempo of time
+            faded in the gray of night
+            like the passing story of coyote and crow
+            who once danced on a river’s edge
+            and before the moon could comfort the night sky,
+            he left as he came
+            but i stayed to become a dancer",
+        
+        "comprehension" => [
+            [
+                "question" => "What provided the beat for the speaker?",
+                "options"=> [
+                    "A" => "his own laughter",
+                    "B" => "the tempo of time",
+                    "C" => "the rippling waves",
+                    "D" => "his grandfather’s song"
+                ],
+                "answer" => "C"
+            ],
+            [
+                "question" => "Which literary device is used in “before the moon could comfort the night sky” (line 29)?",
+                "options"=> [
+                    "A" => "paradox",
+                    "B" => "hyperbole",
+                    "C" => "symbolism",
+                    "D" => "personification"
+                ],
+                "answer" => "D"
+            ],
+            [
+                "question" => "How is the speaker changed by the crow hop?",
+                "options"=> [
+                    "A" => "He suspends his cynicism for a time.",
+                    "B" => "He has a greater appreciation for nature.",
+                    "C" => "He is inspired to connect with his culture.",
+                    "D" => "He understands the significance of drumming."
+                ],
+                "answer" => "C"
+            ]
+        ]
+    ],
+
+    [
+        "type" => "posttest",
+        "title" => "This Is a Story by Jeanette C. Armstrong",
+        "content" => "It came to me one morning early, when the morning star was up shining so big and bright, the way she does in the summers. It was during the women’s gathering at Owl Rock. It was the same year that the Red Star came so close to the earth that it was mentioned in the papers.
+
+        I had been sitting up with the fire. One woman had to sit up with it at all times during the gathering. One friend had stayed up with me to help keep me awake. It had been cold and I was wrapped up in a Pendleton blanket. It was the second to last night of the gathering. I was getting very sleepy when George said, “Tell me a story.” “Okay,” I said. “This story happened a long time ago. It’s real.”
+
+        Kyoti (Coyote) was coming up the river, from the great Columbia River up to the Okanagan River. Kyoti had come up through there before. One time before that I know of. That time Kyoti came up the Okanagan River which runs into the Columbia River. That was the time when Kyoti brought salmon to the Okanagan. Everywhere Kyoti stopped at the Peoples’ villages, salmon was left. It made everyone happy. It was a great gift. Kyoti did that a long time ago.
+
+        Now, after waking up from an unusually short nap, Kyoti was walking along upstream, wanting to visit with the People in the Okanagan. These were Kyoti’s favourite people. Visiting them always meant a real feast with salmon. Kyoti was partial to salmon.
+
+        While walking along, Kyoti noticed a lot of new things. A lot of things changed since that last trip through here. There sure were a lot of Swallow people, and they had houses everywhere, but Kyoti couldn’t find any People, or even the villages of the People. Things looked very strange.
+
+        Eventually, Kyoti came to a huge thing across the river at Grand Coulee. It was so high it stretched all the way across the water and blocked it off. Kyoti stopped and looked at it for a while not having any idea what it might be. It didn’t look good, whatever it was. Something was worrisome about it. Kyoti had thought of going up to the Kettle Falls to where the Salmon Chief stayed, but there didn’t seem to be any way salmon could get past that thing, no matter how high they jumped. Kyoti was pretty hungry by then, not having seen any People. Just to make sure, Kyoti decided to go up the Okanagan River to where the People had been real happy to get the salmon brought to them.
+
+        It was a good thing Kyoti didn’t go up to Kettle Falls anyway. Kyoti didn’t know, yet, that all the People had moved away when the Falls had disappeared under the new lake behind Grand Coulee.
+
+        So Kyoti went back down the river and started up the Okanagan. Kyoti kept going along the river and, sure enough, what Kyoti was afraid of came true. There was another one of those things right there at Chief Joseph. But this time there were a couple of People fishing there. They were the first People Kyoti had seen anywhere along the river. They were directly below that huge thing that stretched way up and across the river.
+
+        So Kyoti went up to them and waited for a greeting and some show of respect. Like an invite to eat. After all Kyoti was respected in these parts. Kyoti had brought the salmon to these People.
+
+        Kyoti waited for a while but neither of the young men said anything. They just kept on fishing. Kyoti got tired waiting for them to speak first and said, “How is the fishing?”
+
+        They both just looked at Kyoti, like they didn’t understand.
+
+        Kyoti again spoke, slower and louder this time, “Is the fishing good? I bet there are some big ones this time of year.”
+
+        One of them shrugged and tried to say in Swallow talk that they didn’t know the language.
+
+        That was how Kyoti found out that they couldn’t understand the language of the Okanagan People!
+
+        Kyoti couldn’t figure that one out, but since Kyoti knew all the languages, Kyoti talked to them in Swallow talk. Kyoti asked them again how the fishing was.
+
+        They looked at Kyoti and one of them answered, “We been here two days, nothing yet.”
+
+        Well Kyoti was pretty disappointed. Kyoti was hoping to eat a couple of salmon for lunch. Kyoti thought that maybe it wasn’t a lost cause after all. People in their village might have food, maybe even salmon, since this was fishing season.
+
+        Kyoti waited around for a while and finally asked, “Where are all the People?”
+
+        One of them answered by asking what Kyoti meant.
+
+        “Well, I would like to talk to your headman,” Kyoti said very seriously.
+
+        Actually Kyoti just wanted to eat. Kyoti was starving.
+
+        They both laughed. “What headman. Hey, man, where’d you come from?” one of them asked.
+
+        Kyoti kinda got mad then and answered, “I came walking up the river. I never saw any People. All I been seeing is those Swallows and they sure got lots of houses. Now you talk to me in their talk and laugh at me. I’m hungry and you don’t even offer me anything to eat.”
+
+        Well that shamed them guys out. Even though they weren’t quite sure of what Kyoti was talking about. One of them said, “Cheeze, you coulda just said that in the first place. We’re Indians. Come on, we’ll go over to the house and feed you up.”
+
+        So that was how Kyoti got to Nespelum. Kyoti got to meet one old person there that talked right. All the rest of the People just kept talking Swallow talk. They used words in Swallow that didn’t have a meaning that Kyoti could figure out.
+
+        What was the most surprising was that all the people lived in Swallow houses and ate Swallow food. A whole lot of things were pretty strange.
+
+        Kyoti had looked and looked for somebody who could talk in the People’s language. Kyoti asked the one person who could talk proper, how this had all happened.
+
+        The person was a very old woman. Kyoti recognized her name and knew which family and village her People were from. She was from an old headman family.
+
+        She looked at Kyoti for quite a while and recognized Kyoti. Then she cried and cried for a long time. “Kyoti,” she said, “I never thought you was ever going to come back. Things haven’t been good for quite a while now. I kept hoping you would show up. Them Swallows came. We don’t know what happened. They did lots of things. They built that thing across the river again, like when they were Monster people and you broke their dams to bring the salmon up. I don’t think it’s made out of spit and clay like that other time, but it’s made something like that. They did lots of other worse stuff. How come you never came back for a long time? Now look what happened.”
+
+        Kyoti was quiet for a while. “Well I guess I went to sleep for a while. You know sometimes I oversleep a little,” Kyoti joked, trying to make her feel better.
+
+        Actually Kyoti was well known for oversleeping all the time. And actually Kyoti always used that as an excuse for being too late for something important.
+
+        But the old woman just kept crying. She kept on talking, saying, “Nobody listens to me. Nobody knows you anymore.”",
+
+        "comprehension" => [
+            [
+                "question" => "Which word best describes the voice established in paragraphs 1–3?",
+                "options"=> [
+                    "A" => "didactic",
+                    "B" => "informal",
+                    "C" => "humorous",
+                    "D" => "passionate"
+                ],
+                "answer" => "B"
+            ],
+            [
+                "question" => "Which word best describes the attitude of the two People toward Kyoti throughout paragraphs 8–23?",
+                "options"=> [
+                    "A" => "hateful",
+                    "B" => "mocking",
+                    "C" => "disgusted",
+                    "D" => "disrespectful"
+                ],
+                "answer" => "D"
+            ],
+            [
+                "question" => "Which sentence best explains why the old woman is crying?",
+                "options"=> [
+                    "A" => "She feels threatened by the Swallow people.",
+                    "B" => "She is frustrated with Kyoti’s lazy behaviour.",
+                    "C" => "She regrets being the last of the People who know their language.",
+                    "D" => "She is saddened by the changes that occurred during Kyoti’s absence."
+                ],
+                "answer" => "D"
+            ]
+        ]
+    ]
+];
+
+$frustrationalContent = [
+    [
+        "type" => "pretest",
+        "title" => "Pre-Test Story",
+        "content" => "Like many people acting on the desire to eat healthy and local, Acropolis resident Eduardo Jimenez decided to plant a garden in his backyard. He tilled the soil, he planted the seeds, and he even erected a fence to keep out the deer. Eduardo did everything right. Or so it seems. Harvest time has come, and he has not one tomato, bean, or leaf of lettuce to show for his hard work. How did this happen? The answer comes in the form of a small, brown, particularly smelly insect: the stink bug. 
+
+        Unlike their fastidious cousins, stink bugs feed on some 300 species of plants, including figs, mulberries, corn, and citrus fruits as well as soybeans, legumes, and weeds. Although they do little damage to the plant itself, they make the fruits and vegetables unmarketable. For this reason, stink bugs pose the most serious threat to the big agriculturalists and macro farm operators. Macro farmers have more invested in their produce, and therefore have more to lose. While hobbyists like Eduardo are left to face the disappointment of an unsuccessful garden, macro farmers are forced to live with the loss of entire tracts of cash crops—a fact that has left many barely able to clothe their children or put food on the table. Last season alone, several New Jersey pepper farmers saw 75% of their crops damaged. Pennsylvania lost half of its peach population, and, according to the US Apple Association, apple farmers in the mid-Atlantic states lost $37 million. This year could be worse. 
+
+        As a result of this decline in the supply of fresh fruits and vegetables, shoppers have seen adjustments—sometimes quite dramatic—in prices at the grocery store. Prices of apples in Maryland are up 8%. In the north-Atlantic states, prices for peppers shot up an astounding 14%. Not only are these items becoming more expensive, but they are also getting harder to find. Last week, Marge Jenkins of Athens, Georgia reported having to check three different stores before stumbling upon a decent batch of peas. And this, she assures us, is a regular occurrence. 
+
+        Accidentally brought from Asia, the stink bug has no natural predators in America, and thus its population is soaring. Reported sightings of stink bugs are becoming increasingly numerous, as the desiccated, brown, trapezoidal shells of the dead bugs are ubiquitous in some areas. This has farmers and scientists alike scratching their heads in search of a remedy. Hope, they believe, may lie with an Asian parasitic wasp, which helpfully lays its eggs inside stink bug eggs. The larvae of the wasp devour the stink bug from the inside. Implementation of such a solution is still several years away, as scientists must first determine if it is safe for the wasp to be introduced into America. Until then, some farmers are resorting to homemade traps. Others have even contemplated the use of peacocks and praying mantises, which, they hypothesize, will gulp down the little stinkers.
+        ",
+
+        "comprehension" => [
+            [
+                "question" => "It is typically a good idea to begin a new paragraph with a transition sentence. Transition sentences are used to introduce a new idea, and to make a smooth shift from the previous paragraph to the next. This helps prevent the reader from getting lost or confused. Using this information, which of the following is the best transition sentence to insert at the beginning of paragraph 2?",
+                "options" => [
+                    "A" => "An increasing number of them have been found in North America, occupying over half of the continental United States as well as Mexico and parts of Canada.",
+                    "B" => "Unbeknownst to Eduardo, the local population of stink bugs has increased dramatically over the last decade, especially in and around the town of Acropolis.",
+                    "C" => "A member of the Pantatomidae family, stink bugs surprisingly do not share the eating habits of related insects.",
+                    "D" => "Brown marmorated stink bugs, which first appeared in America in the late 1990s, are now found in over 30 states.",
+                    "E" => "And this problem isn't specific to Eduardo; it is affecting a wide range of gardeners and farmers alike spanning the continental United States."
+                ],
+                "answer" => "C"
+            ],
+            [
+                "question" => "Based on its use in paragraph 2, it can be inferred that fastidious belongs to which of the following word families?",
+                "options" => [
+                    "A" => "forward, assertive, proactive",
+                    "B" => "demanding, particular, critical",
+                    "C" => "delicate, insubstantial, frail",
+                    "D" => "passionate, fervent, avid",
+                    "E" => "abstemious, moderate, restrained"
+                ],
+                "answer" => "B"
+            ],
+            [
+                "question" => "In paragraph 2, the author most likely refers to people like Eduardo as 'hobbyists' in order to",
+                "options" => [
+                    "A" => "illustrate the type of person who plants a home garden ",
+                    "B" => "characterize the type of person who is most likely to be affected by stink bugs",
+                    "C" => "emphasize the idea that gardeners are relatively unskilled compared to farmers ",
+                    "D" => "juxtapose the impact of stink bugs on gardeners with that on farmers ",
+                    "E" => "elucidate the similarities between the gardener and farmer "
+                ],
+                "answer" => "D"
+            ],
+            [
+                "question" => "According to the author, what is the biggest problem resulting from stink bugs? ",
+                "options" => [
+                    "A" => "Hobbyists like Eduardo Jimenez are unable to eat healthy and local.",
+                    "B" => "Fresh fruits and vegetables are becoming harder to find.",
+                    "C" => "Peppers and apples are becoming increasingly scarce.",
+                    "D" => "The price of fresh fruits and vegetables is increasing.",
+                    "E" => "Macro farmers are losing their crops."
+                ],
+                "answer" => "E"
+            ],
+            [
+                "question" => "Based on the information in paragraph 3, it can be inferred that an increase in supply results in ",
+                "options" => [
+                    "A" => "a decrease in price",
+                    "B" => "an increase in demand",
+                    "C" => "low availability",
+                    "D" => "reduced importance",
+                    "E" => "higher values"
+                ],
+                "answer" => "A"
+            ],
+            [
+                "question" => "Which of the following statements would the author most likely agree with?",
+                "options" => [
+                    "A" => "The fight against stink bugs is hopeless.",
+                    "B" => "There is a possible remedy to the stink bug problem, but it is unlikely to succeed.",
+                    "C" => "In hopes of eradicating stink bugs, several solutions are in the works.",
+                    "D" => "While the stink bug problem is difficult, most believe it to be short-lived.",
+                    "E" => "Scientists have arrived at a foolproof method for eliminating stink bugs."
+                ],
+                "answer" => "C"
+            ],
+            [
+                "question" => "Using the passage as a guide, it can be understood that  
+                \r\nI. Macro farmers commonly use pesticides, artificial hormones, and other synthetic materials. 
+                II. Until a solution to the stink bug problem is found, it is probably not a good time to start a home garden in Washington DC. 
+                III. Introducing foreign insects to closed environments can cause hazardous imbalances.",
+                "options" => [
+                    "A" => "I only",
+                    "B" => "II only",
+                    "C" => "I and II only",
+                    "D" => "II and III only",
+                    "E" => "I, II, and III"
+                ],
+                "answer" => "D"
+            ],
+            [
+                "question" => "As used in the final paragraph, which of the following describes something that is ubiquitous?",
+                "options" => [
+                    "A" => "On Valentine's Day, our school was littered with little pink love notes. I even found one stuck to my shoe when I got home.",
+                    "B" => "Ignacio counted eight purple trucks on the way to work today. He is in the market for a new truck and would like to get a color that nobody else already has.",
+                    "C" => "The copier malfunctioned and showered paper all over the room. It took Earnest twenty minutes to clean it up.",
+                    "D" => "Upon taking the hot dogs from the fire, flies swarmed the campers. Jaime wished he had brought bug spray.",
+                    "E" => "In 1849, droves of gold miners fled to California in hopes of striking it rich. Unfortunately, many arrived too late and found nothing but hard times."
+                ],
+                "answer" => "A"
+            ]
+        ]
+    ],
+    [
+        "type" => "posttest",
+        "title" => "ABC",
+        "content" => "ABC",
+
+        "comprehension" => [
+            [
+                "question" => "",
+                "options" => [
+                    "A" => "",
+                    "B" => "",
+                    "C" => "",
+                    "D" => "",
+                    "E" => ""
+                ],
+                "answer" => ""
             ]
         ]
     ]

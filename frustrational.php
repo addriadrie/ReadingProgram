@@ -30,7 +30,7 @@
                     
                 case 'submit_pretest':
                     $_SESSION['pretest_answers'] = $_POST['answers'] ?? [];
-                    $_SESSION['pretest_score'] = calculateScore($_SESSION['pretest_answers'], $independentContent[0]['comprehension']);
+                    $_SESSION['pretest_score'] = calculateScore($_SESSION['pretest_answers'], $frustrationalContent[0]['comprehension']);
                     $_SESSION['test_stage'] = 'pretest_results';
                     break;
                     
@@ -47,7 +47,7 @@
                     
                 case 'submit_posttest':
                     $_SESSION['posttest_answers'] = $_POST['answers'] ?? [];
-                    $_SESSION['posttest_score'] = calculateScore($_SESSION['posttest_answers'], $independentContent[$_SESSION['selected_posttest']]['comprehension']);
+                    $_SESSION['posttest_score'] = calculateScore($_SESSION['posttest_answers'], $frustrationalContent[$_SESSION['selected_posttest']]['comprehension']);
                     $_SESSION['test_stage'] = 'final_results';
                     break;
                     
@@ -139,9 +139,9 @@
         }
         
         // Get story title
-        global $independentContent;
-        $storyTitle = isset($independentContent[$selectedStory]) ? 
-                    $independentContent[$selectedStory]['title'] : 'Unknown';
+        global $frustrationalContent;
+        $storyTitle = isset($frustrationalContent[$selectedStory]) ? 
+                    $frustrationalContent[$selectedStory]['title'] : 'Unknown';
         
         // Prepare data row
         $data = [
@@ -190,7 +190,7 @@
                         // Time expired - accept whatever answers were provided
                     }
                     $_SESSION['pretest_answers'] = $_POST['answers'] ?? [];
-                    $_SESSION['pretest_score'] = calculateScore($_SESSION['pretest_answers'], $independentContent[0]['comprehension']);
+                    $_SESSION['pretest_score'] = calculateScore($_SESSION['pretest_answers'], $frustrationalContent[0]['comprehension']);
                     $_SESSION['test_stage'] = 'pretest_results';
                     break;
                     
@@ -212,7 +212,7 @@
                     
             case 'submit_posttest':
                     $_SESSION['posttest_answers'] = $_POST['answers'] ?? [];
-                    $_SESSION['posttest_score'] = calculateScore($_SESSION['posttest_answers'], $independentContent[$_SESSION['selected_posttest']]['comprehension']);
+                    $_SESSION['posttest_score'] = calculateScore($_SESSION['posttest_answers'], $frustrationalContent[$_SESSION['selected_posttest']]['comprehension']);
                     
                     // Save results to CSV
                     saveResultsToCSV(
@@ -468,7 +468,7 @@
                 break;
 
             case 'pretest_reading':
-                $pretest = $independentContent[0];
+                $pretest = $frustrationalContent[0];
                 ?>
                 <div class="progress">Pre-Test Reading Phase</div>
                 <h2><?php echo htmlspecialchars($pretest['title']); ?></h2>
@@ -482,7 +482,7 @@
                 break;
 
             case 'pretest_questions':
-                $pretest = $independentContent[0];
+                $pretest = $frustrationalContent[0];
                 ?>
                 <div class="progress">Pre-Test Questions Phase</div>
                 <h2>Pre-Test Questions</h2>
@@ -524,7 +524,7 @@
                 </div>
                 <form method="post">
                     <div class="story-selection">
-                        <?php foreach ($independentContent as $index => $story): ?>
+                        <?php foreach ($frustrationalContent as $index => $story): ?>
                             <?php if ($story['type'] === 'posttest'): ?>
                                 <div class="story-card">
                                     <label>
@@ -542,7 +542,7 @@
                 break;
 
             case 'posttest_reading':
-                $posttest = $independentContent[$_SESSION['selected_posttest']];
+                $posttest = $frustrationalContent[$_SESSION['selected_posttest']];
                 ?>
                 <div class="progress">Post-Test Reading Phase</div>
                 <h2><?php echo htmlspecialchars($posttest['title']); ?></h2>
@@ -556,7 +556,7 @@
                 break;
 
             case 'posttest_questions':
-                $posttest = $independentContent[$_SESSION['selected_posttest']];
+                $posttest = $frustrationalContent[$_SESSION['selected_posttest']];
                 ?>
                 <div class="progress">Post-Test Questions Phase</div>
                 <h2>Post-Test Questions</h2>
@@ -565,13 +565,7 @@
                         <div class="question">
                             <h4>Question <?php echo $index + 1; ?>: <?php echo nl2br(htmlspecialchars($question['question'])); ?></h4>
                             <div class="options">
-                                <?php 
-                                $shuffledOptions = $question['options'];
-                                $keys = array_keys($shuffledOptions);
-                                shuffle($keys);
-                                $shuffledOptions = array_merge(array_flip($keys), $shuffledOptions);
-                                
-                                foreach ($shuffledOptions as $option => $text): ?>
+                                <?php foreach ($question['options'] as $option => $text): ?>
                                     <label>
                                         <input type="radio" name="answers[<?php echo $index; ?>]" value="<?php echo $option; ?>" required>
                                         <?php echo htmlspecialchars($text); ?>
@@ -712,7 +706,7 @@
             });
         });
         
-        // Prevent accidental page refresh during test - FIXED VERSION
+        // Prevent accidental page refresh during test
         <?php if ($_SESSION['test_stage'] !== 'start' && $_SESSION['test_stage'] !== 'final_results'): ?>
         let formSubmitting = false;
 
