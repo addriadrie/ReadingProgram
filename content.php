@@ -846,7 +846,7 @@ $frustrationalContent = [
             ],
             [
                 "question" => "Using the passage as a guide, it can be understood that  
-                \r\nI. Macro farmers commonly use pesticides, artificial hormones, and other synthetic materials. 
+                I. Macro farmers commonly use pesticides, artificial hormones, and other synthetic materials. 
                 II. Until a solution to the stink bug problem is found, it is probably not a good time to start a home garden in Washington DC. 
                 III. Introducing foreign insects to closed environments can cause hazardous imbalances.",
                 "options" => [
@@ -872,25 +872,340 @@ $frustrationalContent = [
         ]
     ],
     [
+        "type" => "activity",
+        "title" => "The Graduation Trip",
+        "content" => "Joanna, Benny, Doris, Michelle, Flora, Shawn, Luc, Penny, and Gordon were all very excited. Their parents had promised to send them on a world tour for their graduation present. The children would have the responsibility of planning their own itinerary. They would have a whole month to travel, so they would be able to visit many places.
+        Everyone had different suggestions for them. Ms. Jasmine recommended Paris. 'I had a friend who spent a summer there and she said it was a life-changing experience,' she told them. Mr. Anderson told them that New York was the best place for people who want to experience a vibrant city. Mr. Lee recommended Japan and its many temples and cultural landmarks.
+        The children spent a few days researching different locations and carefully considering all of their options before going to a travel agent. They decided that their itinerary should focus on visiting as many continents as possible. They wanted to take advantage of their opportunity to see as much of the world as they could.
+        The travel agent recommended a few different itineraries for their group's diverse interests. They discussed many different options and settled on a tour package that ended with a stop in Australia.
+        Everything happened very quickly, and before the children knew it, they had arrived at their first destination in Europe: France. The tour started with a trip to Versailles, where they were able to explore the ornate palace.
+        After that, they went to Paris, where they toured the Louvre Museum. They were able to see many famous works of art, like the Mona Lisa. It was all very exciting; however, the children had problems adjusting to the time difference between Beaver Town and France.Even with jet lag, the children were having an amazing time and they were looking forward to their next European destination: Italy.",
+        "vocabulary" => [
+            "dimmed" => "to turn down lights so that a room is darker",
+            "anniversary" => "the same date that an important event happened",
+            "document" => "a paper that gives information or proof of something",
+            "commemorate" => "to celebrate the memory of something",
+            "cuisine" => "a particular type of cooking"
+        ],
+        "comprehension" => [
+            [
+                "question" => "What did the children's parents promise to do?",
+                "options" => [
+                    "A" => "Take them on a trip to the beach",
+                    "B" => "Let them buy a car",
+                    "C" => "Send them on a world tour",
+                    "D" => "Give them money to buy gifts",
+                    "E" => "Take them to New York"
+                ],
+                "answer" => "C"
+            ],
+            [
+                "question" => "Who went on the trip?",
+                "options" => [
+                    "A" => "Only Joanna and Benny",
+                    "B" => "Ms. Jasmine and Mr. Anderson",
+                    "C" => "Joanna, Benny, Doris, Michelle, Flora, Shawn, Luc, Penny, and Gordon",
+                    "D" => "The children’s parents",
+                    "E" => "Only Gordon and Shawn"
+                ],
+                "answer" => "C"
+            ],
+            [
+                "question" => "Where did the children go to plan their itinerary?",
+                "options" => [
+                    "A" => "The library",
+                    "B" => "A travel agent",
+                    "C" => "Their school",
+                    "D" => "An online website",
+                    "E" => "The airport"
+                ],
+                "answer" => "B"
+            ],
+            [
+                "question" => "What did the children decide their itinerary should focus on?",
+                "options" => [
+                    "A" => "Visiting only France and Italy",
+                    "B" => "Exploring different cuisines",
+                    "C" => "Visiting as many continents as possible",
+                    "D" => "Learning about famous museums",
+                    "E" => "Shopping in big cities"
+                ],
+                "answer" => "C"
+            ],
+            [
+                "question" => "What was the children's first destination?",
+                "options" => [
+                    "A" => "Japan",
+                    "B" => "Australia",
+                    "C" => "Italy",
+                    "D" => "France",
+                    "E" => "New York"
+                ],
+                "answer" => "D"
+            ]
+        ]
+    ],
+    [
         "type" => "posttest",
-        "title" => "ABC",
-        "content" => "ABC",
+        "title" => "Antarctica: Land of Ice",
+        "content" => "In Antarctica, it is colder than you can possibly imagine, even in the summer! The South Pole is the coldest part of Antarctica. The average temperature for January, the middle of the summer, is minus 28 degrees Celsius (written as -28°C). Minus means colder than the freezing point, which is 0°C. In the winter, April to September, the average temperature at the South Pole can be as cold as -89°C. When it is that cold, a mug of boiling water thrown in the air would freeze before it hit the ice. Sometimes the scientists have to use fridges to keep their samples warm!
+        There are more penguins in the Antarctic than any other bird. They cannot fly but use their short wings as swimming Rippers. They are superb swimmers. On land, they waddle upright or move in short hops. Penguins have many feathers that overlap each other. These, together with woolly down feathers and a thick layer of fat, keep out the cold air, wind and water. For extra warmth, penguins huddle together in groups.",
 
         "comprehension" => [
             [
-                "question" => "",
+                "question" => "Antarctica is the coldest place on Earth. What other records does it hold?",
                 "options" => [
-                    "A" => "",
-                    "B" => "",
-                    "C" => "",
-                    "D" => "",
-                    "E" => ""
+                    "A" => "driest and cloudiest",
+                    "B" => "wettest and windiest",
+                    "C" => "windiest and driest",
+                    "D" => "cloudiest and highest"
                 ],
-                "answer" => ""
+                "answer" => "C"
+            ],
+            [
+                "question" => "Why does the article tell you that ‘a mug of boiling water thrown in the air would freeze before it hit the ice’?",
+                "options" => [
+                    "A" => "to tell you how hot the water is in Antarctica",
+                    "B" => "to show you what they drink in Antarctica",
+                    "C" => "to tell you about scientists’ jobs in Antarctica",
+                    "D" => "to show you how cold it is in Antarctica"
+                ],
+                "answer" => "D"
+            ],
+            [
+                "question" => "According to the article, what do penguins use their wings for?",
+                "options" => [
+                    "A" => "flying",
+                    "B" => "swimming",
+                    "C" => "keeping chicks warm",
+                    "D" => "walking upright"
+                ],
+                "answer" => "B"
+            ],
+            [
+                "question" => "Which section of the article tells you how thick the ice is in Antarctica?",
+                "options" => [
+                    "A" => "What is Antarctica?",
+                    "B" => "The Weather in Antarctica",
+                    "C" => "Penguins in Antarctica",
+                    "D" => "A Letter from Antarctica"
+                ],
+                "answer" => "A"
+            ]
+        ]
+    ],
+    [
+        "type" => "posttest",
+        "title" => "The Little Lump of Clay by Diana Engel",
+        "content" => "Way up high, in an old tower, there was a workshop. It was a pottery workshop, filled with barrels of colourful glazes, potter's wheels, kilns and, of course, clay. Near the window stood a big wooden bin with a heavy lid. There the clay was kept. Way at the bottom, squashed into the corner, was the oldest lump of clay. He barely remembered the last time he had been handled, a long time ago. Every day the heavy lid would open. Hands reached in, quickly grabbing bags or balls of clay. The little lump of clay could hear the cheerful sounds of people busy at their work.
+        
+        “When will it be my turn?” he wondered. As each day passed in the darkness of the bin, the little lump of clay lost hope.
+        
+        One day a large group of children came into the workshop with their teacher. Many hands reached into the bin. The little lump of clay was the last to be chosen, but he was out.
+        
+        “Here's my big chance!” he thought, squinting in the light.
+        
+        A boy put the clay on the potter's wheel, spinning it as fast as he could. “This is fun!” thought the little lump of clay. The boy tried pulling the clay up as the wheel went around. The little lump of clay felt the excitement of becoming something! After trying to make a bowl, the boy gave up. He pushed and pounded the clay into a neat ball.
+        
+        “Time to clean up,” said the teacher. The workshop was filled with the sounds of children sponging and wiping and washing and drying. Water dripped <everywhere>
+        
+        The boy plopped the lump of clay near the window and rushed to join his friends. After a while, the workshop emptied. The room was quiet and dark. The little lump of clay was terrified. Not only did he miss the moistness of the bin, he knew he was in danger.
+        
+        “It's all over,” he thought. “I'll just sit here and dry out until I'm as hard as a rock.”
+        
+        He sat by the open window, unable to move, feeling the moisture seep out of him. The sun- light beat down, the night breezes blew in, until  he was rock hard. He was so hard he could hard- ly think. He only knew that he was filled with hopelessness.
+        
+        But somewhere deep inside the little lump of clay, a tiny drop of moisture was left, and he refused to let it go.
+        
+        “Rain,” he thought. “Water,” he sighed.
+        
+        “Please,” he finally squeezed out of his dry hopeless self.
+        
+        A passing cloud took pity on the little lump of clay, and a wonderful thing happened. Huge rain- drops hammered through the open window, fall- ing on the little lump of clay. All night it rained, and by morning he was as soft as his old self.
+        
+        Voices drifted into the workshop. “Oh no,” said a woman. She was a potter who often used the workshop.
+        
+        “Someone has left the window open all weekend! We've got a mess to clean up. You can work with some clay while I find the towels,” she said to her daughter.
+        
+        The little girl saw the lump of clay sitting at the window. “This looks like a perfect lump for me,” she said.
+        
+        Soon she was pressing and kneading the clay into pleasing shapes. To the little lump of clay, her fingers felt heavenly.
+        
+        The girl thought as she worked, and her hands moved with purpose. The little lump of clay felt himself being gently pushed into a rounded, hollow shape. A few pinches, and he had a hand.
+
+        Mommy, Mommy,” called the girl, “I made a cup!”
+        
+        “It's wonderful!” said her mother. “Put it on the shelf and it will be fired in the kiln. Then you can glaze it any colour you like.”
+        
+        Soon the little cup was ready to be taken to his new home. Now he lives on a shelf in the kitchen, next to the other cups and saucers and mugs. They are all very different and some are very beautiful.
+        
+        “Breakfast!” calls the mother, setting the new cup on the table and filling him with hot chocolate.
+        
+        The little girl holds him gently. How happy he feels with the smooth lines of his new shape. How well he does his job!
+        
+        The little cup sits proudly. “At last—at last I am something.”",
+
+        "comprehension" => [
+            [
+                "question" => "Why was the clay eventually taken out of the bin?",
+                "options" => [
+                    "A" => "All the other lumps of clay were used.",
+                    "B" => "It was on top of the other lumps of clay.",
+                    "C" => "The boy chose that lump because he especially liked it.",
+                    "D" => "The teacher told the boy to use that lump"
+                ],
+                "answer" => "A"
+            ],
+            [
+                "question" => "What did the boy do that was careless?",
+                "options" => [
+                    "A" => "He left the clay on the potter’s wheel.",
+                    "B" => "He was spinning the wheel as fast as he could.",
+                    "C" => "He put the clay near the window.",
+                    "D" => "He pushed and pounded the clay."
+                ],
+                "answer" => "C"
+            ],
+            [
+                "question" => "How did the lump of clay feel right after the boy left the pottery workshop?",
+                "options" => [
+                    "A" => "satisfied",
+                    "B" => "scared",
+                    "C" => "angry",
+                    "D" => "proud"
+                ],
+                "answer" => "B"
+            ],
+            [
+                "question" => "Which words in the story show that the little girl knew what she wanted to make?",
+                "options" => [
+                    "A" => "‘her fingers felt heavenly.’",
+                    "B" => "‘The little girl saw the lump of clay.’",
+                    "C" => "‘The little girl holds him gently.’",
+                    "D" => "‘her hands moved with purpose.’"
+                ],
+                "answer" => "D"
+            ],
+            [
+                "question" => "The author of the story writes about the lump of clay as if it were a person. What is the author trying to make you imagine?",
+                "options" => [
+                    "A" => "what it is like in the rain",
+                    "B" => "how a lump of clay might feel",
+                    "C" => "what it is like to work with clay",
+                    "D" => "how it feels to make something"
+                ],
+                "answer" => "B"
+            ],
+            [
+                "question" => "What is the main message of this story?",
+                "options" => [
+                    "A" => "People are easy to knead and shape like clay.",
+                    "B" => "There is a great deal of unhappiness in the world.",
+                    "C" => "Everything is happiest when it finds a purpose.",
+                    "D" => "Pottery is the best way to do good in the world."
+                ],
+                "answer" => "C"
+            ],
+        ]
+    ],
+    [
+        "type" => "posttest",
+        "title" => "An Unbelievable Night by Franz Hohler",
+        "content" => "Anina was ten years old, so even half asleep she could find her way from her room to the bathroom. The door to her room was usually open a crack, and the nightlight in the hallway made it light enough to get to the bathroom past the telephone stand.
+        
+        One night, as she passed the telephone stand on her way to the bathroom, Anina heard something that sounded like a quiet hissing. But, because she was half asleep, she didn't really pay any attention to it. Anyway, it came from pretty far away. Not until she was on her way back to her room did she see where it came from. Under the telephone stand there was a large pile of old newspapers and magazines, and this pile now began to move. That was where the noise was coming from. All of a sudden the pile started to fall over – right, left, forwards, backwards – then there were newspapers and magazines all over the Roor.
+        
+        Anina could not believe her eyes as she watched a grunting and snorting crocodile come out from under the telephone stand. Anina was frozen to the spot. Her eyes wide as saucers, she watched the crocodile crawl completely out of the newspapers and slowly look around the apartment. It seemed to have just come out of the water because its whole body was dripping wet. Wherever the crocodile stepped, the carpet under it became drenched.
+        
+        The crocodile moved its head back and forth letting out a loud hissing sound. Anina swallowed hard, looking at the crocodile's snout with its terribly long row of teeth. It swung its tail slowly back and forth. Anina had read about that in “Animal Magazine”– how the crocodile whips the water with its tail to chase away or attack its enemies.
+        
+        Her gaze fell on the last issue of “Animal Magazine,” which had fallen from the pile and was lying at her feet. She got another shock. The cover of the magazine used to have a picture of a big crocodile on a river bank. The river bank was now empty!
+        
+        Anina bent down and picked up the magazine. At that moment the crocodile whipped his tail so hard that he cracked the big vase of sunRowers on the Roor and the sunRowers scattered everywhere. With a quick jump Anina was in her bedroom. She slammed the door shut, grabbed her bed and pushed it up against the door. She had built a barricade that would keep her safe from the crocodile. Relieved, she let her breath out.
+        
+        But then she hesitated. What if the beast was simply hungry? Maybe to make the crocodile go away you had to give it something to eat?
+        
+        Anina looked again at the animal magazine. If the crocodile could crawl out of a picture then perhaps other animals could too. Anina hastily Ripped through the magazine and stopped at a swarm of Ramingos in a jungle swamp. Just right, she thought. They look like a birthday cake for crocodiles.
+        
+        Suddenly there was a loud crack and the tip of the crocodile's tail pushed through the splintered door.
+        
+        Quickly, Anina held the picture of the flamingos up to the hole in the door and called as loud as she could, “Ket out of the swamp! Shoo! Shoo!” Then she threw the magazine through the hole into the hallway, clapped her hands and yelled and screamed.
+        
+        She could hardly believe what happened next. The entire hallway was suddenly filled with screeching Ramingos wildly Rapping their wings and running around all over the place on their long, skinny legs. Anina saw one bird with a sunRower in its beak and another grabbing her mother's hat from its hook. She also saw a Ramingo disappear into the crocodile's mouth. With two quick bites he swallowed the Ramingo and quickly followed it with another, the one with the sunRower in its beak.
+        
+        After two portions of Ramingo the crocodile seemed to have had enough and lay down contentedly in the middle of the hallway. When he had closed his eyes and no longer moved,
+        
+        Anina quietly opened her door and slipped through it into the hallway.
+        
+        She placed the empty magazine cover in front of the crocodile's nose. “Please,” she whispered, “please go back home.” She crept back into the bedroom and looked through the hole in the door. She saw the crocodile back on the cover of the magazine.
+        
+        She now went cautiously into the living room where the Ramingos were crowded around the sofa and standing on the television. Anina opened the magazine to the page with the empty picture. “Thank you,” she said, “thank you very much. You may now go back to your swamp.”
+        
+        In the morning, it was very difficult for her to explain the giant wet spot on the Roor and the broken door to her parents. They weren't convinced about the crocodile even though her mother's hat was nowhere to be found.",
+
+        "comprehension" => [
+            [
+                "question" => "What was the first sign that something unusual was happening?",
+                "options" => [
+                    "A" => "A pile of newspapers began to move.",
+                    "B" => "Anina saw the magazine cover.",
+                    "C" => "The door to her room was broken.",
+                    "D" => "Anina heard a hissing sound."
+                ],
+                "answer" => "D"
+            ],
+            [
+                "question" => "Where did the crocodile come from?",
+                "options" => [
+                    "A" => "the bathroom",
+                    "B" => "a magazine cover",
+                    "C" => "under the bed",
+                    "D" => "a nearby river"
+                ],
+                "answer" => "B"
+            ],
+            [
+                "question" => "Which words tell you that Anina was frightened?",
+                "options" => [
+                    "A" => "“frozen to the spot”",
+                    "B" => "“could not believe her eyes”",
+                    "C" => "“let her breath out”",
+                    "D" => "“sounded like a quiet hissing”"
+                ],
+                "answer" => "A"
+            ],
+            [
+                "question" => "Why did Anina think the crocodile was going to attack?",
+                "options" => [
+                    "A" => "It showed its long row of teeth.",
+                    "B" => "It let out a loud hissing sound.",
+                    "C" => "It started grunting and snorting.",
+                    "D" => "It swung its tail back and forth",
+                ],
+                "answer" => "D"
+            ],
+            [
+                "question" => "How did the bedroom door get broken?",
+                "options" => [
+                    "A" => "The crocodile’s tail pushed through it.",
+                    "B" => "The big vase cracked against it.",
+                    "C" => "The flamingo’s sharp beak crashed into it.",
+                    "D" => "The bed smashed against it."
+                ],
+                "answer" => "A"
+            ],
+            [
+                "question" => "At the end of the story, how did Anina feel toward the flamingos?",
+                "options" => [
+                    "A" => "guilty",
+                    "B" => "cautious",
+                    "C" => "grateful",
+                    "D" => "annoyed"
+                ],
+                "answer" => "C"
             ]
         ]
     ]
-
 ];
 
 ?>
