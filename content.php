@@ -182,11 +182,17 @@ $independentContent = [
         "type" => "posttest",
         "title" => "'Terry Fox dollar unveiled' by Mike Beamis",
         "content" => "To Terry Fox, the one-legged runner whose life was the antithesis of self-aggrandizement, the thought he would be the first Canadian depicted on a circulating coin would be considered loony. Fox asked every Canadian for a dollar toward cancer research when he dipped his prosthesis into the frigid waters of St. John’s harbor on April 12, 1980, and began his cross-Canada marathon. 
+        
         In 2005, that small change has added up to more than $360 million through the annual Terry Fox Marathon of Hope across Canada and worldwide. To mark the 25th anniversary of the run, the Royal Canadian Mint unveiled a one-dollar commemorative circulation coin Monday on the campus of Simon Fraser University. Fox was an undergraduate student and basketball player at SFU when a malignant tumour was discovered in his right leg in 1977. It resulted in amputation. A bronze statue of Fox, one of many such tributes across Canada, looks over the academic quadrangle of the university, just a short stroll from the theatre where Monday’s unveiling was held. 
+        
         “I think he’d be a little uncomfortable with it,” says Darrell Fox, Terry’s younger brother and national director of the Terry Fox Foundation, based in Chilliwack. “Terry always wanted to deflect attention to the real heroes, the cancer patients in the hospital wards. Ultimately he’d gladly trade a loonie with his picture on it for another dollar to fight cancer, if he would recognize its potential for fundraising.” 
+        
         Betty and Rolly Fox, Terry’s parents, accepted the first of 11 million Terry Fox coins from mint employees. Another nine million will be issued in September to coincide with Terry Fox runs across Canada. The Foxes’ nine grandchildren and Terry’s brother Fred and sister Judith Alder were in the audience that watched a moving tribute to the runner with a voice-over by Man in Motion campaigner Rick Hansen. Betty Fox said the pride the family feels in receiving the honor is tempered by the fact Terry could not be there to accept it.
+        
         The Royal Canadian Mint is based in Winnipeg where Fox was born in 1958 before the family moved to Port Coquitlam. Engraver Stan Witten, who designed the coin image based on a picture from photographer Gail Harvey, lives near Terry Fox Drive in Ottawa and fills up his car at Terry Fox Esso, but his connection to the runner runs much deeper than that. “I was in Grade 11 in Edmonton, and I’d watch the run nightly on TV to see his progress,” Witten said. “I’ve participated in the Terry Fox run myself. It’s a real honor to be part of Canadian history.” 
+        
         Terry’s is the first Canadian coin ever struck to show a human likeness other than a monarch. The sideways view of Fox, caught in his hypnotic hop-step gait, is displayed against a background of the Canadian Shield and evokes the loneliness of the long-distance runner. “I wanted to capture the courage and determination on his face,” Witten said. “It was important that he towered over the trees.” 
+        
         Although the Terry Fox Foundation receives no direct benefit from the coin, Darrell Fox is hoping that the image will have a catalytic effect on fund-raising and awareness. “I think BC’s population is over 4 million, but we raised $1.8 million from the run last year in the province,” Fox says. “There’s a lot of room to grow there. We hope people respond to the challenge.”",
         
         "comprehension" => [
@@ -1307,11 +1313,17 @@ $frustrationalContent = [
         "type" => "activity",
         "title" => "The Graduation Trip",
         "content" => "Joanna, Benny, Doris, Michelle, Flora, Shawn, Luc, Penny, and Gordon were all very excited. Their parents had promised to send them on a world tour for their graduation present. The children would have the responsibility of planning their own itinerary. They would have a whole month to travel, so they would be able to visit many places.
+        
         Everyone had different suggestions for them. Ms. Jasmine recommended Paris. 'I had a friend who spent a summer there and she said it was a life-changing experience,' she told them. Mr. Anderson told them that New York was the best place for people who want to experience a vibrant city. Mr. Lee recommended Japan and its many temples and cultural landmarks.
+        
         The children spent a few days researching different locations and carefully considering all of their options before going to a travel agent. They decided that their itinerary should focus on visiting as many continents as possible. They wanted to take advantage of their opportunity to see as much of the world as they could.
+        
         The travel agent recommended a few different itineraries for their group's diverse interests. They discussed many different options and settled on a tour package that ended with a stop in Australia.
+        
         Everything happened very quickly, and before the children knew it, they had arrived at their first destination in Europe: France. The tour started with a trip to Versailles, where they were able to explore the ornate palace.
+       
         After that, they went to Paris, where they toured the Louvre Museum. They were able to see many famous works of art, like the Mona Lisa. It was all very exciting; however, the children had problems adjusting to the time difference between Beaver Town and France.Even with jet lag, the children were having an amazing time and they were looking forward to their next European destination: Italy.",
+        
         "vocabulary" => [
             "dimmed" => "to turn down lights so that a room is darker",
             "anniversary" => "the same date that an important event happened",
@@ -1378,9 +1390,543 @@ $frustrationalContent = [
         ]
     ],
     [
+        "type" => "activity",
+        "title" => "Exploring Rome",
+        "content" => "When the children arrived in Italy, they were all very tired and a little homesick. They decided to stop by their hotel for a quick nap before exploring Rome. Everyone was sure they would feel better once they had some rest.
+        
+        After their nap, the nine friends left their hotel feeling rejuvenated. The first place they visited was the famous Trevi Fountain, which was constructed in the eighteenth century. There is a legend that people who toss in a coin with their right hand over their left shoulder will return to Rome one day. Left-handed Benny used the wrong hand, so he had to try again.
+        
+        At the Trevi Fountain, the children decided to try an Italian specialty, gelato. Everyone agreed that it was the best ice cream they had ever tasted. It was so much creamier and more delicious than the ice cream that was sold in Beaver Town. They got one scoop of each flavor to share, so they could sample all of the flavors.
+        
+        Even after all the gelato, the children were still hungry. They walked around until they found a restaurant that specialized in everyone's favorite food: pizza. The children were eager to try authentic Italian pizza. It was more delicious than they could have ever imagined. They ordered two pizzas and a few varieties of pasta to share.
+        
+        After dinner, the children got a little lost on the way back to their accommodations. A kind man offered to guide them there. He was very helpful, but unfortunately he could not speak English very well. He had a very thick accent, and it was difficult to understand him. On the way, he often stopped to explain about various buildings and landmarks. Although the children did not always know what he was saying, they were grateful for his help.",
+        
+        "vocabulary" => [
+            "rejuvenated" => "feeling refreshed or full of energy again",
+            "legend" => "a traditional story or belief passed down over time",
+            "authentic" => "real or genuine; not an imitation",
+            "variety" => "a collection of different kinds",
+            "eager" => "very interested or excited to do something"
+        ],
+        "comprehension" => [
+            [
+                "question" => "How did the children feel when they arrived in Rome?",
+                "options" => [
+                    "A" => "Excited and full of energy",
+                    "B" => "Angry and upset",
+                    "C" => "Tired and a little homesick",
+                    "D" => "Nervous and scared"
+                ],
+                "answer" => "C"
+            ],
+            [
+                "question" => "Where did they go first?",
+                "options" => [
+                    "A" => "The Colosseum",
+                    "B" => "The Trevi Fountain",
+                    "C" => "A pizza restaurant",
+                    "D" => "A museum"
+                ],
+                "answer" => "B"
+            ],
+            [
+                "question" => "What is the legend about the Trevi Fountain?",
+                "options" => [
+                    "A" => "You will find love if you make a wish there",
+                    "B" => "Tossing in a coin will bring good luck",
+                    "C" => "Tossing in a coin means you will return to Rome one day",
+                    "D" => "You will become rich if you throw in two coins"
+                ],
+                "answer" => "C"
+            ],
+            [
+                "question" => "How was gelato different from ice cream in Beaver Town?",
+                "options" => [
+                    "A" => "It was more colorful",
+                    "B" => "It was creamier and more delicious",
+                    "C" => "It was served in larger portions",
+                    "D" => "It melted faster"
+                ],
+                "answer" => "B"
+            ],
+            [
+                "question" => "What did the children order for dinner?",
+                "options" => [
+                    "A" => "Pizza and gelato",
+                    "B" => "Pizza and pasta",
+                    "C" => "Sandwiches and soup",
+                    "D" => "Salad and breadsticks"
+                ],
+                "answer" => "B"
+            ]
+        ]
+    ],
+    [
+        "type" => "activity",
+        "title" => "A Stop in Russia",
+        "content" => "The next stop on their itinerary was Russia. Due to some surprisingly cold weather, the children had to buy warmer clothes to keep themselves comfortable during their stay. They all bought sweaters, and Joanna bought a traditional Russian style hat. She thought it would be a unique souvenir to take home. Flora liked Joanna's hat so much that she bought a few to give to her family.
+
+        Before leaving for Europe, the children had combined all of their money in one account. They thought it would simplify paying for meals and other travel expenses. Because he was the best at math, the children made Shawn responsible for budgeting their money. After all the money they spent on warm clothes, Shawn had to calculate whether or not they had enough money to see a Russian ballet.
+
+        They booked a tour of Moscow. The guide took them to see many famous palaces and other sights. The architecture was very different than the palace they had seen in Versailles. Flora and Doris loved hearing stories about the royal family that once lived there. They asked the guide many questions about Russian history.
+
+        The next stop on their tour was Red Square, which got its name from its red bricks. Red Square is a popular tourist spot, because many parades and important events occur there. The children were able to watch some street performers. It was very exciting, so they cheered for the show.
+
+        In the evening, the children went to see a ballet at a famous theater. The girls were inspired by the graceful ballerinas they saw in the show. The show made them all want to take ballet lessons. The children were having a great time in Europe, but they were ready to move on to North America.",
+        
+        "vocabulary" => [
+            "Itinerary" => "A planned schedule or route for a trip",
+            "Architecture" => "The design and style of buildings",
+            "Graceful" => "Moving in a smooth, beautiful way",
+            "Royal" => "Relating to a king, queen, or their family",
+            "Souvenir" => "Something kept as a reminder of a place visited"
+        ],
+        "comprehension" => [
+            [
+                "question" => "What did the children have to do because of the surprisingly cold weather?",
+                "options" => [
+                    "A" => "Leave Russia early",
+                    "B" => "Buy warmer clothes",
+                    "C" => "Stay inside all day",
+                    "D" => "Cancel their tour"
+                ],
+                "answer" => "B"
+            ],
+            [
+                "question" => "Why did the children combine all of their money in one account?",
+                "options" => [
+                    "A" => "So they could buy souvenirs together",
+                    "B" => "To make paying for things easier",
+                    "C" => "Because Shawn told them to",
+                    "D" => "Because they lost some money"
+                ],
+                "answer" => "B"
+            ],
+            [
+                "question" => "Why was Shawn in charge of the money?",
+                "options" => [
+                    "A" => "He was the oldest",
+                    "B" => "He was the only boy",
+                    "C" => "He was best at math",
+                    "D" => "He asked to be in charge"
+                ],
+                "answer" => "C"
+            ],
+            [
+                "question" => "Where did their guide take them?",
+                "options" => [
+                    "A" => "To a ballet theater",
+                    "B" => "To see palaces and other sights in Moscow",
+                    "C" => "To Red Square only",
+                    "D" => "To a shopping mall"
+                ],
+                "answer" => "B"
+            ],
+            [
+                "question" => "Where are the children going next?",
+                "options" => [
+                    "A" => "Back to Italy",
+                    "B" => "To Asia",
+                    "C" => "To North America",
+                    "D" => "Back home"
+                ],
+                "answer" => "C"
+            ]
+        ]
+    ],
+    [
+        "type" => "activity",
+        "title" => "On to New York",
+        "content" => 'After boarding the plane to New York, the children were very excited. It would be their longest flight yet. They had a very nice flight attendant. Whenever she came down the aisle, she always asked if there was anything she could do to help them.
+        
+        May I have some more apple juice?" Gordon asked
+        
+        "How do I find the video games on my screen?" Shawn asked
+        
+        "The screen in my seat isn`t working. Could you please help me?" Luc asked.
+        
+        After dinner, the lights on the plane were dimmed, and the flight attendant passed out blankets for all the passengers. She asked everyone to put down the shades on their windows and to talk quietly. Before long, Benny was sleeping soundly. He surprised Doris and Joanna by snoring loudly.
+        
+        After dropping off their luggage at the hotel, the children met their tour guide. He was going to be with them for their entire visit to the United States. The first place they visited was the Statue of Liberty. The guide told them that the statue was a gift from France in 1876. It was given to commemorate the one-hundredth anniversary of the United States` independence.
+        
+        After that, the guide took them to a museum where they were able to see an authentic copy of the US Constitution. The children had many questions about the historic document. Gordon was enjoying the tour, but he was getting really hungry. He kept looking at his watch to see how much longer he had to wait.
+        
+        After finishing the tour, the guide dropped them off at a famous restaurant near their hotel. The children were excited about trying authentic American cuisine. They had trouble deciding what to order because everything sounded so delicious. Before eating dinner, Shawn decided to get a picture of the group together. He never wanted to forget their trip to New York.',
+        
+        "vocabulary" => [
+            "Aisle" => "The walkway between rows of seats",
+            "Commemorate" => "To honor or remember something important",
+            "Authentic" => "Real or genuine",
+            "Cuisine" => "The style of cooking from a particular place",
+            "Independence" => "Freedom from control by another country or person"
+        ],
+        "comprehension" => [
+            [
+                "question" => "What happened after dinner on the plane?",
+                "options" => [
+                    "A" => "The flight attendant passed out desserts",
+                    "B" => "The children watched movies",
+                    "C" => "The lights were dimmed and blankets were given out",
+                    "D" => "They landed in New York"
+                ],
+                "answer" => "C"
+            ],
+            [
+                "question" => "How did Benny surprise Doris and Joanna on the plane?",
+                "options" => [
+                    "A" => "He started singing loudly",
+                    "B" => "He was crying",
+                    "C" => "He snored loudly while sleeping",
+                    "D" => "He stayed awake the whole night"
+                ],
+                "answer" => "C"
+            ],
+            [
+                "question" => "Where was the first place they visited in New York?",
+                "options" => [
+                    "A" => "The Empire State Building",
+                    "B" => "A famous restaurant",
+                    "C" => "The Statue of Liberty",
+                    "D" => "The museum"
+                ],
+                "answer" => "C"
+            ],
+            [
+                "question" => "Why did France give the United States the Statue of Liberty?",
+                "options" => [
+                    "A" => "To celebrate the end of a war",
+                    "B" => "To commemorate the one-hundredth anniversary of independence",
+                    "C" => "As payment for a debt",
+                    "D" => "As a trade agreement"
+                ],
+                "answer" => "B"
+            ],
+            [
+                "question" => "What document did the children see at the museum?",
+                "options" => [
+                    "A" => "The Declaration of Independence",
+                    "B" => "The Bill of Rights",
+                    "C" => "The US Constitution",
+                    "D" => "The Emancipation Proclamation"
+                ],
+                "answer" => "C"
+            ]
+        ]
+    ],
+    [
+        "type" => "activity",
+        "title" => "African Safari",
+        "content" => "The children's time in North America quickly came to an end. After New York, they were heading to Africa to take a safari in Tanzania. Due to the fact that there are not many flights to Africa, the children were forced to leave very early in the morning. Everyone promised to meet in the hotel lobby at 4 a.m. to take a shuttle bus to the airport. Gordon was running late, so they had to rush to the airport.
+        
+        After their long flight, the children were happy to finally arrive in Africa. Their travel agent had arranged for an extended safari, so they could see many of their favorite animals in their natural habitat. They had visited only cities so far on their trip, so the children were looking forward to spending some time outside.
+        
+        The children were shocked by how beautiful the African landscape was. The grasslands seemed to go on forever. On their safari, they were able to enter a wildlife preserve. There the children could see many different species of animals walking around freely. Their driver kept stopping to allow them to take pictures of the animals. Penny snapped an unbelievable photo of a family of elephants walking together.
+        
+        Everyone was surprised when a giraffe crossed in front of the car. They were in awe of the strange-looking creature. No one could believe how tall it was. Compared to the giant giraffe, the antelopes they saw looked like tiny ants.
+        
+        At night, they camped outside. The guide helped them pitch their tents in a flat place with a view of majestic Mount Kilimanjaro on the horizon. The girls were a little nervous about sleeping so near the wild animals that they had seen earlier, but the guide made them feel very safe. Everyone was having a great time on their graduation trip, and they couldn't wait to move on to their next destinations in Asia.",
+        
+        "vocabulary" => [
+            "Species" => "A group of living things that are alike",
+            "Landscape" => "An area of land and its physical features",
+            "Majestic" => "Very beautiful, grand, and impressive",
+            "Shuttle" => "A vehicle that travels back and forth between places",
+            "Preserve" => "A protected area where animals can live safely"
+        ],
+        "comprehension" => [
+            [
+                "question" => "Where did the children go after New York?",
+                "options" => [
+                    "A" => "Europe",
+                    "B" => "Asia",
+                    "C" => "Africa",
+                    "D" => "Australia"
+                ],
+                "answer" => "C"
+            ],
+            [
+                "question" => "What were they able to enter on their safari?",
+                "options" => [
+                    "A" => "A zoo",
+                    "B" => "A wildlife preserve",
+                    "C" => "A museum",
+                    "D" => "A city park"
+                ],
+                "answer" => "B"
+            ],
+            [
+                "question" => "What did the antelope look like next to the giraffe?",
+                "options" => [
+                    "A" => "Bigger than the giraffe",
+                    "B" => "The same size as the giraffe",
+                    "C" => "Like tiny ants",
+                    "D" => "Like giant elephants"
+                ],
+                "answer" => "C"
+            ],
+            [
+                "question" => "What did their campsite have a view of?",
+                "options" => [
+                    "A" => "A river",
+                    "B" => "The ocean",
+                    "C" => "Mount Kilimanjaro",
+                    "D" => "A rainforest"
+                ],
+                "answer" => "C"
+            ],
+            [
+                "question" => "Which continent will the children be visiting next?",
+                "options" => [
+                    "A" => "Europe",
+                    "B" => "Asia",
+                    "C" => "Australia",
+                    "D" => "South America"
+                ],
+                "answer" => "B"
+            ]
+        ]
+    ],
+    [
+        "type" => "activity",
+        "title" => "Visit to China",
+        "content" => 'The children`s next stop was China. When they started planning their itinerary, the Great Wall was on everyone`s must-see lists. Climbing the wall ended up being much more challenging than the children imagined. Some parts were very steep and other parts were beginning to collapse, so they had to climb up the wall carefully. They were all exhausted, so listening attentively to their guide was very difficult.
+        
+        The guide told them about the remarkable wall. In total, the wall`s segments add up to more than 20,000 kilometers. This means that it is the largest man-made structure in the world. It is even more impressive if you remember that it was built hundreds of years ago. It took a lot of labor to build the wall without modern technology. Many men were forced to leave their families to work on it.
+        
+        As they walked along the wall, the children were curious about its history
+        
+        "How long did the construction take?" asked Joanna
+        
+        "It took around a thousand years. It was built continuously from the 3rd century BC to the seventeenth century," the guide answered
+        
+        "Why did they build it?" asked Gordon
+        
+        "It was designed to keep out invaders," replied the guide.
+        
+        After touring the wall, the children went with their guide to visit a nearby lake. They took a boat tour around the lake. On the boat, refreshments were served. After their tiring walk along the Great Wall, they enjoyed spending some time relaxing on the boat.
+        
+        On the boat, the guide told the children some facts about the lake and the people who reside nearby. They were very impressed with her knowledge of local history. They were very sad when the tour ended. The children had a great time in China, but now they were ready to move on to their next stop in Asia: Japan.',
+        
+        "vocabulary" => [
+            "Steep" => "Having a sharp slope or angle",
+            "Exhausted" => "Very tired",
+            "Labor" => "Hard physical work",
+            "Invaders" => "People who enter a place by force to conquer it",
+            "Reside" => "To live in a place"
+        ],
+        "comprehension" => [
+            [
+                "question" => "Why was climbing the Great Wall challenging?",
+                "options" => [
+                    "A" => "It was raining heavily",
+                    "B" => "Some parts were steep and collapsing",
+                    "C" => "It was very crowded",
+                    "D" => "The guide walked too fast"
+                ],
+                "answer" => "B"
+            ],
+            [
+                "question" => "How long is the Great Wall?",
+                "options" => [
+                    "A" => "About 2,000 kilometers",
+                    "B" => "About 5,000 kilometers",
+                    "C" => "More than 20,000 kilometers",
+                    "D" => "Less than 1,000 kilometers"
+                ],
+                "answer" => "C"
+            ],
+            [
+                "question" => "When was the Great Wall built?",
+                "options" => [
+                    "A" => "From the 3rd century BC to the seventeenth century",
+                    "B" => "In the 1800s only",
+                    "C" => "All in one year",
+                    "D" => "From the first century AD to the 10th century"
+                ],
+                "answer" => "A"
+            ],
+            [
+                "question" => "Where did the children go after touring the wall?",
+                "options" => [
+                    "A" => "To a museum",
+                    "B" => "To a mountain",
+                    "C" => "To a nearby lake",
+                    "D" => "Back to their hotel"
+                ],
+                "answer" => "C"
+            ],
+            [
+                "question" => "Where will the children go next?",
+                "options" => [
+                    "A" => "Australia",
+                    "B" => "Japan",
+                    "C" => "India",
+                    "D" => "Russia"
+                ],
+                "answer" => "B"
+            ]
+        ]
+    ],
+    [
+        "type" => "activity",
+        "title" => "Trip to Japan",
+        "content" => 'After a short plane ride from China, the children arrived in Kyoto, Japan. Their accommodation was a traditional style house that had been turned into a hotel. The manager of the hotel offered them some advice. "You must not miss seeing the cherry blossoms," he said. "Now, they are in full bloom." He directed them to a good park to spot the flowers.
+
+        In the park, the children took many photographs under the cherry blossom trees. They loved watching the pretty petals floating to the ground. In the park, they met an elderly woman. She asked them about their itinerary for Kyoto and gave them some advice. "You should go to some temples while you are here. Kyoto has some of the best temples in all of Japan," she said.
+
+        They followed the woman`s advice and went to one of the most famous temples in Kyoto. Flora, Doris, and Michelle bowed to all of the Buddha statues in the temple and took many photos of the lovely gardens surrounding it.
+        Then, Gordon came. "We ought to leave," he said. "The sumo wrestling show will start soon."
+
+        The children got lost walking to the show. They ended up in a confusing marketplace. It felt like they were walking in circles. They couldn`t find anyone who spoke English to ask where to go. Finally, they found a shopkeeper who did. She told them about a shortcut through the market stalls. They were very relieved.
+
+        None of the children had seen a sumo wrestling match before, so they weren`t sure about the rules. The children thought the competitors` costumes were a little too revealing, but they were impressed by their strength. At the end of the competition, the boys asked to pose for a photograph with all of the wrestlers.',
+        
+        "vocabulary" => [
+            "Temple" => "A building used for religious worship",
+            "Accommodation" => "A place where people stay or live temporarily",
+            "Bloom" => "The period when a flower is fully open",
+            "Stalls" => "Small shops or booths in a market",
+            "Marketplace" => "An open area where people buy and sell things"
+        ],
+        "comprehension" => [
+            [
+                "question" => "Where was their accommodation?",
+                "options" => [
+                    "A" => "A modern skyscraper hotel",
+                    "B" => "A houseboat on a river",
+                    "C" => "A traditional style house turned into a hotel",
+                    "D" => "A tent near a park"
+                ],
+                "answer" => "C"
+            ],
+            [
+                "question" => "What did the hotel manager recommend?",
+                "options" => [
+                    "A" => "Visiting the zoo",
+                    "B" => "Seeing the cherry blossoms",
+                    "C" => "Going shopping downtown",
+                    "D" => "Watching a tea ceremony"
+                ],
+                "answer" => "B"
+            ],
+            [
+                "question" => "What did the elderly woman recommend?",
+                "options" => [
+                    "A" => "Taking a cooking class",
+                    "B" => "Buying souvenirs",
+                    "C" => "Visiting some temples",
+                    "D" => "Watching a tea ceremony"
+                ],
+                "answer" => "C"
+            ],
+            [
+                "question" => "Who helped them find the sumo wrestling competition?",
+                "options" => [
+                    "A" => "A taxi driver",
+                    "B" => "A hotel manager",
+                    "C" => "A friendly tourist",
+                    "D" => "A shopkeeper"
+                ],
+                "answer" => "D"
+            ],
+            [
+                "question" => "What did the children think of the wrestlers' costumes?",
+                "options" => [
+                    "A" => "They looked very stylish",
+                    "B" => "They were too colorful",
+                    "C" => "They were a little too revealing",
+                    "D" => "They were very traditional and elegant"
+                ],
+                "answer" => "C"
+            ]
+        ]
+    ],
+    [
+        "type" => "activity",
+        "title" => "The Final Stop",
+        "content" => 'The children were excited about finally visiting the continent of Oceania, but they were also a little sad that their trip was ending. On the plane, Joanna and Benny talked about all the exciting things that they would see in Australia. Joanna was looking forward to visiting Sydney, while Benny was determined that Canberra would be the highlight of their trip.
+
+        In Sydney, the children were able to attend an orchestra performance at the famous Sydney Opera House. Doris had read that the Opera House is considered to be one of the representative buildings of Sydney. People always name it as one of the city`s most famous landmarks.
+
+        Joanna was also able to fulfill her lifelong dream of visiting the Koala Park. She was disappointed that the park staff did not allow visitors to handle the animals. However, they were able to see many other animals, so she soon forgot her disappointment. The children were most excited about seeing kangaroos and dingoes because they had never encountered those animals in their local zoo.
+
+        The tour guide brought them to Melbourne next. The city is famous for its good waterway system and also its large aquarium. The children were excited about visiting the aquarium and all of the other exciting attractions that Melbourne had to offer.
+
+        The final day of their trip had come. The children made sure that they had presents for everyone in Beaver Town. Gordon hurried to find a postcard. They had promised to send one to Ms. Jasmine from Australia.
+
+        Dear Ms. Jasmine,
+        The final day of our trip has come. The children made sure that they had presents for everyone in Beaver Town. Gordon hurried to find a postcard. They had promised to send one to Ms. Jasmine from Australia.
+        How are you? Today is our last day in Australia. We will be back in Beaver Town soon. We hope you had a nice summer vacation. We thought about you often.
+        Love,
+        Gordon, Penny, Benny, Doris, Luc, Shawn, Flora, Michelle, and Joanna',
+        
+        "vocabulary" => [
+            "Continent" => "One of the large land masses on Earth",
+            "Orchestra" => "A large group of musicians playing together",
+            "Landmark" => "A famous or easily recognized place",
+            "Aquarium" => "A place where water animals are kept and displayed",
+            "Postcard" => "A card for sending a short message by mail"
+        ],
+        
+        "comprehension" => [
+            [
+                "question" => "Which continent is Australia located on?",
+                "options" => [
+                    "A" => "Europe",
+                    "B" => "South America",
+                    "C" => "Africa",
+                    "D" => "Oceania"
+                ],
+                "answer" => "D"
+            ],
+            [
+                "question" => "What kind of performance were they able to attend in Sydney?",
+                "options" => [
+                    "A" => "A ballet performance",
+                    "B" => "A circus performance",
+                    "C" => "An orchestra performance",
+                    "D" => "A theater play"
+                ],
+                "answer" => "C"
+            ],
+            [
+                "question" => "Why was Joanna disappointed with Koala Park?",
+                "options" => [
+                    "A" => "It was too crowded",
+                    "B" => "She couldn’t take any photographs",
+                    "C" => "She wasn’t allowed to handle the animals",
+                    "D" => "It was closed when they arrived"
+                ],
+                "answer" => "C"
+            ],
+            [
+                "question" => "Which animals were the children most excited to see in Koala Park?",
+                "options" => [
+                    "A" => "Penguins and seals",
+                    "B" => "Kangaroos and dingoes",
+                    "C" => "Elephants and giraffes",
+                    "D" => "Tigers and lions"
+                ],
+                "answer" => "B"
+            ],
+            [
+                "question" => "What did the children promise to send to Ms. Jasmine?",
+                "options" => [
+                    "A" => "A package of gifts",
+                    "B" => "A postcard",
+                    "C" => "A letter",
+                    "D" => "A photograph"
+                ],
+                "answer" => "B"
+            ]
+        ]
+    ],
+    [
         "type" => "posttest",
         "title" => "Antarctica: Land of Ice",
         "content" => "In Antarctica, it is colder than you can possibly imagine, even in the summer! The South Pole is the coldest part of Antarctica. The average temperature for January, the middle of the summer, is minus 28 degrees Celsius (written as -28°C). Minus means colder than the freezing point, which is 0°C. In the winter, April to September, the average temperature at the South Pole can be as cold as -89°C. When it is that cold, a mug of boiling water thrown in the air would freeze before it hit the ice. Sometimes the scientists have to use fridges to keep their samples warm!
+        
         There are more penguins in the Antarctic than any other bird. They cannot fly but use their short wings as swimming Rippers. They are superb swimmers. On land, they waddle upright or move in short hops. Penguins have many feathers that overlap each other. These, together with woolly down feathers and a thick layer of fat, keep out the cold air, wind and water. For extra warmth, penguins huddle together in groups.",
 
         "comprehension" => [
