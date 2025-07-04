@@ -1,6 +1,3 @@
-
-
-
 <?php
     session_start();
 
@@ -28,7 +25,7 @@
         if (isset($_POST['action'])) {
             switch ($_POST['action']) {
                 case 'start_pretest':
-                    $_SESSION['test_stage'] = 'pretest_reading';
+                    $_SESSION['test_stage'] = 'pretest';
                     $_SESSION['pretest_start_time'] = time();
                     break;
                     
@@ -223,7 +220,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reading Comprehension Test System</title>
+    <link rel="icon" href="images/icon.png" type="image/x-icon">
+    <title>Frustrational Reading Level</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -259,13 +257,19 @@
             50% { opacity: 0.7; }
             100% { opacity: 1; }
         }
-        .content {
+        .pretest-content {
+            padding: 25px 0;
+            margin: 20px 0;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+        /* .content {
             background: white;
             padding: 25px;
             border-radius: 8px;
             margin: 20px 0;
             border-left: 4px solid #3498db;
-        }
+        } */
         .question {
             background: #f8f9fa;
             padding: 20px;
@@ -388,7 +392,7 @@
     <div class="container">
         <?php
         // 15 minutes total for entire pretest
-        if (in_array($_SESSION['test_stage'], ['pretest_reading', 'pretest_questions'])) {
+        if ($_SESSION['test_stage'] === 'pretest_combined') {
             $timeLimit = 900; // 15 minutes
             $startTime = $_SESSION['pretest_start_time'];
             $remainingTime = getRemainingTime($startTime, $timeLimit);
@@ -437,25 +441,17 @@
                 <?php
                 break;
 
-            case 'pretest_reading':
+           case 'pretest':
                 $pretest = $frustrationalContent[0];
                 ?>
-                <div class="progress">Pre-Test Reading Phase</div>
+                <div class="progress">Pre-Test - Reading & Questions</div>
+                
                 <h2><?php echo htmlspecialchars($pretest['title']); ?></h2>
-                <div class="content">
+                <div class="passage-text">
                     <?php echo nl2br(htmlspecialchars($pretest['content'])); ?>
                 </div>
-                <form method="post">
-                    <button type="submit" name="action" value="start_pretest_questions" class="btn">Proceed to Questions</button>
-                </form>
-                <?php
-                break;
-
-            case 'pretest_questions':
-                $pretest = $frustrationalContent[0];
-                ?>
-                <div class="progress">Pre-Test Questions Phase</div>
-                <h2>Pre-Test Questions</h2>
+                
+                <h3>Answer the following questions based on the passage above:</h3>
                 <form method="post">
                     <?php foreach ($pretest['comprehension'] as $index => $question): ?>
                         <div class="question">
@@ -473,6 +469,11 @@
                     <button type="submit" name="action" value="submit_pretest" class="btn btn-success">Submit Pre-Test</button>
                 </form>
                 <?php
+                break;
+
+            case 'start_pretest':
+                $_SESSION['test_stage'] = 'pretest'; 
+                $_SESSION['pretest_start_time'] = time();
                 break;
 
             case 'prevocab_test':
@@ -672,29 +673,30 @@
 
     <script>
         // Timer functionality
-        <?php if (in_array($_SESSION['test_stage'], ['pretest_reading', 'pretest_questions', 'posttest_reading', 'posttest_questions'])): ?>
+        // Timer functionality
+        <?php if (in_array($_SESSION['test_stage'], ['pretest', 'prevocab_test', 'activity_reading', 'postvocab_test', 'activity_questions', 'posttest_reading', 'posttest_questions'])): ?>
         let remainingTime = <?php echo $remainingTime; ?>;
         const timerElement = document.getElementById('timer');
-        
+
         function updateTimer() {
             if (remainingTime <= 0) {
                 // Handle different stages when time runs out
                 const currentStage = '<?php echo $_SESSION['test_stage']; ?>';
                 
-                if (currentStage === 'pretest_reading') {
-                    // Auto-advance to questions phase
-                    const form = document.createElement('form');
-                    form.method = 'POST';
-                    form.style.display = 'none';
-                    
-                    const actionInput = document.createElement('input');
-                    actionInput.type = 'hidden';
-                    actionInput.name = 'action';
-                    actionInput.value = 'start_pretest_questions';
-                    
-                    form.appendChild(actionInput);
-                    document.body.appendChild(form);
-                    form.submit();
+                if (currentStage === 'pretest') {
+                    // Auto-submit pretest with current answers
+                    const form = document.querySelector('form[method="post"]');
+                    if (form) {
+                        let actionInput = form.querySelector('input[name="action"]');
+                        if (!actionInput) {
+                            actionInput = document.createElement('input');
+                            actionInput.type = 'hidden';
+                            actionInput.name = 'action';
+                            actionInput.value = 'submit_pretest';
+                            form.appendChild(actionInput);
+                        }
+                        form.submit();
+                    }
                     
                 } else if (currentStage === 'posttest_reading') {
                     // Auto-advance to questions phase
@@ -711,22 +713,6 @@
                     document.body.appendChild(form);
                     form.submit();
                     
-                } else if (currentStage === 'pretest_questions') {
-                    // Auto-submit pretest with current answers
-                    const form = document.querySelector('form[method="post"]');
-                    if (form) {
-                        // Add hidden input for action if not present
-                        let actionInput = form.querySelector('input[name="action"]');
-                        if (!actionInput) {
-                            actionInput = document.createElement('input');
-                            actionInput.type = 'hidden';
-                            actionInput.name = 'action';
-                            actionInput.value = 'submit_pretest';
-                            form.appendChild(actionInput);
-                        }
-                        form.submit();
-                    }
-                    
                 } else if (currentStage === 'posttest_questions') {
                     // Auto-submit posttest with current answers
                     const form = document.querySelector('form[method="post"]');
@@ -741,6 +727,7 @@
                         }
                         form.submit();
                     }
+                    
                 } else if (currentStage === 'prevocab_test') {
                     // Auto-submit pre-vocab test
                     const form = document.querySelector('form[method="post"]');
@@ -755,8 +742,9 @@
                         }
                         form.submit();
                     }
-                
+                    
                 } else if (currentStage === 'activity_reading') {
+                    // Auto-advance to post-vocab test
                     const form = document.createElement('form');
                     form.method = 'POST';
                     form.style.display = 'none';
@@ -764,13 +752,14 @@
                     const actionInput = document.createElement('input');
                     actionInput.type = 'hidden';
                     actionInput.name = 'action';
-                    actionInput.value = 'start_activity_questions';
+                    actionInput.value = 'start_postvocab';
                     
                     form.appendChild(actionInput);
                     document.body.appendChild(form);
                     form.submit();
                     
                 } else if (currentStage === 'postvocab_test') {
+                    // Auto-submit post-vocab test
                     const form = document.querySelector('form[method="post"]');
                     if (form) {
                         let actionInput = form.querySelector('input[name="action"]');
@@ -785,6 +774,7 @@
                     }
                     
                 } else if (currentStage === 'activity_questions') {
+                    // Auto-submit activity questions
                     const form = document.querySelector('form[method="post"]');
                     if (form) {
                         let actionInput = form.querySelector('input[name="action"]');
@@ -813,7 +803,7 @@
             
             remainingTime--;
         }
-        
+
         // Update timer every second
         setInterval(updateTimer, 1000);
         <?php endif; ?>

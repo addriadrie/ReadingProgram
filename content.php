@@ -764,6 +764,438 @@ $independentContent = [
     ]
 ];
 
+$instructionalContent = [
+    [
+        "type" => "pretest",
+        "title" => "Pre-Test Story",
+        "content" => "The average computer user has between 5 and 15 username/password combinations to log in to email accounts, social networking sites, discussion boards, news and entertainment sites, online stores, online banking accounts, or other websites. For people who use email or other internet applications at work, the number of required username/password combinations may surpass 30. Some of these accounts demand that you use a specific number of symbols and digits, while others require you to change your password every 60 days. When you add to this list the codes needed to access things like ATMs, home alarm systems, padlocks, or voicemail, the number of passwords becomes staggering. The feeling of frustration that results from maintaining a memorized list of login credentials has grown so prevalent that it actually has a name: password fatigue. \
+        
+        Having to remember so many different passwords is irritating, but it can also be dangerous. Because it is virtually impossible to remember a unique password for each of these accounts, many people leave handwritten lists of usernames and passwords on or next to their computers. Others solve this problem by using the same password for every account or using extremely simple passwords. While these practices make it easier to remember login information, they also make it exponentially easier for thieves to hack into accounts. \
+        
+        Single sign-on (SSO) authentication and password management software can help mitigate this problem, but there are drawbacks to both approaches. SSO authentication can be used for related, but independent software systems. With SSO, users log in once to access a variety of different applications. Users only need to remember one password to log in to the main system; the SSO software then automatically logs the user in to other accounts within the system. SSO software is typically used by large companies, schools, or libraries. Password management software, such as KeePass and Password Safe, is most often used on personal computers. These software programs—which have been built into many major web browsers—store passwords in a remote database and automatically “remember” users’ passwords for a variety of sites. \
+        
+        The problem with both SSO authentication and password management software is that the feature that makes them useful is also what makes them vulnerable. If a user loses or forgets the password required to log in to SSO software, the user will then lose access to all of the applications linked to the SSO account. Furthermore, if a hacker can crack the SSO password, he or she will then have access to all of the linked accounts. Users who rely on password management software are susceptible to the same problems, but they also incur the added threat of passwords being compromised because of computer theft. \
+        
+        Although most websites or network systems allow users to recover or change lost passwords by providing email addresses or answering a prompt, this process can waste time and cause further frustration. What is more, recovering a forgotten password is only a temporary solution; it does not address the larger problem of password fatigue. \
+        
+        Some computer scientists have suggested that instead of passwords, computers rely on biometrics. This is a method of recognizing human users based on unique traits, such as fingerprints, voice, or DNA. Biometric identification is currently used by some government agencies and private companies, including the Department of Defense and Disney World. While biometrics would certainly eliminate the need for people to remember passwords, the use of biometrics raises ethical questions concerning privacy and can also be expensive to implement. \
+        
+        The problems associated with SSO, password management software, and biometrics continue to stimulate software engineers and computer security experts to search for the cure to password fatigue. Until they find the perfect solution, however, everyone will simply have to rely on the flawed password system currently in place.",
+
+        "comprehension" => [
+            [
+                "question" => "Which of the following best describes the organization of the passage?",
+                "options" => [
+                    "A" => "The passage organizes ideas in order of increasing importance.",
+                    "B" => "The author presents an argument and then uses evidence to dismiss opposing views.",
+                    "C" => "The author explains a problem, explores solutions, and then dismisses these solutions as inadequate.",
+                    "D" => "The author explains a problem and then persuades readers to agree with his or her solution to the problem.",
+                    "E" => "The author explains a problem, contextualizes the problem, and ultimately dismisses it as an unnecessary concern."
+                ],
+                "answer" => "C"
+            ],
+            [
+                "question" => "The passage discusses all of the following solutions to password fatigue except",
+                "options" => [
+                    "A" => "writing the passwords down on a piece of paper",
+                    "B" => "voice-recognition software",
+                    "C" => "KeePass",
+                    "D" => "using very simple passwords",
+                    "E" => "intelligent encryption"
+                ],
+                "answer" => "E"
+            ],
+            [
+                "question" => "As used in paragraph 3, which is the best synonym for mitigate?",
+                "options" => [
+                    "A" => "predict",
+                    "B" => "postpone",
+                    "C" => "investigate",
+                    "D" => "lessen",
+                    "E" => "complicate"
+                ],
+                "answer" => "D"
+            ],
+            [
+                "question" => "According to the passage, SSO authentication software may be safer than password management software because 
+                I. stolen personal computers contain passwords memorized by a user’s web browser 
+                II. if a user of password management software forgets his or her login credentials, the user can no longer access any of the applications protected by the password 
+                III. hackers who access password management software can gain access to all of the applications protected by that password ",
+                "options" => [
+                    "A" => "I only",
+                    "B" => "II only",
+                    "C" => "I and II only",
+                    "D" => "II and III only",
+                    "E" => "I, II, and III"
+                ],
+                "answer" => "A"
+            ],
+            [
+                "question" => "Which of the following statements from the passage represents an opinion, as opposed to a fact?",
+                "options" => [
+                    "A" => "“For people who use email or other internet applications at work, the number of required username/password combinations may surpass 30.”",
+                    "B" => "“The feeling of frustration that results from maintaining a memorized list of login credentials has grown so prevalent that it actually has a name: password fatigue.”",
+                    "C" => "“Having to remember so many different passwords is irritating, but it can also be dangerous.”",
+                    "D" => "“Additionally, recovering a forgotten password is only a temporary solution; it does not address the larger problem of password fatigue.”",
+                    "E" => "“The problems associated with SOS, password management software, and biometrics continue to stimulate software engineers and computer security experts to search for the cure to password fatigue.”"
+                ],
+                "answer" => "C"
+            ],
+            [
+                "question" => "In paragraph 6, the author notes that “the use of biometrics raises ethical questions concerning privacy.” Which of the following situations could be used as an example to illustrate this point?",
+                "options" => [
+                    "A" => "A thief steals a personal computer with password management software and gains access to private email accounts, credit card numbers, and bank statements.",
+                    "B" => "An employee at a company uses a voice recognition system to log in to his computer, only to be called away by his boss. While he is away from the computer but still logged in, another employee snoops on his computer and reads personal email correspondence.",
+                    "C" => "A computer hacker gains access to a system that uses SSO software by cracking the password, thus gaining private access to all linked accounts.",
+                    "D" => "A company that employs fingerprint identification security software turns over its database of fingerprints to the local police department when a violent crime occurs on its grounds.",
+                    "E" => "Even when a person is on password-protected websites, an internet browser tracks the person’s internet use and collects information in order to tailor advertisements to his or her interests."
+                ],
+                "answer" => "D"
+            ],
+            [
+                "question" => "In the final paragraph, the author’s tone can best be described as",
+                "options" => [
+                    "A" => "angry",
+                    "B" => "resigned",
+                    "C" => "confused",
+                    "D" => "hopeful",
+                    "E" => "depressed"
+                ],
+                "answer" => "B"
+            ]
+        ]
+    ],
+    [
+        "type" => "posttest",
+        "title" => "",
+        "content" => "Helen Adams Keller was born on June 27,1880 in Northern Alabama, USA. She was a clever child and began talking even as a six-month old baby. During the first nineteen months of her life, she admired natural scenes like the broad green fields, the bright sky, the tall trees, and colourful flowers. But her happy days did not last long, for in February 1882 came an illness which closed her eyes and ears, affected her speech, and drove her into a world of darkness and silence. The illness was diagnosed as an acute congestion of the stomach and brain. Chances of the child’s survival were low. 
+        
+        One morning, however, the fever left her as suddenly as it had come. There was great happiness in the family, but no one, not even the doctor, suspected that the child would be a victim of multiple handicaps. Gradually, little Helen got used to the darkness and silence that surrounded her, till one memorable day, March 3, 1887, when Miss Anne Mansfield Sullivan came to Helen's house. Anne began to teach Helen to communicate by spelling words into her hand, beginning with 'd-o-l-l' for the doll that she had brought Keller as a present. Helen also learned from and was grateful to Miss Sarah Fuller, who taught her to speak. 
+        
+        Today, Helen’s name stands as a symbol of patience and courage. She was a young lady of enormous intelligence, who struggled through life till she was awarded the Bachelor’s degree from Radcliffe College. Further on, she devoted her life to helping blind and deaf people. She travelled around the world giving lectures and visiting special schools for blind and deaf people and wrote a lot of books and articles. She played a major role in focusing the world’s attention on the problems of the blind. Helen Keller died on June 1st, 1968. ",
+
+        "comprehension" => [
+            [
+                "question" => "The best title for the passage is:",
+                "options" => [
+                    "A" => "Fever Forever",
+                    "B" => "A Symbol of Patience and Courage",
+                    "C" => "Acute Congestion of Brain",
+                    "D" => "The Bright Sky"
+                ],
+                "answer" => "B"
+            ],
+            [
+                "question" => "The underlined word “acute” in the 1st paragraph is closest in meaning to:",
+                "options" => [
+                    "A" => "fine",
+                    "B" => "simple",
+                    "C" => "attractive",
+                    "D" => "serious"
+                ],
+                "answer" => "D"
+            ],
+            [
+                "question" => "The underlined word “who” in the 2nd paragraph refers to:",
+                "options" => [
+                    "A" => "Miss Sarah Fuller",
+                    "B" => "Helen",
+                    "C" => "the doctor",
+                    "D" => "Miss Anne Mansfield Sullivan"
+                ],
+                "answer" => "A"
+            ],
+            [
+                "question" => "What did Helen admire through the first nineteen months of her life? ",
+                "options" => [
+                    "A" => "She admired her parents.",
+                    "B" => "She admired her Northern Alabama.",
+                    "C" => "She admired the natural scenes.",
+                    "D" => "She admired clever children."
+                ],
+                "answer" => "C"
+            ],
+            [
+                "question" => "The author's primary purpose in writing this passage is to:",
+                "options" => [
+                    "A" => "encourage doctors to help sick people",
+                    "B" => "advise people to be patient and never give up",
+                    "C" => "show the consequences of neglecting precautions",
+                    "D" => "persuade parents to take care of their kids",
+                ],
+                "answer" => "B"
+            ]
+        ]
+    ],
+    [
+        "type" => "posttest",
+        "title" => "",
+        "content" => "You take it for granted that you are a unique person, different from everybody else on Earth, and you understand that everybody else is also unique. Identical twins are fascinating because they challenge this idea: they are unique people, of course, but they are also similar to each other – and not only in terms of appearance. They often share opinions, habits, and personality traits or characteristics.
+        
+        Identical twins are rare, happening in about three out of every 1,000 births. They seem to happen randomly, regardless of the age and cultural background of the mother, unlike non-identical twins who are remarkably common in Central Africa. Although there may be tiny differences in physical appearances between two identical twins, which allow family and close friends to tell them apart, they do have exactly the same DNA. 
+        
+        For most scientists, it is the nonphysical similarities between identical twins that are the most interesting. By studying identical twins who have been raised by different families, researchers wanted to determine which certain personality traits are inherited and which are learned from the environment. The Minnesota Twin Study is probably the best-known twin study to date. The study provides information about how our environment and genes work together to influence everything from attitudes and abilities to job selection and health. 
+        
+        Identical twins Jim Lewis and Jim Springer were only four weeks old when they were taken in by different adoptive families. From there, their lives diverged as they were raised apart by different parents until they finally met again at the age of 39. The similarities the twins shared not only amazed them, but also amazed researchers at the University of Minnesota. The very fact that both twins were given the same name was a big coincidence. But there’s more. As youngsters, each Jim had a dog named “Toy”. Both Jims had at one time held part-time jobs as officers. They drove the same type of car and even took vacations at the same beach in Florida. Both were fingernail biters and suffered from constant headaches. 
+        
+        It is obvious from the twins’ story that genetics is a major factor in shaping who we are. In fact, research so far indicates that there are some genetic influences on personality. This means that our personality traits as adults are largely determined before we are born, and there is very little that we can do to change them.",
+
+        "comprehension" => [
+            [
+                "question" => "What best expresses the main idea of the passage?",
+                "options" => [
+                    "A" => "All twins live identical lives.",
+                    "B" => "Some women give birth to identical twins.",
+                    "C" => "Genetics plays a major role in shaping personality.",
+                    "D" => "Personality is largely determined by physical appearance."
+                ],
+                "answer" => "C"
+            ],
+            [
+                "question" => "The underlined word ‘diverged’ in the 4th paragraph means:",
+                "options" => [
+                    "A" => "returned ",
+                    "B" => "increased",
+                    "C" => "completed",
+                    "D" => "separated"
+                ],
+                "answer" => "D"
+            ],
+            [
+                "question" => "What does the underlined word ‘they’ in the 2nd paragraph refer to?",
+                "options" => [
+                    "A" => "tiny differences",
+                    "B" => "physical appearances",
+                    "C" => "two identical twins",
+                    "D" => "close friends"
+                ],
+                "answer" => "C"
+            ],
+            [
+                "question" => "As adults, the Jim twins:",
+                "options" => [
+                    "A" => "served as part-time officers.",
+                    "B" => "had pets with different names.",
+                    "C" => "suffered from fatal diseases.",
+                    "D" => "drove different types of cars."
+                ],
+                "answer" => "A"
+            ],
+            [
+                "question" => "According to the passage, which of the following is NOT TRUE about identical twins?",
+                "options" => [
+                    "A" => "They are unique but similar to each other.",
+                    "B" => "They share habits and personality traits.",
+                    "C" => "They have totally different DNA.",
+                    "D" => "They are less common than non-identical twins.",
+                ],
+                "answer" => "C"
+            ]
+        ]
+    ],
+    [
+        "type" => "posttest",
+        "title" => "",
+        "content" => "To whom it may concern, 
+        
+        I am writing this letter in response to the latest issue of your magazine in which you asked readers to share with you some ideas for saving the planet. My name is John and I come from Brazil. As you have mentioned in your previous issue, everybody should bear responsibility in keeping the Earth a safer environment. For example, we should have special collection points in every neighborhood or area so that we could keep our household waste for recycling instead of sending it to landfills. Also, we could make use of our gardens waste like grass, twigs, and leaves as a valuable source of nutrients by turning it into compost. 
+        
+        In my country, the government has come up with a solution to the issue of waste. It has assigned a committee for holding a waste management conference. The committees have listened to the ideas of various leading industry companies which could showcase their waste and recycling machinery and services. 
+        
+        Deforestation is another problem that our environment is suffering from. Trees are being cut down in an increasingly careless way. This has negative effects because floods wash away the nutrients in the soil and the rate of oxygen that the trees' leaves release into the atmosphere decreases. Deforestation makes the land arid. This is known as desertification. Last but not least, nothing will stop the dust which is bound to cause health problems. Waste management, deforestation and desertification are only a few examples of environmental threats that we are coming up against today. It is our responsibility as citizens to keep up with the most recent ways and inventions to overcome these threats. 
+        
+        However big questions remain about whether the world`s nations will take action and, ultimately, about whether my letter will matter. We can’t just play a waiting game where we bet on future technological miracles to emerge and save the planet. 
+
+
+        Thank you, 
+        John",
+
+        "comprehension" => [
+            [
+                "question" => "Which of the following can be the most suitable title for the passage?",
+                "options" => [
+                    "A" => "Saving the Planet Earth",
+                    "B" => "Waste Management",
+                    "C" => "Waste Recycling",
+                    "D" => "Future Miracles"
+                ],
+                "answer" => "A"
+            ],
+            [
+                "question" => "The underlined pronoun 'it' in the 1st paragraph refers to:",
+                "options" => [
+                    "A" => "area",
+                    "B" => "recycling",
+                    "C" => "neigbourhood",
+                    "D" => "household waste"
+                ],
+                "answer" => "D"
+            ],
+            [
+                "question" => "The underlined word 'showcase' in the 2nd paragraph is closest in meaning to:",
+                "options" => [
+                    "A" => "come up with an idea",
+                    "B" => "keep up with the recent changes",
+                    "C" => "show the bad effects of something",
+                    "D" => "show the good qualities of something in an attractive way"
+                ],
+                "answer" => "D"
+            ],
+            [
+                "question" => "It is inferred from the 3rd paragraph that:",
+                "options" => [
+                    "A" => "Citizens are responsible for the lack of oxygen.",
+                    "B" => "The cutting down of trees helps boost economy.",
+                    "C" => "Deforestation badly affects both the soil and air.",
+                    "D" => "Waste, deforestation and desertification are the only problems that face our planet."
+                ],
+                "answer" => "C"
+            ],
+            [
+                "question" => "One of the following statements about saving the Earth is not mentioned in the passage:",
+                "options" => [
+                    "A" => "Composting can be a solution.",
+                    "B" => "Recycling helps protect the environment.",
+                    "C" => "Conserving water can benefit the environment.",
+                    "D" => "Technological inventions can help in this respect.",
+                ],
+                "answer" => "C"
+            ]
+        ]
+    ],
+    [
+        "type" => "posttest",
+        "title" => "",
+        "content" => "Consumers are buying more clothes and shoes because social media and window shopping encourage them to buy these things persistently. In addition to that, online shopping makes it is easy for customers to buy unnecessary things without thinking. Major clothing brands also offer such cheap clothes that they can be treated like disposable items. 
+        
+        In Britain, the average person spends more than £1,000 on new clothes a year. That might not sound like much, but that figure hides two far more worrying trends for society and for the environment. First, a lot of that consumer spending is via credit cards. British people currently owe approximately £670 per adult to credit card companies. That is 66 per cent of the average wardrobe budget. 
+        
+        People are not only spending money they do not have, but they are also using it to buy things they do not need. People might not realise they are part of the disposable clothing problem because they donate their unwanted clothes to charities. Charity shops cannot sell all those unwanted clothes. Therefore, huge quantities end up being thrown away, causing even more environmental problems. However, the 'Buy Nothing trend ' is a different trend, springing up in opposition to consumerism. The idea originated in Canada in the early 1990s and then moved to the US. On 'Buy Nothing Day', people organise various types of protests and cut up their credit cards. Throughout the year, Buy Nothing groups encourage people to exchange and repair items they already own. 
+        
+        The trend has now reached influencers on social media who usually share posts of clothing and make-up that they recommend for people to buy. Some famous YouTubers now encourage their viewers not to buy anything at all for periods as long as a year. For instance, two friends in Canada spent a year working towards buying only food. For the first three months, they learned how to live without buying electrical appliances, clothes or things for the house. After that, they gave up services such as haircuts and eating out at restaurants. In one year, they had saved $55,000. The changes the two friends made meant a reduction in plastic and paper packaging and a positive impact on the environment from all the energy saved. 
+        
+        You can participate in the anti-consumerist movement by refusing to buy things you do not need. Buy Nothing groups send a clear message to companies that people are no longer willing to accept the environmental and human cost of overconsumption.",
+
+        "comprehension" => [
+            [
+                "question" => "The best title for the passage could be:",
+                "options" => [
+                    "A" => "The Charity Movement",
+                    "B" => "The Wardrobe Budget",
+                    "C" => "The Buy Nothing Movement",
+                    "D" => "The Rates of Overconsumption",
+                ],
+                "answer" => "C"
+            ],
+            [
+                "question" => "The underlined word 'protests' in the 3rd paragraph is closest in meaning to:",
+                "options" => [
+                    "A" => "local legislations",
+                    "B" => "walkout movements",
+                    "C" => "natural preservations",
+                    "D" => "legal consultations",
+                ],
+                "answer" => "B"
+            ],
+            [
+                "question" => "The underlined pronoun 'they' in the 4th paragraph refers to:",
+                "options" => [
+                    "A" => "services",
+                    "B" => "haircuts",
+                    "C" => "restaurants",
+                    "D" => "two friends",
+                ],
+                "answer" => "B"
+            ],
+            [
+                "question" => "How did the two friends contribute to the reduction of buying products?",
+                "options" => [
+                    "A" => "They encouraged people to eat out at restaurants.",
+                    "B" => "They spent a year working towards buying only food",
+                    "C" => "They encouraged people to buy their unwanted clothes.",
+                    "D" => "They spent $55,000 to buy electrical appliances for the house.",
+                ],
+                "answer" => "B"
+            ],
+            [
+                "question" => "According to the 3rd paragraph, all the following statements are TRUE EXCEPT:",
+                "options" => [
+                    "A" => "The 'Buy Nothing trend' started in US in the early 1990s.",
+                    "B" => "The 'Buy Nothing trend ' became a trend due to consumerism.",
+                    "C" => "Throwing away unwanted clothes causes many environmental problems.",
+                    "D" => "Buy Nothing groups organize the exchange and repair of items they already own.",
+                ],
+                "answer" => "A"
+            ]
+        ]
+    ],
+    [
+        "type" => "posttest",
+        "title" => "",
+        "content" => "People think children should play sports. Sports are fun, and children stay healthy while playing with others. However, playing sports can have negative effects on children. It may produce feelings of poor self-esteem or aggressive behaviour in some children.
+        
+        According to research on kids and sports, 40 million kids play sports in the US. Of these, 18 million say they have been shouted at or called names while playing sports. This leaves many children with a bad impression of sports. They think sports are just too aggressive. Many researchers believe adults, especially parents and coaches, are the main cause of too much aggression in children’s sports. They believe children copy aggressive adult behaviour. This behaviour is then further reinforced through both positive and negative feedback.
+        
+        Parents and coaches are powerful teachers because children usually look up to them. Often these adults behave aggressively themselves, sending children the message that winning is everything. At children’s sporting events, parents may shout insults at other players or cheer when their child behaves aggressively. As well, children may be taught that hurting other players is acceptable, or they may be pushed to continue playing even when they are injured.
+        
+        In addition, the media makes violence seem exciting. Children watch adult sports games and see violent behaviour replayed over and over on television. As a society, we really need to face up to this problem and do something about it. Parents and coaches should act as better examples for children. They also need to teach children better values. They should teach children to enjoy themselves whether they win or lose. It is not necessary to knock yourself out to enjoy sports. Winning is not everything. In addition, children should not be allowed to continue to play when they are injured. Sending a child with an injury into a game gives the child the message that health is not as important as winning. If we make some basic changes, children might learn to enjoy sports again.",
+
+        "comprehension" => [
+            [
+                "question" => "What is the best title for the passage?",
+                "options" => [
+                    "A" => "Injuries Caused by Sports",
+                    "B" => "Sports Played at Schools",
+                    "C" => "The Positive Effects of Sports on Children",
+                    "D" => "The Negative Effects of Sports on Children",
+                ],
+                "answer" => "D"
+            ],
+            [
+                "question" => "Which of the following phrases best defines “poor self-esteem” in the 1st paragraph?",
+                "options" => [
+                    "A" => "getting honoured",
+                    "B" => "lacking confidence",
+                    "C" => "being selfish",
+                    "D" => "lacking loyalty",
+                ],
+                "answer" => "B"
+            ],
+            [
+                "question" => "What does the underlined word “They” in the 2nd paragraph refer to?",
+                "options" => [
+                    "A" => "parents",
+                    "B" => "adults",
+                    "C" => "coaches",
+                    "D" => "researchers",
+                ],
+                "answer" => "D"
+            ],
+            [
+                "question" => "According to the 2nd paragraph, the number of children who had been shouted at is:",
+                "options" => [
+                    "A" => "All children",
+                    "B" => "None of the children",
+                    "C" => "Eighteen million",
+                    "D" => "Forty million",
+                ],
+                "answer" => "C"
+            ],
+            [
+                "question" => "According to the passage, which of the following sentences is NOT TRUE?",
+                "options" => [
+                    "A" => "Children sometimes have a bad impression about sports.",
+                    "B" => "Forcing an injured child into a game is an advantage.",
+                    "C" => "Parents and teachers are role models for children.",
+                    "D" => "Winning isn’t the only source of enjoyment.",
+                ],
+                "answer" => "B"
+            ]
+        ]
+    ]
+
+];
+
 $frustrationalContent = [
     [
         "type" => "pretest",
