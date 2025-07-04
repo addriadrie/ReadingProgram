@@ -1,0 +1,13 @@
+// Clear session storage
+sessionStorage.clear();
+
+// Clear local storage (if used)
+localStorage.clear();
+
+// Clear all cookies for current domain
+document.cookie.split(";").forEach(function(c) { 
+    document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
+});
+
+// Reload page
+location.reload();
